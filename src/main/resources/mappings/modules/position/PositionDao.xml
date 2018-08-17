@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.position.dao.PositionDao">
+    
+	<select id="findAlltwo" resultType="com.modules.position.entity.Position">
+		SELECT * FROM t_position
+		<where>
+			<if test="posid != null and posid != ''">
+				and posid = #{posid}
+			</if>
+		</where>
+		
+	</select>
+	
+	<insert id="insert" parameterType="com.modules.position.dao.PositionDao">
+		insert into t_position ( 
+			posid,
+			stat,
+			createdate,
+			medifydate,
+			description,
+			type
+		) 
+		values (
+			#{posid},
+			#{stat},
+			#{createdate},
+			#{medifydate},
+			#{description},
+			#{type}
+			
+		)
+	</insert>
+	
+	<update id="marge" parameterType="com.modules.position.dao.PositionDao">
+		UPDATE t_position
+		<set>
+			<if test="posid!=null and posid!=''">
+				posid=#{posid},
+			</if>
+			<if test="stat!=null and stat!=''">
+				stat=#{stat},
+			</if>
+			<if test="createdate!=null and createdate!=''">
+				createdate=#{createdate},
+			</if>
+			<if test="medifydate!=null and medifydate!=''">
+				medifydate=#{medifydate},
+			</if>
+			<if test="description!=null and description!=''">
+				description=#{description},
+			</if>
+			<if test="type!=null and type!=''">
+				type=#{type}
+			</if>
+			
+			
+		</set>
+		WHERE posid = #{posid}
+	</update>
+	
+	<update id="deleteByPosid" parameterType="int">
+		DELETE FROM t_position WHERE posid = #{posid}
+	</update>
+	<update id="delposiarticle" parameterType="int">
+		DELETE FROM t_position_article WHERE posid = #{posid}
+	</update>
+	
+	<select id="getArticlePosid" parameterType="String" resultType="Integer">
+		select posid from t_position_article where article_id = #{aid}
+	</select>
+	
+</mapper>

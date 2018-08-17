@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<base target="_blank">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="render" content="webkit">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes, width=device-width">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<script type="text/javascript" src="../../../../../../../../js/jquery-1.7.js"></script>
+		<link href="../../../../../../../../css/article.css" rel="stylesheet" />
+		<style type="text/css">
+			@media screen and (max-width:319px){html{font-size:29px!important}}
+			@media screen and (min-width:320px){html{font-size:31px!important}}
+			@media screen and (min-width:360px){html{font-size:35px!important}}
+			@media screen and (min-width:375px){html{font-size:36px!important}}
+			@media screen and (min-width:384px){html{font-size:37px!important}}
+			@media screen and (min-width:414px){html{font-size:40px!important}}
+			@media screen and (min-width:480px){html{font-size:46px!important}}
+			@media screen and (min-width:550px){html{font-size:53px!important}}
+			@media screen and (min-width:600px){html{font-size:58px!important}}
+			@media screen and (min-width:640px){html{font-size:62px!important}}
+			@media screen and (min-width:700px){html{font-size:68px!important}}
+			@media screen and (min-width:750px){html{font-size:73px!important}}
+			@media screen and (min-width:800px){html{font-size:78px!important}}
+			@media screen and (min-width:850px){html{font-size:83px!important}}
+			@media screen and (min-width:900px){html{font-size:88px!important}}
+			@media screen and (min-width:950px){html{font-size:93px!important}}
+			@media screen and (min-width:1000px){html{font-size:98px!important}}
+			.nav a {
+					font-size: 0.5rem;
+			}
+			.art-title {
+			    margin: 15px 0 0;
+			}
+			.art-info {
+			    margin-bottom: 10px;
+			    line-height: 20px;
+			}
+			.img3-panel .picbox {
+			    padding-right: 10px;
+			    margin-bottom: 10px;
+			    overflow: hidden;
+			    height: 70px;
+			    box-sizing: border-box;
+			}
+		</style>
+	</head>
+	<body style="padding: 10px;">
+			<div class="relate-news">
+				<h2>推荐阅读</h2>
+				<aside class="recommend_moudule j_relevent_box" data-sudaclick="recommend_news">
+					<div th:each="t:${tjMap1}" >
+						<a th:href="${t.staticUrl}" title="" target="_bank">
+							<dl class="clearfix">
+								<dt class="j_art_lazy">
+									<img th:src="${t.image}" width="120" height="80" src="/js/grey2.png" />
+								</dt>
+								<dd>
+									<h3 class="title" th:utext="${t.shorttile}">您好您好</h3>
+									<div class="mark_count">
+										<span th:text="${t.acquisitionSource}">互联网</span>
+										<time th:text="${#dates.format(t.createDate, 'yyyy-MM-dd HH:mm:ss')}">2016-2-15 12:23:25</time>
+									</div>
+								</dd>
+							</dl>
+						</a>
+					</div>
+		
+					<!--推荐位中的3张缩略图-->		
+					<!-- [[${duoMap}]]			 -->
+					<div th:each="t:${duoMap}">
+						<a th:href="${t.staticUrl}" title="" target="_bank">
+							<dl class="three-img clearfix">
+								<dd>
+									<h3 class="title" th:utext="${t.title}">您好fdsf您好</h3>
+								</dd>
+								<div class="img3-panel" >
+										<div class="img-box" th:each="i,tStat:${t.images}" th:if="${tStat.index &lt; 3}">
+											<div class="picbox" >
+												<img th:src="${i}" src="../../../../../../../../js/grey2.png" class="img" />
+											</div>
+										</div>
+								</div>
+								<div class="mark_count">
+										<span th:utext="${t.acquisitionSource}">互联网</span>
+										<time th:text="${#dates.format(t.createDate, 'yyyy-MM-dd HH:mm:ss')}">2016-2-15 12:23:25</time>
+								</div>
+							</dl>
+						</a>
+					</div>
+						
+					<div th:each="t:${tjMap2}">
+						<a th:href="${t.staticUrl}" title="" target="_bank">
+							<dl class="clearfix">
+								<dt class="j_art_lazy">
+									<img th:src="${t.image}" width="120" height="80" src="/js/grey2.png" />
+								</dt>
+								<dd>
+									<h3 class="title" th:utext="${t.shorttile}">您好您好</h3>
+									<div class="mark_count">
+										<span th:utext="${t.acquisitionSource}">互联网</span>
+										<time th:text="${#dates.format(t.createDate, 'yyyy-MM-dd HH:mm:ss')}">2016-2-15 12:23:25</time>
+									</div>
+								</dd>
+							</dl>
+						</a>
+					</div>
+					
+				</aside>
+			</div>	
+
+	</body>
+</html>

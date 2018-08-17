@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.attention.dao.AttentionDao">
+
+	<sql id="cmsAttentionColumns">
+		a.aid AS "aid",
+		a.category_id AS "category.id",
+		a.posid AS
+		"position.posid",
+		a.msgid AS "msgsource.sid",
+		a.create_by AS
+		"createBy.id",
+		a.create_date AS
+		"createDate",
+		a.update_by AS
+		"updateBy.id",
+		a.update_date AS
+		"updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u.name AS "user.name"
+
+	</sql>
+
+
+	<select id="get" resultType="Attention">
+		SELECT
+		a.aid AS "aid",
+		a.category_id AS "category.id",
+		a.posid AS
+		"position.posid",
+		a.msgid AS "msgsource.sid",
+		a.create_by AS
+		"createBy.id",
+		a.create_date AS
+		"createDate",
+		a.update_by AS
+		"updateBy.id",
+		a.update_date AS
+		"updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		<if test="type!=null and type==0">
+			c.name AS "category.name",
+		</if>
+		<if test="type!=null and type==1">
+			p.description AS "position.description",
+		</if>
+		<if test="type!=null and type==2">
+			m.name AS "msgsource.name",
+		</if>
+
+		u.name AS "user.name"
+		FROM cms_attention a
+		<if test="type!=null and type==0">
+			JOIN cms_category c ON c.id = a.category_id
+		</if>
+		<if test="type!=null and type==1">
+			JOIN t_position p ON p.posid = a.posid
+		</if>
+		<if test="type!=null and type==2">
+			JOIN cms_msgsource m ON m.sid = a.msgid
+		</if>
+		JOIN sys_user u ON u.id = a.create_by
+		WHERE a.aid = #{aid}
+	</select>
+
+	<select id="findList" resultType="Attention">
+		SELECT
+		<include refid="cmsAttentionColumns" />
+		<if test="type!=null and type==0">
+			,c.name AS "category.name"
+			,c.module AS "category.module"
+		</if>
+		<if test="type!=null and type==1">
+			,p.description AS "position.description"
+		</if>
+		<if test="type!=null and type==2">
+			,m.name AS "msgsource.name"
+		</if>
+		FROM cms_attention a
+		<if test="type!=null and type==0">
+			JOIN cms_category c ON c.id = a.category_id
+		</if>
+		<if test="type!=null and type==1">
+			JOIN t_position p ON p.posid = a.posid
+		</if>
+		<if test="type!=null and type==2">
+			JOIN cms_msgsource m ON m.sid = a.msgid
+		</if>
+		JOIN sys_user u ON u.id = a.create_by
+		<where>
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				AND a.create_by = #{createBy.id}
+			</if>
+			<if test="type!=null and type==0">
+				<if test="category!=null and category.name!=null and category.name!=''">
+					AND (c.name like
+					<if test="dbName == 'oracle'">'%'||#{category.name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{category.name}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{category.name}, '%')</if>
+					)
+				</if>
+				<if test="category_id != null and category_id!= ''">
+				AND a.category_id = #{category_id}
+				</if>
+				
+			</if>
+			<if test="type!=null and type==1">
+				<if
+					test="position!=null and position.description!=null and position.description!=''">
+					AND (p.description like
+					<if test="dbName == 'oracle'">'%'||#{position.description}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{position.description}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{position.description}, '%')</if>
+					)
+				</if>
+			</if>
+			<if test="type!=null and type==2">
+				<if
+					test="msgsource!=null and msgsource.name!=null and msgsource.name!=''">
+					AND (c.name like
+					<if test="dbName == 'oracle'">'%'||#{msgsource.name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{msgsource.name}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{msgsource.name}, '%')</if>
+					)
+				</if>
+			</if>
+			<if test="posid!=null">
+				AND a.posid =#{posid}  
+			</if>
+			<if test="msgid!=null">
+				AND a.msgid =#{msgid} 
+			</if>
+			<if test="category_id!=null">
+				AND a.category_id = #{category_id}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findAllList" resultType="Attention">
+		SELECT
+		<include refid="cmsAttentionColumns" />
+		FROM cms_attention a
+
+
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+
+	<insert id="insert">
+		INSERT INTO cms_attention(
+		aid,
+		type,
+		<if test="type!=null and type==0">
+			category_id,
+		</if>
+		<if test="type!=null and type==1">
+			posid,
+		</if>
+		<if test="type!=null and type==2">
+			msgid,
+		</if>
+		create_by,
+		create_date,
+		update_by,
+		update_date,
+		remarks,
+		del_flag
+
+		) VALUES (
+		#{aid},
+		#{type},
+		<if test="type!=null and type==0">
+			#{category.id},
+		</if>
+		<if test="type!=null and type==1">
+			#{position.posid},
+		</if>
+		<if test="type!=null and type==2">
+			#{msgsource.sid},
+		</if>
+		#{createBy.id},
+		#{createDate},
+		#{updateBy.id},
+		#{updateDate},
+		#{remarks},
+		#{delFlag}
+
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE cms_attention SET
+		type=#{type},
+		<if test="type==0">
+			category_id=#{category.id},
+		</if>
+		<if test="type==1">
+			posid=#{position.posid},
+		</if>
+		<if test="type==2">
+			posid=#{position.posid},
+		</if>
+		create_date = #{createDate},
+		update_by = #{updateBy.id},
+		update_date =
+		#{updateDate},
+		remarks = #{remarks},
+		del_flag = #{delFlag}
+
+
+		WHERE aid =
+		#{aid}
+	</update>
+
+
+
+	<delete id="delete" parameterType="Map">
+
+		DELETE
+		FROM
+		cms_attention
+		WHERE
+		aid =#{aid}
+	</delete>
+
+
+
+
+
+</mapper>

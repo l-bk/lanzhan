@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.copy.dao.ContextnodedefineDao">
+
+	<select id="findAll" parameterType="com.modules.copy.entity.Contextnodedefine"
+		resultType="com.modules.copy.entity.Contextnodedefine">
+		SELECT
+
+		a.cid AS cid,
+		a.stat AS stat,
+		a.category_id AS categoryId,
+		a.description AS description,
+		a.copy_url AS copyUrl,
+		a.list_reg_begin AS listRegBegin,
+		a.copy_url_reg AS copyUrlReg,
+		a.list_reg_end AS listRegEnd,
+		a.copy_count AS copyCount,
+		a.is_split_page AS isSplitPage,
+		a.split_page_new_reg AS splitPageNewReg,
+		a.is_list_simple_title AS isListSimpleTitle,
+		a.title_reg_begin AS titleRegBegin,
+		a.title_reg_end AS titleRegEnd,
+		a.is_list_simple_meta AS isListSimpleMeta,
+		a.list_keyorks_reg_begin AS listKeyorksRegBegin,
+		a.list_keyorks_reg_end AS listKeyorksRegEnd,
+		a.list_description_reg_begin AS listDescriptionRegBegin,
+		a.list_description_reg_end AS listDescriptionRegEnd,
+		a.is_context_simple_title AS isContextSimpleTitle,
+		a.context_title_begin AS contextTitleBegin,
+		a.context_title_end AS contextTitleEnd,
+		a.is_context_simple_meta AS isContextSimpleMeta,
+		a.context_keyorks_reg_begin AS contextKeyorksRegBegin,
+		a.context_keyorks_reg_end AS contextKeyorksRegEnd,
+		a.context_description_reg_begin AS contextDescriptionRegBegin,
+		a.context_description_reg_end AS contextDescriptionRegEnd,
+		a.main_context_reg_begin AS mainContextRegBegin,
+		a.main_context_reg_end AS mainContextRegEnd,
+		c.name AS "category.name",
+		a.parentid AS parentid,
+		a.lastcopydate AS lastcopydate,
+		a.is_context_simple_date AS isContextSimpleDate,
+		a.context_date_reg AS contextDateReg,
+		a.context_date_format AS contextDateFormat,
+		a.ishaspic AS ishaspic,
+		a.picreg AS picreg,
+		a.iscontextnextpage AS iscontextnextpage,
+		a.contextnextreg AS contextnextreg,
+		a.is_context_simple_shortTitle AS isContextSimpleShortTitle,
+		a.context_short_title_reg_begin AS contextShortTitleRegBegin,
+		a.context_short_title_reg_end AS contextShortTitleRegEnd,
+		a.is_msgsource AS IsMsgsource,
+		a.msgsource_begin AS MsgsourceBegin,
+		a.msgsource_end AS MsgsourceEnd,
+		a.is_msgsource_cn AS IsMsgsourceCn,
+		a.msgsource_cn_reg AS MsgsourceCnReg,
+		a.msgsource_url_reg AS MsgsourceUrlReg,
+		a.is_base_href AS "isBaseHref",
+		a.base_href_reg AS "baseHrefReg",
+		a.posid AS "posid"		
+		FROM
+		context_node_define a
+		JOIN cms_category c ON c.id = a.category_id
+		<where>
+			<if test="cid != null and cid != '' ">
+				and cid = #{cid}
+			</if>
+			<if test="parentid != null and parentid != '' ">
+				and parentid = #{parentid}
+			</if>
+		</where>
+
+
+	</select>
+
+	<insert id="save" parameterType="com.modules.copy.dao.ContextnodedefineDao">
+		insert into context_node_define
+		(
+		title_reg_begin,
+		list_keyorks_reg_end,
+		list_reg_end,
+		list_keyorks_reg_begin,
+		list_description_reg_end,
+		context_title_end,
+		copy_url_reg,
+		is_list_simple_meta,
+		context_title_begin,
+		context_description_reg_begin,
+		is_context_simple_title,
+		copy_url,
+		main_context_reg_begin,
+		main_context_reg_end,
+		title_reg_end,
+		is_context_simple_meta,
+		is_list_simple_title,
+		cid,
+		stat,
+		list_description_reg_begin,
+		copy_count,
+		split_page_new_reg,
+		list_reg_begin,
+		context_keyorks_reg_begin,
+		context_keyorks_reg_end,
+		is_split_page,
+		category_id,
+		description,
+		parentid,
+		lastcopydate,
+		is_context_simple_date,
+		context_date_reg,
+		context_date_format,
+		ishaspic,
+		picreg,
+		iscontextnextpage,
+		contextnextreg,
+		is_context_simple_shortTitle,
+		context_short_title_reg_begin,
+		context_short_title_reg_end,
+		is_msgsource,
+		msgsource_begin,
+		msgsource_end,
+		is_msgsource_cn,
+		msgsource_cn_reg,
+		msgsource_url_reg,
+		is_base_href,
+		base_href_reg,
+		posid
+		) values (
+		#{titleRegBegin},
+		#{listKeyorksRegEnd},
+		#{listRegEnd},
+		#{listKeyorksRegBegin},
+		#{listDescriptionRegEnd},
+		#{contextTitleEnd},
+		#{copyUrlReg},
+		#{isListSimpleMeta},
+		#{contextTitleBegin},
+		#{contextDescriptionRegBegin},
+		#{isContextSimpleTitle},
+		#{copyUrl},
+		#{mainContextRegBegin},
+		#{mainContextRegEnd},
+		#{titleRegEnd},
+		#{isContextSimpleMeta},
+		#{isListSimpleTitle},
+		#{cid},
+		#{stat},
+		#{listDescriptionRegBegin},
+		#{copyCount},
+		#{splitPageNewReg},
+		#{listRegBegin},
+		#{contextKeyorksRegBegin},
+		#{contextKeyorksRegEnd},
+		#{isSplitPage},
+		#{categoryId},
+		#{description},
+		#{parentid},
+		#{lastcopydate},
+		#{isContextSimpleDate},
+		#{contextDateReg},
+		#{contextDateFormat},
+		#{ishaspic},
+		#{picreg},
+		#{iscontextnextpage},
+		#{contextnextreg},
+		#{isContextSimpleShortTitle},
+		#{contextShortTitleRegBegin},
+		#{contextShortTitleRegEnd},
+		#{IsMsgsource},
+		#{MsgsourceBegin},
+		#{MsgsourceEnd},
+		#{IsMsgsourceCn},
+		#{MsgsourceCnReg},
+		#{MsgsourceUrlReg},
+		#{isBaseHref},
+		#{baseHrefReg},
+		#{posid}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.modules.copy.dao.ContextnodedefineDao">
+		UPDATE context_node_define
+		<set>
+			<if test="titleRegBegin!=null and titleRegBegin!=''">
+				title_reg_begin=#{titleRegBegin},
+			</if>
+			<if test="listKeyorksRegEnd!=null and listKeyorksRegEnd!=''">
+				list_keyorks_reg_end=#{listKeyorksRegEnd},
+			</if>
+			<if test="listRegEnd!=null and listRegEnd!=''">
+				list_reg_end=#{listRegEnd},
+			</if>
+			<if test="listKeyorksRegBegin!=null and listKeyorksRegBegin!=''">
+				list_keyorks_reg_begin=#{listKeyorksRegBegin},
+			</if>
+			<if test="listDescriptionRegEnd!=null and listDescriptionRegEnd!=''">
+				list_description_reg_end=#{listDescriptionRegEnd},
+			</if>
+			<if test="contextTitleEnd!=null and contextTitleEnd!=''">
+				context_title_end=#{contextTitleEnd},
+			</if>
+			<if test="copyUrlReg!=null and copyUrlReg!=''">
+				copy_url_reg=#{copyUrlReg},
+			</if>
+			<if test="isListSimpleMeta!=null and isListSimpleMeta!=''">
+				is_list_simple_meta=#{isListSimpleMeta},
+			</if>
+			<if test="contextTitleBegin!=null and contextTitleBegin!=''">
+				context_title_begin=#{contextTitleBegin},
+			</if>
+			<if
+				test="contextDescriptionRegBegin!=null and contextDescriptionRegBegin!=''">
+				context_description_reg_begin=#{contextDescriptionRegBegin},
+			</if>
+			<if test="isContextSimpleTitle!=null and isContextSimpleTitle!=''">
+				is_context_simple_title=#{isContextSimpleTitle},
+			</if>
+			<if test="copyUrl!=null and copyUrl!=''">
+				copy_url=#{copyUrl},
+			</if>
+			<if test="mainContextRegBegin!=null and mainContextRegBegin!=''">
+				main_context_reg_begin=#{mainContextRegBegin},
+			</if>
+			<if test="mainContextRegEnd!=null and mainContextRegEnd!=''">
+				main_context_reg_end=#{mainContextRegEnd},
+			</if>
+			<if test="titleRegEnd!=null and titleRegEnd!=''">
+				title_reg_end=#{titleRegEnd},
+			</if>
+			<if test="isContextSimpleMeta!=null and isContextSimpleMeta!=''">
+				is_context_simple_meta=#{isContextSimpleMeta},
+			</if>
+			<if test="isListSimpleTitle!=null and isListSimpleTitle!=''">
+				is_list_simple_title=#{isListSimpleTitle},
+			</if>
+			<if test="cid!=null and cid!=''">
+				cid=#{cid},
+			</if>
+			<if test="stat!=null and stat!=''">
+				stat=#{stat},
+			</if>
+			<if test="listDescriptionRegBegin!=null and listDescriptionRegBegin!=''">
+				list_description_reg_begin=#{listDescriptionRegBegin},
+			</if>
+			<if test="copyCount!=null and copyCount!=''">
+				copy_count=#{copyCount},
+			</if>
+			<if test="splitPageNewReg!=null and splitPageNewReg!=''">
+				split_page_new_reg=#{splitPageNewReg},
+			</if>
+			<if test="listRegBegin!=null and listRegBegin!=''">
+				list_reg_begin=#{listRegBegin},
+			</if>
+			<if test="contextKeyorksRegBegin!=null and contextKeyorksRegBegin!=''">
+				context_keyorks_reg_begin=#{contextKeyorksRegBegin},
+			</if>
+			<if test="contextKeyorksRegEnd!=null and contextKeyorksRegEnd!=''">
+				context_keyorks_reg_end=#{contextKeyorksRegEnd},
+			</if>
+			<if test="isSplitPage!=null and isSplitPage!=''">
+				is_split_page=#{isSplitPage},
+			</if>
+			<if test="categoryId!=null and categoryId!=''">
+				category_id=#{categoryId},
+			</if>
+			<if test="description!=null and description!=''">
+				description=#{description},
+			</if>
+			<if test="parentid!=null and parentid!=''">
+				parentid=#{parentid},
+			</if>
+			<if test="lastcopydate!=null">
+				lastcopydate=#{lastcopydate},
+			</if>
+			<if test="isContextSimpleDate !=null">
+				is_context_simple_date=#{isContextSimpleDate},
+			</if>
+			<if test="contextDateReg !=null">
+				context_date_reg=#{contextDateReg},
+			</if>
+			<if test="contextDateFormat !=null">
+				context_date_format=#{contextDateFormat},
+			</if>
+			<if test="ishaspic!=null">
+				ishaspic=#{ishaspic},
+			</if>
+			<if test="picreg!=null">
+				picreg=#{picreg},
+			</if>
+			<if test="iscontextnextpage!=null">
+				iscontextnextpage=#{iscontextnextpage},
+			</if>
+			<if test="contextnextreg!=null">
+				contextnextreg=#{contextnextreg},
+			</if>
+			<if test="isContextSimpleShortTitle!=null">
+				is_context_simple_shortTitle=#{isContextSimpleShortTitle},
+			</if>
+			<if test="contextShortTitleRegBegin!=null">
+				context_short_title_reg_begin=#{contextShortTitleRegBegin},
+			</if>
+			<if test="contextShortTitleRegEnd!=null">
+				context_short_title_reg_end=#{contextShortTitleRegEnd},
+			</if>
+			<if test="IsMsgsource!=null">
+				is_msgsource=#{IsMsgsource},
+			</if>
+			<if test="MsgsourceBegin!=null">
+				msgsource_begin=#{MsgsourceBegin},
+			</if>
+			<if test="MsgsourceEnd!=null">
+				msgsource_end=#{MsgsourceEnd},
+			</if>
+			<if test="IsMsgsourceCn!=null">
+				is_msgsource_cn=#{IsMsgsourceCn},
+			</if>
+			<if test="MsgsourceCnReg!=null">
+				msgsource_cn_reg=#{MsgsourceCnReg},
+			</if>
+			<if test="MsgsourceUrlReg!=null">
+				msgsource_url_reg=#{MsgsourceUrlReg},
+			</if>
+			<if test="isBaseHref!=null">
+				is_base_href=#{isBaseHref},
+			</if>
+			<if test="baseHrefReg!=null">
+				base_href_reg=#{baseHrefReg},
+			</if>
+			<if test="posid!=null">
+				posid=#{posid}
+			</if>
+
+		</set>
+		WHERE cid = #{cid}
+	</update>
+
+	<update id="delete" parameterType="int">
+		DELETE FROM
+		context_node_define WHERE cid = #{cid}
+	</update>
+
+</mapper>

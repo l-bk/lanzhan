@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd"
+	default-lazy-init="true">
+
+
+	<!-- <bean id="goodsJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="goodsScheduler" />
+		<property name="targetMethod" value="updateAutoend" />
+	</bean>
+
+
+	<bean id="goodsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="goodsJobDetail" />
+		<property name="cronExpression" value="0 0 1 ? * L" />每天凌晨1点
+	</bean>
+
+
+	<bean id="statisticsJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="statisticsScheduler" />
+		<property name="targetMethod" value="statistics" />
+	</bean>
+
+	<bean id="statisticsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="statisticsJobDetail" />
+		<property name="cronExpression" value="0 0 1 ? * L" />每天凌晨1点 */5 * * * * ?
+	</bean>
+
+	<bean id="IMJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="iMScheduler" />
+		<property name="targetMethod" value="run" />
+	</bean>
+
+	<bean id="IMTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="IMJobDetail" />
+		<property name="cronExpression" value="* */10 * * * ?" />
+	</bean>
+
+
+	<bean id="recordDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="recordScheduler" />
+		<property name="targetMethod" value="updateRecord" />
+	</bean>
+
+	<bean id="recordTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="recordDetail" />
+		<property name="cronExpression" value="0 */50 * * * ?" />
+	</bean> -->
+
+
+
+
+
+
+	<bean id="biddingNotify" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mixNotifyService" />
+		<property name="targetMethod" value="biddingNotify" />
+	</bean>
+
+	<bean id="biddingTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="biddingNotify" />
+		<property name="cronExpression" value="0 */1 * * * ?" />
+	</bean>
+
+
+	<bean id="winBiddingNotify" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mixNotifyService" />
+		<property name="targetMethod" value="winBiddingNotify" />
+	</bean>
+
+	<bean id="winBiddingTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="winBiddingNotify" />
+		<property name="cronExpression" value="0 */1 * * * ?" />
+	</bean>
+
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="goodsTrigger" />
+				<ref bean="statisticsTrigger" />
+				<ref bean="IMTrigger" />
+				<ref bean="recordTrigger" /> -->
+				<ref bean="biddingTrigger" />
+				<ref bean="winBiddingTrigger" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

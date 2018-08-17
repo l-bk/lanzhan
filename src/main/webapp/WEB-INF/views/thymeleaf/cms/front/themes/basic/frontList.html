@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title th:text="'腾云军事 - ' + ${category.name}"></title>
+    <base target="_blank">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="render" content="webkit">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes, width=device-width">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script type="text/javascript" src="../../../../../../../js/jquery-1.7.js"></script>    
+    <link href="../../../../../../../css/list.css" rel="stylesheet" />
+    <style type="text/css">
+        .w300{width: 300px;margin-top: 35px;}
+        .w630{width: 630px;margin-top: 39px;}
+        .section-head {
+            height: 40px;
+            line-height: 40px;
+            border-bottom: #ccc 1px solid;
+            color: #7f7f7f;
+            font-size: 12px;
+            position: relative;
+        }
+        .section-head .title {
+            color: #7f7f7f;
+            font-size: 16px;
+            display: block;
+            position: absolute;
+            border-bottom: #0963af 2px solid;
+            bottom: -1px;
+            -webkit-font-smoothing: antialiased;
+        }
+        .section-head .title span {
+            color: #0963af;
+            -webkit-font-smoothing: auto;
+        }
+        .section-head .head_r{
+            width: 102px;
+        }
+        .section-head .head_r ul{
+            height: 40px;
+        }
+        .section-head .head_r li {
+            float: left;
+            line-height: 40px;
+            text-align: center;
+            color: #666;
+            padding: 0 12px;
+            cursor: pointer
+        }
+        .section-head .head_r li.active {
+            border-right: #ccc 1px solid;
+            border-left: #ccc 1px solid;
+            border-top: #ccc 1px solid;
+            height: 40px;
+            background: #fff
+        }
+        .top-list{display: none;}
+        .top-list.active{display: block;}
+        .top-list li{ height: 137px;margin-bottom: 10px;}
+        .top-list .r1_h h5 a { font-size: 14px; font-weight: bold; line-height: 32px; }
+        .top-list .pic { width: 140px; height: 105px; float: left; }
+        .top-list .pic_new_r0 { width: 145px; padding-top: 12px; float: right;overflow: hidden}
+        .top-list .pic_new_r0 p{ color: #717171;line-height: 20px;}
+        .top-list .pic_new_r0 .blue a{color: #004276;}
+        .tb_recom{height:447px;}
+        .tb_recom li{width:130px;height: 99px;overflow: hidden;float:left;margin:20px 10px 0 10px;overflow: hidden;}
+        .footer {
+            padding: 20px;
+            line-height: 30px;
+            text-align: center;
+            border-top:2px solid #165ea3 ;
+        }
+        .zc_title {
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            font-size: 14px;
+            margin: 5px 0 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .today_div {
+            width: 140px;
+            float: left;
+            margin-bottom: 10px;
+        }
+        .today_div img{
+            display: block;
+        }
+       	.today_diveven {
+					width: 140px;
+					float: right;
+					margin-bottom: 10px;
+				}
+				.today_divright {
+					width: 140px;
+					float: right;
+					margin-bottom: 10px;
+				}
+				.today_divright img {
+					display: block;
+				}
+				.hot-txt-list{padding:0px 0px 10px 0px; display: block; overflow: hidden;float: left;}
+.hot-txt-list li { background: url('../images/li.jpg') no-repeat scroll left center transparent; padding-left:10px;margin:0px 10px;height:28px;line-height:28px;overflow: hidden; }
+.hot-txt-list li a { color: #036; font-size: 14px; line-height: 24px; }
+        .twpic{ position: relative;width:130px;}
+        .twpic img{display: block}
+        .twpic a{color:#fff; display: block;}
+        .twpic span{position: absolute;bottom:0;z-index:4;width:130px;height: 26px; line-height: 26px; text-align:center;overflow: hidden;}
+        .twpic em{ width: 130px; height: 26px; display: block; background: #000; opacity: 0.6; position: absolute; z-index: 2; bottom:0px;}
+        .top-list .r1_h h5 a {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .newslist_del{height:48px ;font-family:Microsoft YaHei;margin: 5px 0;}
+        
+    </style>
+</head>
+
+<body>
+    <div class="header-bg">
+        <div class="header-bg-left"></div>
+        <div class="header-bg-right"></div>
+        <div class="header">
+            <a class="logo" href="/" target="_self"><img width="197" height="70" src="../../../../../../../images/tengyun_logo1.png" /></a>
+           <ul class="nav" >
+					<li th:each="t:${categoryList}">
+						<a th:href="${t.staticUrl}">[[${t.name}]]</a>
+					</li>
+				</ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <section class="w1000">
+        <!--<div class="sub_nav">
+            <a href="http://www.60mil.com/">首页</a>&nbsp;>&nbsp;<a href="http://www.60mil.com/"  target='_blank'>腾云军事</a>&nbsp;>&nbsp;<a href="http://www.xilu.com/jstj/"  target='_blank'><span th:text="${category.name }">军事动态</span></a>
+        </div>  -->
+        <div class="w630 left">
+            <!-- 内容 -->
+            <div class="page_tit"><h2 th:text="${category.name }"></h2></div>
+            <div class="newslist_box">
+                <ul th:each="t:${page.list}">
+                    <li>
+                        <div class="newslist_Aimg" th:if="${t.image} ne null and ${t.image} ne ''"><a th:href="${t.staticUrl}" target="_blank" th:title="${t.title}"><img th:src="${t.image}" border="0"></a></div>
+                        <div class="newslist_tit"><a th:href="${t.staticUrl}" target="_blank" th:title="${t.title}"><span th:utext="${t.title}">中国军火出口再遭重创：10亿美元军火大单告急</span></a></div>
+                        <div class="newslist_del"><p th:utext="${t.description}">向当前JSP页面中引入URL资源（可以是远程序站点上的资源）。Include指令和include动作不能向JSP页引入Web程序以外的资源，引入的资源必须位于当前Web程序中。</p></div>
+                        <div class="newslist_tm">
+                        <div class="newslist_source"><p th:text="${category.name }">军事动态</p></div>
+                        <span class="ml20 f14 times" th:text="${#dates.format(t.createDate, 'yyyy-MM-dd HH:mm:ss')}">2016-08-29 09:32:02</span>
+                        </div>
+                    </li>
+                </ul>
+                
+            </div>
+            <div class="clear"></div>
+            <!-- 页码 -->
+            <div class="w630" style="text-align:center; margin-top:20px; margin-bottom:10px;">
+                <div class="pagebox">
+                    <span style="display: none;" class="columnName" th:text="${category.nameEn}"></span><!--栏目名称-->
+                    <span style="display: none;" class="pageLast" th:text="${page.last}"></span><!--总数-->
+                    <span th:utext="${page}"></span>
+                    <!--
+                    <ul class="pagelist">
+                        <li class="disabled">< a href=" ">上一页</ a></li>
+                        <li class="thisclass">< a href="javascript:">1</ a></li>
+                        <li>< a href="javascript:" onclick="page(2,8,'');">2</ a></li>
+                        <li>< a href="javascript:" onclick="page(3,8,'');">3</ a></li>
+                        <li>< a href="javascript:" onclick="page(4,8,'');">4</ a></li>
+                        <li>< a href="javascript:" onclick="page(5,8,'');">5</ a></li>
+                        <li>< a href="javascript:" onclick="page(6,8,'');">6</ a></li>
+                        <li>< a href="javascript:" onclick="page(7,8,'');">7</ a></li>
+                        <li>< a href="javascript:" onclick="page(8,8,'');">8</ a></li>
+                        <li>< a href="javascript:">...</ a></li>
+                        <li>< a href="javascript:" onclick="page(2,8,'');">下一页</ a></li>
+                    </ul>
+                    -->
+                    <script type="text/javascript">
+                        var loca = location.href;
+                        var pageLast = $('.pageLast').text();
+                        if(pageLast < 9){
+                            $('.pagelist li a:contains("...")').parent().hide();
+                        }
+                        $(".pagelist li a").each(function(){
+                            if($(this).html().indexOf(pageLast)!=-1){
+                                $('.pagelist li a:contains("...")').eq(1).parent().hide();
+                            }
+                        })
+                        function page(n, s) {
+                            var columnName = $('.columnName').text();
+                            var loca1 = loca.split('/'+columnName+'/')[0]+'/'+columnName;
+                            location = loca1 + '/list' + n + '.shtml';
+                        }
+                    </script>
+                    <div class="nav-line"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!--right-->
+        <div class="w300 right">
+        
+          <!-- 头条--> 
+             <iframe src="/frontList-tjw1.shtml" frameborder="0" scrolling="no" width="100%" 
+				id="external-frame1" onload="setIframeHeight(this)"></iframe> 
+		
+            <div class="blank20"></div>
+            
+            <!-- 周榜热榜 -->
+            <iframe src="/frontList-tjw2.shtml" frameborder="0" scrolling="no" width="100%" 
+				id="external-frame2" onload="setIframeHeight(this)"></iframe> 
+				
+            <div class="blank20"></div>
+            
+            <!-- 热门搜索 -->
+             <iframe src="/frontList-tjw3.shtml" frameborder="0" scrolling="no" width="100%" 
+				id="external-frame3" onload="setIframeHeight(this)"></iframe> 
+				
+				
+            
+            
+            <div class="blank20"></div>
+            
+             <!-- 图文-->
+              <iframe src="/frontList-tjw4.shtml" frameborder="0" scrolling="no" width="100%" 
+				id="external-frame4" onload="setIframeHeight(this)"></iframe> 
+				
+            
+        </div>
+        <div class="blank20"></div>
+        
+        <!--<div class="w336 right">
+            <div>
+            <!--广告 右1
+            </div>
+            <!-- 栏目最新 
+            <div class="hotnews mt10">
+                <ul class="menubox clearfix" action="roll" method="mouseover" obj="three" preclass="hover" aftclass="" start="1" end="3" outtime="3000">
+                    <li class="hover" id="threenav1"><a href="javascript:void(0)" title="栏目最新">栏目最新</a></li>
+                    <li id="threenav2" class=""><a href="javascript:void(0)" title="栏目最热">栏目最热</a></li>
+                    <li id="threenav3" class=""><a href="javascript:void(0)" title="栏目推荐">栏目推荐</a></li>
+                </ul>
+                <div class="clear"></div>
+                <div class="tabCon block" id="three1" style="display: block;">
+                    <ul class="sideImgList three1">
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_2&amp;dourl=www.xilu.com&amp;url=93" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2016/0722/a5ac914efe9d9cc0753a7e1c53a0f51d.jpg" alt="女子与猪同床4年人" title="女子与猪同床4年"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_2&amp;dourl=www.xilu.com&amp;url=93" target="_blank" rel="nofollow">女子与猪同床4年</a></span></li>
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_2&amp;dourl=www.xilu.com&amp;url=93" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2016/0722/a5ac914efe9d9cc0753a7e1c53a0f51d.jpg" alt="女子与猪同床4年人" title="女子与猪同床4年"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_2&amp;dourl=www.xilu.com&amp;url=93" target="_blank" rel="nofollow">女子与猪同床4年</a></span></li>
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_2&amp;dourl=www.xilu.com&amp;url=93" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2016/0722/a5ac914efe9d9cc0753a7e1c53a0f51d.jpg" alt="女子与猪同床4年人" title="女子与猪同床4年"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_2&amp;dourl=www.xilu.com&amp;url=93" target="_blank" rel="nofollow">女子与猪同床4年</a></span></li>
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_2&amp;dourl=www.xilu.com&amp;url=93" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2016/0722/a5ac914efe9d9cc0753a7e1c53a0f51d.jpg" alt="女子与猪同床4年人" title="女子与猪同床4年"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_2&amp;dourl=www.xilu.com&amp;url=93" target="_blank" rel="nofollow">女子与猪同床4年</a></span></li>
+                    </ul>
+                </div>
+                <div class="tabCon block" id="three2" style="display: none;">
+                    <ul class="sideImgList three2">
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_3&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2016/0517/8001b5e99e85b630fd84928b43e583b5.jpg" alt="揭韩国最火辣主播高清私照" title="揭韩国最火辣主播高清私照"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_3&amp;dourl=www.xilu.com&amp;url=109" target="_blank">揭韩国最火辣主播高清私照</a></span></li>
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_3&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2016/0517/8001b5e99e85b630fd84928b43e583b5.jpg" alt="揭韩国最火辣主播高清私照" title="揭韩国最火辣主播高清私照"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_3&amp;dourl=www.xilu.com&amp;url=109" target="_blank">揭韩国最火辣主播高清私照</a></span></li>
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_3&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2016/0517/8001b5e99e85b630fd84928b43e583b5.jpg" alt="揭韩国最火辣主播高清私照" title="揭韩国最火辣主播高清私照"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_3&amp;dourl=www.xilu.com&amp;url=109" target="_blank">揭韩国最火辣主播高清私照</a></span></li>
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_3&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2016/0517/8001b5e99e85b630fd84928b43e583b5.jpg" alt="揭韩国最火辣主播高清私照" title="揭韩国最火辣主播高清私照"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_3&amp;dourl=www.xilu.com&amp;url=109" target="_blank">揭韩国最火辣主播高清私照</a></span></li>
+                    </ul>
+                </div>
+                <div class="tabCon block" id="three3" style="display: none;">
+                    <ul class="sideImgList three3">
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_4&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2014/0928/2ae5ef02019c0d0747901f98734b1715.jpg" alt="19位女星被包养绝密照" title="19位女星被包养绝密照"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_4&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow">19位女星被包养绝密照</a></span></li>
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_4&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2014/0928/2ae5ef02019c0d0747901f98734b1715.jpg" alt="19位女星被包养绝密照" title="19位女星被包养绝密照"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_4&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow">19位女星被包养绝密照</a></span></li>
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_4&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2014/0928/2ae5ef02019c0d0747901f98734b1715.jpg" alt="19位女星被包养绝密照" title="19位女星被包养绝密照"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_4&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow">19位女星被包养绝密照</a></span></li>
+                        <li><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_4&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2014/0928/2ae5ef02019c0d0747901f98734b1715.jpg" alt="19位女星被包养绝密照" title="19位女星被包养绝密照"></a><span><a href="http://www.xilu.com/nadtj.html?adid=126&amp;sid=126_4&amp;dourl=www.xilu.com&amp;url=109" target="_blank" rel="nofollow">19位女星被包养绝密照</a></span></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>    
+            </div>
+         
+            <div class="mt10">
+            <!--广告 右2--
+            </div>
+            <!-- 栏目排行 --
+            <div class='hotnews mt10'>
+                <ul class='menubox clearfix' action='roll' method='mouseover' obj='two' preclass='hover' aftclass='' start=1 end=3  outtime=3000>
+                    <li class='hover' id='twonav1'><a href='javascript:void(0)' title='栏目排行'>栏目排行</a></li>
+                    <li id='twonav2'><a href='javascript:void(0)' title='频道推荐'>频道推荐</a></li>
+                    <li id='twonav3'><a href='javascript:void(0)' title='军迷评论'>军迷评论</a></li> 
+                </ul>
+                <div class='clear'></div>
+                <div id='two1' style='display:block;'>
+                    <div class='news_side '>
+                        <ul class="twonav1">
+                            <li class='cur'><span>1</span>
+                                <a href='http://www.xilu.com/20160111/1000010000924705.html'  title='周冬雨自曝分手 谋女郎现状大盘点' target='_blank' >周冬雨自曝分手 谋女郎现状大盘点</a>
+                            </li>
+                            <li><span>2</span>
+                                <a href='http://www.xilu.com/20160108/1000010000923791.html'  target='_blank' title='高铁邂逅帅气小伙 女孩一见倾心'>高铁邂逅帅气小伙 女孩一见倾心</a>
+                            </li>
+                            <li><span>3</span>
+                                <a href='http://www.xilu.com/20151218/1000010000916248.html'  target='_blank' title='男子套牌易建联车 驾照车型完全一样车主已被控制'>男子套牌易建联车 驾照车型完全一样车主</a>
+                            </li>
+                            
+                            <li><span>4</span>
+                                <a href='http://www.xilu.com/20151218/1000010000916247.html'  target='_blank' title='熊黛林直播吃榴莲 女神们那些让人崩溃的怪癖'>熊黛林直播吃榴莲 女神们那些让人崩溃的</a>
+                            </li>
+                            <li><span>5</span>
+                                <a href='http://www.xilu.com/20151217/1000010000915774.html'  target='_blank' title='恒大0-3不敌巴萨 梅西和内马尔皆因伤缺战'>恒大0-3不敌巴萨 梅西和内马尔皆因伤</a>
+                            </li>
+                            <li><span>6</span>
+                                <a href='http://www.xilu.com/20151216/1000010000915213.html'  target='_blank' title='村委吃饭打白条 自从当上村长就没在家做过饭'>村委吃饭打白条 自从当上村长就没在家做</a>
+                            </li>
+                            <li><span>7</span>
+                                <a href='http://www.xilu.com/20151216/1000010000915195.html'  target='_blank' title='女子为肇事顶包 因一张照片露出马脚被公诉'>女子为肇事顶包 因一张照片露出马脚被公</a>
+                            </li>
+                            <li><span>8</span>
+                                <a href='http://www.xilu.com/20151210/1000010000912719.html'  target='_blank' title='老人冬天半裸健身 揭全球了不得的牛人'>老人冬天半裸健身 揭全球了不得的牛人</a>
+                            </li>
+                            <li><span>9</span>
+                                <a href='http://www.xilu.com/20151210/1000010000912712.html'  target='_blank' title='女童幼儿园内骨折 家长要看监控园方给8万希望私了'>女童幼儿园内骨折 家长要看监控园方给8</a>
+                            </li>
+                            <li><span>10</span>
+                                <a href='http://www.xilu.com/20151210/1000010000912715.html'  target='_blank' title='陆毅豪宅内景曝光 揭与妻子恩爱照'>陆毅豪宅内景曝光 揭与妻子恩爱照</a>
+                            </li>
+                            
+                        </ul>
+                        <div class='side-slider'></div>
+                    </div> 
+                </div> 
+                <div class='tabCon'  id='two2'> 
+                    <div class='news_side'>
+                        <ul class="twonav2">
+                            <li class='cur'><span>1</span><a href='http://shizheng.xilu.com/20160113/1000010000925164.html'  title='布鲁克林·贝克汉姆PO出恩爱照 与女友在沙滩紧拥' target='_blank' >布鲁克林·贝克汉姆PO出恩爱照 与女友</a>
+                            </li>
+                            <li><span>2</span><a href='http://shizheng.xilu.com/20160113/1000010000925163.html'  target='_blank' title='何傲儿要求周子扬道歉 暗示对方劈腿'>何傲儿要求周子扬道歉 暗示对方劈腿</a>
+                            </li>
+                            <li><span>3</span><a href='http://shizheng.xilu.com/20160112/1000010000924762.html'  target='_blank' title='王喜了不起的挑战全程马赛克 网友点赞称干得漂亮'>王喜了不起的挑战全程马赛克 网友点赞称</a>
+                            </li>
+                        </ul>
+                        <div class='side-slider'></div>
+                    </div> 
+                </div>  
+                <div class='tabCon'  id='two3'>
+                    <div class='news_side'>
+                        <ul class="twonav3">
+                            <li class='cur'><span>1</span><a href='http://shizheng.xilu.com/20141126/1000010000688052.html'  title='一般人受不了！实拍少林寺练功夫受皮肉苦的僧人' target='_blank' >一般人受不了！实拍少林寺练功夫受皮肉苦</a>
+                            </li>
+                            <li><span>2</span><a href='http://shizheng.xilu.com/20141124/1000010000686595.html'  target='_blank' title='中国十大财富帮派全揭秘 这是一大江湖'>中国十大财富帮派全揭秘 这是一大江湖</a>
+                            </li>
+                            <li><span>3</span><a href='http://shizheng.xilu.com/20141121/1000010000684351.html'  target='_blank' title='不为人知的现代奴隶贸易 太过残忍'>不为人知的现代奴隶贸易 太过残忍</a>
+                            </li>
+                        </ul>
+                        <div class='side-slider'></div>
+                    </div>  
+                </div>
+            </div>
+
+            <div class="mt10">
+            <!--广告右3--
+            </div>
+        <div class="mt15">
+            <div class="page_tit"><h2>热门专题</h2></div>
+            <ul class="newslist mt10">
+                <li><a href="http://shizheng.xilu.com/20141124/1000010000686595.html" title="中国十大财富帮派全揭秘 这是一大江湖" target="_blank">中国十大财富帮派全揭秘 这是一大江湖</a>
+                </li>
+                <li><a href="http://shizheng.xilu.com/20141126/1000010000688052.html" title="一般人受不了！实拍少林寺练功夫受皮肉苦的僧人" target="_blank">一般人受不了！实拍少林寺练功夫受皮肉苦的僧人</a>
+                </li>
+                <li><a href="http://shizheng.xilu.com/20141121/1000010000684331.html" title="世界最穷的国家排名 竟有这个国家" target="_blank">世界最穷的国家排名 竟有这个国家</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+        <div style="margin-top:20px;">
+        <!--广告右4--
+        </div>
+        <!-- 热门关键词 --
+        <div class="mt10">
+            <div class="page_tit"><h2 class="left">热门关键词</h2></div>
+            <div class="hot_keywords mt10">
+                <a href="http://www.xilu.com/news/60migaomotianlunkake.html" title="60米高摩天轮卡壳" target="_blank">60米高摩天轮卡壳</a>
+                <a href="http://www.xilu.com/news/zhangyishanyangziqinhudong.html" title="张一山杨紫亲昵互动" target="_blank">张一山杨紫亲昵互动</a>
+                <a href="http://www.xilu.com/news/fenlanshixingjibenshouru.html" title="芬兰试行基本收入" target="_blank">芬兰试行基本收入</a>
+                <a href="http://www.xilu.com/news/nanzijiujiazhuangsimingong.html" title="男子酒驾撞死民工" target="_blank">男子酒驾撞死民工</a>
+                <a href="http://www.xilu.com/news/songjilvshizaoba.html" title="宋喆律师遭扒" target="_blank">宋喆律师遭扒</a>
+                <a href="http://www.xilu.com/news/songjihuiyingbaicikaifang.html" title="宋喆回应百次开房" target="_blank">宋喆回应百次开房</a>
+                <a href="http://www.xilu.com/news/nanzitineiquchuguaidan.html" title="男子体内取出怪蛋" target="_blank">男子体内取出怪蛋</a>
+                <a href="http://shizheng.xilu.com/news/laoboshentilipachuchongzi1.html" title="老伯身体里爬出虫子" target="_blank">老伯身体里爬出虫子</a>
+                <a href="http://shizheng.xilu.com/news/juzupaixidapaizhaoxuesheng1.html" title="剧组拍戏打拍照学生" target="_blank">剧组拍戏打拍照学生</a>
+                <a href="http://shizheng.xilu.com/news/101suilaotaibanhuzhao0.html" title="101岁老太办护照" target="_blank">101岁老太办护照</a>
+                <a href="http://shizheng.xilu.com/news/toukahuatanlanganshenwang0.html" title="头卡花坛栏杆身亡" target="_blank">头卡花坛栏杆身亡</a>
+                <a href="http://shizheng.xilu.com/news/nanzitoupainvxueshengruce2.html" title="男子偷拍女学生如厕" target="_blank">男子偷拍女学生如厕</a>
+            </div>
+        </div>
+
+        <div style="margin-top:20px;">
+        <!--广告右5    --
+        </div>
+        <!--历史人物  --
+        <div class="mt10" style="height:auto; overflow:hidden;">
+            <div class="page_tit"><h2>历史人物</h2></div>
+                <ul class="sideImgList">
+                    <li><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2014/1126/f94afdaa7c4c9e8440104d73895ee2df.gif" alt="2345小游戏：手撕小鬼子" title="2345小游戏：手撕小鬼子"></a><span><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow">2345小游戏：手撕小鬼子</a></span></li>
+                    <li><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2014/1126/f94afdaa7c4c9e8440104d73895ee2df.gif" alt="2345小游戏：手撕小鬼子" title="2345小游戏：手撕小鬼子"></a><span><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow">2345小游戏：手撕小鬼子</a></span></li>
+                    <li><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2014/1126/f94afdaa7c4c9e8440104d73895ee2df.gif" alt="2345小游戏：手撕小鬼子" title="2345小游戏：手撕小鬼子"></a><span><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow">2345小游戏：手撕小鬼子</a></span></li>
+                    <li><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2014/1126/f94afdaa7c4c9e8440104d73895ee2df.gif" alt="2345小游戏：手撕小鬼子" title="2345小游戏：手撕小鬼子"></a><span><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow">2345小游戏：手撕小鬼子</a></span></li>
+                    <li><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow"><img src="http://img1.xilu.com/2014/1126/f94afdaa7c4c9e8440104d73895ee2df.gif" alt="2345小游戏：手撕小鬼子" title="2345小游戏：手撕小鬼子"></a><span><a href="http://www.xilu.com/nadtj.html?adid=124&amp;sid=124_1&amp;dourl=www.xilu.com&amp;url=55" target="_blank" rel="nofollow">2345小游戏：手撕小鬼子</a></span></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>-->
+    </section>
+    <div class="footer">
+        <p>本站文章来源于网络 仅作为展示之用 版权归原作者所有 如果侵犯您的权益 请来信告知我们 我们会尽快删除</p>
+        <p><a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=rpDyXRXVH0Bv883FlqX2Q214zhrRD80pfzclPFPLLjKxLF51S5GT!1219073593">粤ICP备15002994号-1</a></p>
+    </div>
+<!--    <div class="w1000 banner_bg mt10">
+        <div class="news_banner_01">
+            底部广告
+            <script type="text/javascript">BAIDU_CLB_fillSlot("753871");</script>
+        </div>
+    </div> -->
+    <!-- <script language="JavaScript" type="text/javascript" src="http://newspage.xilu.com/model/xilu_bottom.js"></script> -->
+    <!--弹出广告-->
+    <!-- <script type="text/javascript">    /*时政栏目页-富媒体*/var cpro_id = "u2403235";</script><script src="http://cpro.baidustatic.com/cpro/ui/f.js" type="text/javascript"></script> -->
+
+    <!--画中画对联-->
+    <!-- <script type="text/javascript">    /*时政栏目页-对联*/var cpro_id = "u2403233";</script><script src="http://cpro.baidustatic.com/cpro/ui/f.js" type="text/javascript"></script> -->
+
+<script type="text/javascript" src="../../../../../../../js/scroll.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            
+            
+            
+            
+            //字数限制
+            function word(m){
+                var length = $('.word').length;
+                for(var i=0; i<length; i++){
+                    var wordText = $('.word').eq(i).text();
+                    var wordLength = $('.word').eq(i).text().length;
+                    if (wordLength>m){
+                        var n = wordText.substr(0,m)+'...';
+                        $('.word').eq(i).text(n);
+                    }
+                }
+            }   
+            
+       
+
+       
+            
+            
+        });
+</script>
+    <script type="text/javascript">
+        $('#J_TopListTab li').on('click',function(){
+            var $this = $(this);
+            $this.addClass('active').siblings().removeClass('active');
+            $('.top-list').eq($this.index()).addClass('active').siblings('.top-list').removeClass('active');
+        })
+//      $(".newslist_del").each(function(i){
+//          var divH = $(this).height();
+//          var $p = $("p", $(this)).eq(0);
+//          while ($p.outerHeight() > divH) {
+//              $p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));
+//          };
+//      });
+        
+        function wordlimit(cname,wordlength){//1.首先，定义函数，其中两个参数，参数一是目标元素，也就是需要显示省略号的那个元素；参数二是需要限制的字数。   
+            var cname=document.getElementsByClassName(cname);//2.定义变量cname，即目标元素
+            for(var i=0;i<cname.length;i++){//3.这里写了个循环，因为目标元素不止一个，之前找到一个通过获取id来截取字段实现效果的，但是如果目标元素有多个，id每个又不能相同，就显得麻烦了
+　　　　            var nowLength=cname[i].innerText.length;//4.定义变量nowLength，里面存储的是每一个目标元素所包含的字数。
+　　　　            var imgLength = cname[i].getElementsByTagName('img').length;
+                if(imgLength > 0){
+                    cname[i].innerText = '......';
+                }
+                if(nowLength>wordlength){//这里做一些判断，如果现在的每个目标元素里面的字数多于我们需要限制的字数
+　　　　　　          cname[i].innerText=cname[i].innerText.substr(0,wordlength)+' . . . ';//每个目标元素的内容就会被改变为当前内容的字符长度从0开始然后一直截取到需要限制的字数位置。
+　　　　            }
+　　          }　
+        }
+
+        wordlimit("newslist_del",65)
+        
+         function setIframeHeight(iframe) {
+			if (iframe) {
+				var iframeWin = iframe.contentWindow
+						|| iframe.contentDocument.parentWindow;
+				if (iframeWin.document.body) {
+					iframe.height = iframeWin.document.documentElement.scrollHeight
+							|| iframeWin.document.body.scrollHeight;
+				}
+			}
+		};
+
+		window.onload = function() {
+			setIframeHeight(document.getElementById('external-frame1'));
+		 	setIframeHeight(document.getElementById('external-frame2'));
+			setIframeHeight(document.getElementById('external-frame3'));
+			setIframeHeight(document.getElementById('external-frame4')); 
+		};
+    </script> 
+        
+
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "//hm.baidu.com/hm.js?952977d2b203cdf5badf715d7539ee16";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+</body>
+</html>

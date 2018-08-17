@@ -1,0 +1,423 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>腾云军事</title>
+    <base target="_blank">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="render" content="webkit">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes, width=device-width">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="../../../../../../../css/index.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="header-bg">
+        <div class="header-bg-left"></div>
+        <div class="header-bg-right"></div>
+        <div class="header">
+            <a class="logo" href="/" target="_self"><img width="197" height="70" src="../../../../../../../images/tengyun_logo1.png" /></a>
+            <ul class="nav">
+                <li>
+                    <a href="#">社会热点</a>
+                </li>
+                <li>
+                    <a href="#">国内要闻</a>
+                </li>
+                <li>
+                    <a href="#">国际观察</a>
+                </li>
+                <li>
+                    <a href="#">深度评论</a>
+                </li>
+                <li>
+                    <a href="#">中外历史</a>
+                </li>
+                <li>
+                    <a href="#">环球图片</a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+    <div class="wrap clearfix">
+        <div class="blank20"></div>
+        <div class="focus" id="fcbx">
+            <ul id="fcimg">
+                <!--焦点图片内容-->
+            </ul>
+        </div>
+        <div class="blank20"></div>
+        <div class="blank20"></div>
+        
+        <div class="main_sidebar left globalHotSpots" style="margin-right: 20px;">
+            <!--环球热点内容-->
+        </div>
+        
+        <div class="main_sidebar left chineseMilitary" style="margin-right: 20px;">
+            <!--中国军情内容-->
+        </div>
+        
+        <div class="main_sidebar left overseasObservation" >
+            <!--海外观察内容-->
+        </div>
+        <div class="blank20"></div>
+        <div class="blank20"></div>
+        
+        <div class="main_sidebar left militarySecrets" style="margin-right: 20px;">
+            <!--军情秘闻内容-->
+        </div>
+        
+        <!--  slideBOX  -->
+        <div id="slide_x" class=" left" style="margin-right: 20px;">
+            <div >
+                <ul class="list" style="text-align: center;">
+                    <!--最新热点内容-->
+                </ul>
+            </div>
+        </div>
+        
+        <!--    slideBox end-->
+        <div class="main_sidebar left  currentAffairsComment">
+            <!--时事评论内容-->
+        </div>
+        <div class="blank20"></div>
+        <div class="blank20"></div>
+        
+        <div class=" morePictures">
+            <!--图说军事内容-->
+        </div>
+        <div class="blank20"></div>
+        <div class="blank20"></div>
+    </div>
+    <div class="footer">
+        <p>本站文章来源于网络 仅作为展示之用 版权归原作者所有 如果侵犯您的权益 请来信告知我们 我们会尽快删除</p>
+        <p><a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=rpDyXRXVH0Bv883FlqX2Q214zhrRD80pfzclPFPLLjKxLF51S5GT!1219073593">粤ICP备15002994号-1</a></p>
+    </div>
+    <script type="text/javascript" src="../../../../../../../js/jquery-1.7.js"></script>
+    <script src="../../../../../../../js/jquery.cxslide.min.js"></script>
+        
+    <!--ajax来填充页面-->
+    <script type="text/javascript">
+        var indx = 1;
+        var looper = 3500;
+        var myTimer;
+        $(document).ready(function(){
+            //栏目
+            $.ajax({
+                type:"get",
+                url:"/getMainNavList",
+                async:true,
+                data:{"siteId":"1"},
+                dataType:'json',
+                success:function(json){
+                    var data=json.categoryList;
+                    $('.nav').empty();
+                    var commentA = "";
+                    for(var i=0;i<data.length;i++){
+                        commentA += '<li><a href="'+data[i].url+'">'+data[i].name+'</a></li>';
+                    };
+                    $('.nav').append(commentA);
+                },
+                error:function(){
+                    
+                }
+            });
+            
+             //焦点图
+            $.ajax({
+                type:"post",
+                url:"/getPosArticleList",
+                async:true,
+                data:{"type":"16","size":4},
+                dataType:"json",
+                success:function(json){
+                    var data=json.articleList;
+                    $('#fcimg').empty();
+                    var commentB = "";
+                    for(var i=0;i<data.length;i++){
+                        commentB +='<li ><a href="'+data[i].staticUrl+'"  target="_blank"><img src="'+data[i].image+'" height="340"  width="590"></a><p class="fcTitle">'+data[i].shorttile+'</p></li>'
+                    };
+                    $('#fcimg').append(commentB);
+                    $('#fcimg>li').eq(0).css('display','block');
+                },
+                error:function(){
+                },
+                complete:function(){
+                    focusMap();
+                }
+                
+            });
+            
+            //首页头条
+            $.ajax({
+                type:"post",
+                url:"/getPosArticleList",
+                async:true,
+                data:{"type":"17","size":2},
+                dataType:"json",
+                success:function(data){
+                    $('#fcbx').nextAll().find('dl').empty();
+                    var commentC = "";
+                    for(var i=0; i<data.articleList.length; i++){
+                        commentC += '<dl class="main_imglist_right"><dt><a href="'+data.articleList[i].staticUrl+'" target="_blank" title="'+data.articleList[i].shorttile+'">'+data.articleList[i].shorttile+'</a></dt><dd class="main_imglist_l left"><a href="'+data.articleList[i].staticUrl+'" target="_blank" title="'+data.articleList[i].shorttile+'"><img width="150" height="100" src="'+data.articleList[i].image+'"></a></dd>';
+                        commentC += '<dd class="main_imglist_r_txt left f12"><span class="word">'+data.articleList[i].description+'</span><span><a href="'+data.articleList[i].staticUrl+'" target="_blank" title="详细">[详细]</a></span></dd></dl>';
+                    };
+                    $('#fcbx').after(commentC);
+                },
+                complete:function(){
+                    word(50);
+                }
+            });
+            
+            //环球热点
+            $.ajax({
+                type:"post",
+                url:"/getPosArticleList",
+                async:true,
+                data:{"type":"18","size":9},
+                dataType:"json",
+                success:function(json){
+                    var data=json.articleList;
+                    $('.globalHotSpots').empty();
+                    var commentD = "";
+                        commentD += '<div class="main_tit"><span class="f12 more right "><a href="'+'/rd'+'" target="_blank" title="更多">更多</a></span><a href="'+'/rd'+'" target="_blank" title="环球热点">环球热点</a></div>';
+                        commentD += '<dl class="main_imglist_left"><dt><a href="'+data[0].url+'" target="_blank" title="'+data[0].shorttile+'">'+data[0].shorttile+'</a></dt><dd class="main_imglist_l left"><a href="'+data[0].url+'" target="_blank" title="'+data[0].shorttile+'"><img width="150" height="100" src="'+data[0].image+'"></a></dd>';
+                        commentD += '<dd class="main_imglist_r_txt left f12"><span class="word">'+data[0].description+'</span><span><a href="'+data[0].url+'" target="_blank" title="详细">[详细]</a></span></dd></dl><ul class="main_article_list">';
+                    for(var j=1; j<data.length; j++){
+                        commentD += '<li><a href="'+data[j].url+'" target="_blank" title="'+data[j].shorttile+'">'+data[j].shorttile+'</a></li>';
+                    }
+                    commentD +='</ul>';
+                    $('.globalHotSpots').append(commentD);
+                },
+                complete:function(){
+                    word(41);
+                }
+            });
+            
+            //中国军情
+            $.ajax({
+                type:"post",
+                url:"/getPosArticleList",
+                async:true,
+                data:{"type":"19","size":9},
+                dataType:"json",
+                success:function(json){
+                    var data=json.articleList;
+                    $('.chineseMilitary').empty();
+                    var commentT = "";
+                    commentT += '<div class="main_tit"><span class="f12 more right"><a href="'+'/gn'+'" target="_blank" title="更多">更多</a></span><a href="'+'/gn'+'" target="_blank" title="中国军情">中国军情</a></div>';
+                    commentT += '<dl class="main_imglist_left"><dt><a href="'+data[0].url+'" target="_blank" title="'+data[0].shorttile+'">'+data[0].shorttile+'</a></dt><dd class="main_imglist_l left"><a href="'+data[0].url+'" target="_blank" title="'+data[0].shorttile+'"><img width="150" height="100" src="'+data[0].image+'"></a></dd>';
+                    commentT += '<dd class="main_imglist_r_txt left f12"><span class="word">'+data[0].description+'</span><span><a href="'+data[0].url+'" target="_blank" title="详细">[详细]</a></span></dd></dl><ul class="main_article_list">';
+                    for(var j=1; j<data.length; j++){
+                        commentT += '<li><a href="'+data[j].url+'" target="_blank" title="'+data[j].shorttile+'">'+data[j].shorttile+'</a></li>';
+                    }
+                    commentT +='</ul>';
+                    $('.chineseMilitary').append(commentT);
+                },
+                complete:function(){
+                    word(41);
+                }
+            });
+            
+            //海外观察
+            $.ajax({
+                type:"post",
+                url:"/getPosArticleList",
+                async:true,
+                data:{"type":"20","size":9},
+                dataType:"json",
+                success:function(json){
+                    var data=json.articleList;
+                    $('.overseasObservation').empty();
+                    var commentH = "";
+                    commentH += '<div class="main_tit"><span class="f12 more right"><a href="'+'/gj'+'" target="_blank" title="更多">更多</a></span><a href="'+'/gj'+'" target="_blank" title="海外观察">海外观察</a></div>';
+                    commentH += '<dl class="main_imglist_left"><dt><a href="'+data[0].url+'" target="_blank" title="'+data[0].shorttile+'">'+data[0].shorttile+'</a></dt><dd class="main_imglist_l left"><a href="'+data[0].url+'" target="_blank" title="'+data[0].shorttile+'"><img width="150" height="100" src="'+data[0].image+'"></a></dd>';
+                    commentH += '<dd class="main_imglist_r_txt left f12"><span class="word">'+data[0].description+'</span><span><a href="'+data[0].url+'" target="_blank" title="详细">[详细]</a></span></dd></dl><ul class="main_article_list">';
+                    for(var j=1; j<data.length; j++){
+                        commentH += '<li><a href="'+data[j].url+'" target="_blank" title="'+data[j].shorttile+'">'+data[j].shorttile+'</a></li>';
+                    }
+                    commentH +='</ul>';
+                    $('.overseasObservation').append(commentH);
+                },
+                complete:function(){
+                    word(41);
+                }
+            });
+            
+            //军情秘闻
+            $.ajax({
+                type:"post",
+                url:"/getPosArticleList",
+                async:true,
+                data:{"type":"21","size":9},
+                dataType:"json",
+                success:function(json){
+                    var data=json.articleList;
+                    $('.militarySecrets').empty();
+                    var commentE = "";
+                        commentE += '<div class="main_tit"><span class="f12 more right"><a href="'+'/ls'+'" target="_blank" title="更多">更多</a></span><a href="'+'/ls'+'" target="_blank" title="军情秘闻">军情秘闻</a></div>';
+                        commentE += '<dl class="main_imglist_left"><dt><a href="'+data[0].url+'" target="_blank" title="'+data[0].shorttile+'">'+data[0].shorttile+'</a></dt><dd class="main_imglist_l left"><a href="'+data[0].url+'" target="_blank" title="'+data[0].shorttile+'"><img width="150" height="100" src="'+data[0].image+'"></a></dd>';
+                        commentE += '<dd class="main_imglist_r_txt left f12"><span class="word">'+data[0].description+'</span><span><a href="'+data[0].url+'" target="_blank" title="详细">[详细]</a></span></dd></dl><ul class="main_article_list">';
+                    for(var j=1; j<data.length; j++){
+                        commentE += '<li><a href="'+data[j].url+'" target="_blank" title="'+data[j].shorttile+'">'+data[j].shorttile+'</a></li>';
+                    }
+                    commentE +='</ul>';
+                    $('.militarySecrets').append(commentE);
+                },
+                complete:function(){
+                    word(41);
+                }
+            });
+            
+            //最新热图
+            $.ajax({
+                type:"post",
+                url:"/getPosArticleList",
+                async:true,
+                data:{"type":"22","size":4},
+                dataType:"json",
+                success:function(json){
+                    var data=json.articleList;
+                    $('.list').empty();
+                    var commentF = "";
+                    var commentG = "";
+                    for(var i=0;i<data.length;i++){
+                        commentF +='<li ><a href="'+data[i].staticUrl+'"  target="_blank"><img src="'+data[i].image+'" height="440"  width="320"></a><p class="fcTitle">'+data[i].shorttile+'</p></li>'
+                    };
+                    commentG +='<ul class="focus-btn"><li class="b_1 selected">1</li><li class="b_2">2</li><li class="b_3">3</li><li class="b_4">4</li></ul>';
+                    $('.list').append(commentF);
+                    $('.list').parent().after(commentG);
+                    $('.list').parent().addClass('focus-box');
+                    $('.list').parent().parent().addClass('slide_x');
+                },
+                error:function(){
+                },
+                complete:function(){
+                    $("#slide_x").cxSlide({plus:true,minus:true});
+                }
+            });
+            
+            //时事评论
+            $.ajax({
+                type:"post",
+                url:"/getPosArticleList",
+                async:true,
+                data:{"type":"23","size":5},
+                dataType:"json",
+                success:function(json){
+                    var data=json.articleList;
+                    $('.currentAffairsComment').empty();
+                    var commentI = '<div class="main_tit"><span class="f12 more right"><a href="'+'/pl'+'" target="_blank" title="更多">更多</a></span><a href="'+'/pl'+'" target="_blank" title="时事评论">时事评论</a></div>';
+                    for(var i=0;i<2;i++){
+                        commentI +='<dl class="main_imglist_left" style="padding-bottom: 15px;"><dt><a href="'+data[i].staticUrl+'" target="_blank" title="'+data[i].shorttile+'">'+data[i].shorttile+'</a></dt><dd class="main_imglist_l left"><a href="'+data[i].staticUrl+'" target="_blank" title="'+data[i].shorttile+'"><img width="150" height="100" src="'+data[i].image+'"></a></dd><dd class="main_imglist_r_txt left f12"><span class="word">'+data[i].description+'</span><span><a href="'+data[i].staticUrl+'" target="_blank" title="详细">[详细]</a></span></dd></dl>';
+                    };
+                    commentI += '<ul class="main_article_list">';
+                    for(var j=2; j<data.length; j++){
+                        commentI += '<li><a href="'+data[j].url+'" target="_blank" title="'+data[j].shorttile+'">'+data[j].shorttile+'</a></li>';
+                    };
+                    commentI +='</ul>';
+                    $('.currentAffairsComment').append(commentI);
+                },
+                error:function(){
+                },
+                complete:function(){
+                    word(41);
+                }
+            });
+            
+            //图说军事
+            $.ajax({
+                type:"post",
+                url:"/getPosArticleList",
+                async:true,
+                data:{"type":"24","size":7},
+                dataType:"json",
+                success:function(json){
+                    var data=json.articleList;
+                    $('.morePictures').empty();
+                    var commentJ = "";
+                    var comment1 ="";
+                    for(var i=0;i<1;i++){
+                        commentJ +='<span class="f12 more right"><a href="'+'/tp'+'" target="_blank" title="更多">更多</a></span><a href="'+'/tp'+'" target="_blank" title="图说军事">图说军事</a>';
+                        comment1 += '<div class="clearfix"><div class="pic2015_box_l left"><a href="'+data[i].staticUrl+'" target="_blank" title="'+data[i].shorttile+'"><img width="400" height="277" src="'+data[i].image+'"></a><p class="pic2015_box_l_tit f18"><a href="'+data[i].staticUrl+'" target="_blank" title="'+data[i].shorttile+'">'+data[i].shorttile+'</a></p></div><ul class="right pic2015_box_r f14" style="text-align: center;">';
+                    };
+                    for(var j=1; j<data.length; j++){
+                        comment1 += '<li><a href="'+data[j].url+'" target="_blank" title="'+data[j].shorttile+'"><img width="180" height="120" src="'+data[j].image+'"></a><p><a href="'+data[j].url+'" target="_blank" title="'+data[j].shorttile+'">'+data[j].shorttile+'</a></p></li>';
+                    };
+                    comment1 += '</ul></div>';
+                    $('.morePictures').append(commentJ);
+                    $('.morePictures').after(comment1);
+                    $('.morePictures').addClass('main_tit');
+                },
+                error:function(){
+                }
+            });
+            
+            //焦点图函数
+            function focusMap(){
+                if($('#thscrll') && $('#thscrll img').length > 0) {
+                    $('#thscrll').css({"padding-bottom":"15px"}); }
+    
+                if($("#fcimg li").length >1){
+                    $("#fcimg").after( $('<div></div><ul id="fcnum"></ul>'));
+                    for(i=1;i<=$("#fcimg li").length;i++){
+                        if(i==1) $("#fcnum").append($("<li class=\"crn\"> </li>"));
+                        else $("#fcnum").append($("<li> </li>"));
+                    }
+                    clearInterval(myTimer);
+                    myTimer = setInterval('showFImg("#fcimg li","#fcnum li","crn")', looper);
+                    $("#fcnum li").click(function(){
+                        indx  =  $("#fcnum li").index(this);
+                        showFImg("#fcimg li","#fcnum li","crn");
+                        try{
+                            clearInterval(myTimer);
+                            myTimer = setInterval('showFImg("#fcimg li","#fcnum li","crn")', looper);
+                        }catch(e){}
+                        return false;
+                    });
+                    $("#fcimg").hover(function(){
+                        if(myTimer){ clearInterval(myTimer); }
+                    },function(){
+                        clearInterval(myTimer);
+                        myTimer = setInterval('showFImg("#fcimg li","#fcnum li","crn")', looper);
+                    });
+                }
+                
+            }
+//栏目列表页中所采集的文章没有图片，栏目列表页则不显示左侧图片框
+            var newslist_AimgLength = $('.ddImag').length;
+            for(var j = 0; j<newslist_AimgLength; j++){
+                var newslist_Aimg = $('.ddImag').eq(j).find('img');
+                if(newslist_Aimg == ""){
+                    $('.ddImag').eq(j).css('display','none');
+                }
+            }
+            //字数限制
+            function word(m){
+                var length = $('.word').length;
+                for(var i=0; i<length; i++){
+                    var wordText = $('.word').eq(i).text();
+                    var wordLength = $('.word').eq(i).text().length;
+                    if (wordLength>m){
+                        var n = wordText.substr(0,m)+'...';
+                        $('.word').eq(i).text(n);
+                    }
+                }
+            }
+        });
+        function showFImg(il,nl,cs){
+            if($(il).length >1){
+                crobj = $(il).eq(indx);
+                $(il).not(crobj).hide();
+                $(nl).removeClass(cs)
+                $(nl).eq(indx).addClass(cs);
+                crobj.stop(true,true).fadeIn('slow');
+                indx = (++indx) % ($(il).length);
+            }
+        }
+    </script>
+    
+</body>
+</html>

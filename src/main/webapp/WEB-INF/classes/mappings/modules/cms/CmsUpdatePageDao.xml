@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.cms.dao.CmsUpdatePageDao">
+    
+	<sql id="cmsUpdatePageColumns">
+		a.id AS "id",
+		a.type AS "type",
+		a.is_update AS "isUpdate",
+		a.state AS "state",
+		a.update_date AS "updateDate",
+		a.category_id AS "categoryId",
+		a.is_mobile_update AS "isMobileUpdate"
+	</sql>
+	
+	<sql id="cmsUpdatePageJoins">
+	</sql>
+    
+	<select id="get" resultType="CmsUpdatePage">
+		SELECT 
+			<include refid="cmsUpdatePageColumns"/>
+		FROM cms_update_page a
+		<include refid="cmsUpdatePageJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CmsUpdatePage">
+		SELECT 
+			<include refid="cmsUpdatePageColumns"/>
+		FROM cms_update_page a
+		<include refid="cmsUpdatePageJoins"/>
+		<where>
+			
+			<if test="updatePageName != null and updatePageName != ''">
+				AND a.update_page_name = #{updatePageName}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CmsUpdatePage">
+		SELECT 
+			<include refid="cmsUpdatePageColumns"/>
+		FROM cms_update_page a
+		<include refid="cmsUpdatePageJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO cms_update_page(
+			id,
+			type,
+			is_update,
+			state,
+			update_date,
+			category_id,
+			is_mobile_update
+		) VALUES (
+			#{id},
+			#{type},
+			#{isUpdate},
+			#{state},
+			#{updateDate},
+			#{categoryId},
+			#{isMobileUpdate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE cms_update_page SET 	
+			type = #{type},
+			is_update = #{isUpdate},
+			state = #{state},
+			update_date = #{updateDate},
+			category_id = #{categoryId},
+			is_mobile_update = #{isMobileUpdate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM cms_update_page
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

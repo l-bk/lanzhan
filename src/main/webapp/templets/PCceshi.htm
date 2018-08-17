@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片切换广告</title>
+	<style type="text/css">
+		body,p,input,h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,form{margin:0;padding:0;list-style:none;vertical-align:middle;}
+		em{font-style:normal;}
+		.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+		body{font-family:\5FAE\8F6F\96C5\9ED1,helvetica,arial;color:#f34b8f;-webkit-user-select:none;-webkit-text-size-adjust:none;font-size:16px;}
+		img{display:block;margin:0;padding:0;border:0;}
+		a{text-decoration:none;color:#000;}
+		input,button{-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;outline:none;}
+
+		.slider-ctrl-prev,.slider-ctrl-next{opacity:.5;filter:alpha(opacity=50);position:absolute;z-index:1;overflow:hidden;width:30px;height:35px;cursor:pointer;text-indent:-10em;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABPCAMAAABs4TM5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5QkQ3MjMxN0VEMjQxMUU1ODAzNEU2MkUzNTFEQkZGRiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5QkQ3MjMxOEVEMjQxMUU1ODAzNEU2MkUzNTFEQkZGRiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjlCRDcyMzE1RUQyNDExRTU4MDM0RTYyRTM1MURCRkZGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjlCRDcyMzE2RUQyNDExRTU4MDM0RTYyRTM1MURCRkZGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+b4RLNgAAAAZQTFRFAAAA////pdmf3QAAAAJ0Uk5T/wDltzBKAAAAwklEQVR42uzYSxKDMAwE0dH9L00C+QA765EKC3tNd5VtaeQidVqpsXX+PgkJklFDkD8KGvxB0OH3gha/E/T4r6DJfwRd/i1o8y9Bn98EwK8C4Z8C4h8C4zcc+AsEvAU/RL9GLyQvZW8mb2cPFI80D1WPdR8sPtp8uPp49wcGXeMUTMFNBEHBzMQbZeKYIYWGFBpSaEihIYWGFBpSaEihIYWGnwl0C3qIeo1aSFrK2kzazhooGmnzL84Fw/UPD4xFgAEAvCoShZ40yH0AAAAASUVORK5CYII=);background-repeat:no-repeat;}
+		.slider-ctrl-prev:hover,.slider-ctrl-next:hover{opacity:1;filter:alpha(opacity=100);}
+		.slider-ctrl-prev{background-position:6px top;left:30px;top:50%;margin-top:-18px;}
+		.slider-ctrl-next{background-position:-6px -45px;right:0;top:50%;margin-top:-18px;}
+
+		.piclist-panel{
+			position: relative;
+			width: 320px;
+			margin-left: -20px
+		}
+
+		.piclist {
+			display: none;
+			width: 320px;
+			opacity:0;
+			filter:alpha(opacity=0);
+		}
+
+		.piclist.show{
+			display: block;
+		}
+
+		.piclist li {
+		    float: left;
+		    display: inline;
+		    overflow: hidden;
+		    width: 140px;
+		    height: 125px;
+		    margin-left: 20px;
+		    color: #666
+		}
+
+		.piclist a,.piclist img,.piclist em {
+		    display: block
+		}
+
+		.piclist a {
+		    text-align: center;
+		    text-decoration: none
+		}
+
+		.piclist img {
+		    width: 140px;
+		    height: 90px;
+		    margin: 0 auto 5px;
+		    background-color: #ccc
+		}
+
+		.piclist em {
+		    line-height: 18px;
+		    height: 18px;
+		    overflow: hidden;
+		    font-size: 14px;
+		    font-family: microsoft yahei;
+		    display: block
+		}
+	</style>
+</head>
+<body>
+	<div class="piclist-panel">
+		<span id="prev" class="slider-ctrl-prev">></span>
+		<span id="next" class="slider-ctrl-next">></span>
+		<ul class="piclist show clearfix">
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/xiao/3452.html">
+				    <img width="140" height="90" alt="揭秘朝鲜唯一红灯区" src="http://img001.21cnimg.com/photos/album/20160321/o/245E68BB87E03384D37B007BD812C1C2.jpg?visible=1" style="display: block;">
+				    <em>揭秘朝鲜唯一红灯区</em>
+			    </a>
+		    </li>
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/news/3287.html">
+				    <img width="140" height="90" alt="女模特接拍写真被强暴" src="http://img001.21cnimg.com/photos/album/20160321/o/3DBCF5CB0559ED3876AF94892BB04F35.jpg?visible=1" style="display: block;">
+				    <em>女模特接拍写真被强暴</em>
+			    </a>
+		    </li>
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/news/3139.html">
+				    <img width="140" height="90" alt="以色列唯一的女子监狱" src="http://img002.21cnimg.com/photos/album/20160321/o/E67844E24AF660DB670566410428EBC5.jpg?visible=1" style="display: block;">
+				    <em>以色列唯一的女子监狱</em>
+			    </a>
+		    </li>
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/xiao/3457.html">
+				    <img width="140" height="90" alt="男子自制迷药" src="http://img001.21cnimg.com/photos/album/20160321/o/8FCC1EDD40F54525DE27E7F63AD92802.jpg?visible=1" style="display: block;">
+				    <em>男子自制迷药投舞厅女子</em>
+			    </a>
+		    </li>
+		</ul>
+		<ul class="piclist clearfix">
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/news/3263.html">
+				    <img width="140" height="90" alt="印度10大雷人习俗" src="http://img003.21cnimg.com/photos/album/20160321/o/00F6AAB9E10FA92F508308F132565295.jpg?visible=1" style="display: block;">
+				    <em>印度10大雷人习俗</em>
+			    </a>
+		    </li>
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/news/3286.html">
+				    <img width="140" height="90" alt="揭秘日本牛郎工作 月入4万美元" src="http://img003.21cnimg.com/photos/album/20160321/o/2F220424592CF5C59CBCE60D85562C63.jpg?visible=1" style="display: block;">
+				    <em>日本牛郎月入4万美元</em>
+			    </a>
+		    </li>
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/xiao/3453.html">
+				    <img width="140" height="90" alt="农民捡一腌菜石头:竟值400万" src="http://img002.21cnimg.com/photos/album/20160321/o/785D8757D546CD8F8F4D8E9980C59DC0.jpg?visible=1" style="display: block;">
+				    <em>农民捡一石头值400万</em>
+			    </a>
+		    </li>
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/xiao/3446.html">
+				    <img width="140" height="90" alt="老和尚坐缸3年 开缸后震惊全场" src="http://img003.21cnimg.com/photos/album/20160321/o/CE24B8465C1C389D110A55ACAD575D2A.jpg?visible=1" style="display: block;">
+				    <em>老和尚开缸后震惊全场</em>
+			    </a>
+		    </li>
+		</ul>
+		<ul class="piclist clearfix">
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/xiao/3334.html">
+				    <img width="140" height="90" alt="54岁男子体检被查怀孕" src="http://img001.21cnimg.com/photos/album/20160321/o/B732E08598190378530C845BCEA0D1B6.jpg?visible=1" style="display: block;">
+				    <em>54岁男子被查怀孕</em>
+			    </a>
+		    </li>
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/xiao/3456.html">
+				    <img width="140" height="90" alt="越南同性恋，亲密而平淡的生活" src="http://img003.21cnimg.com/photos/album/20160321/o/8BCCEC5278F9C91F35A28C1ECF9491B6.jpg?visible=1" style="display: block;">
+				    <em>实拍越南同性恋生活</em>
+			    </a>
+		    </li>
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/xiao/3448.html">
+				    <img width="140" height="90" alt="明星的演技总结说的好有道理" src="http://img002.21cnimg.com/photos/album/20160321/o/07F0ACADD953B2511CE99F6B6311F802.jpg?visible=1" style="display: block;">
+				    <em>这些演技尴尬癌发作了</em>
+			    </a>
+		    </li>
+		    <li>
+			    <a target="_blank" href="http://www.88ysg.com/xiao/3390.html">
+				    <img width="140" height="90" alt="郑爽又整了？" src="http://img003.21cnimg.com/photos/album/20160321/o/6CA9AA2B8A3F1D48DF981A4DA2D9C62B.jpg?visible=1" style="display: block;">
+				    <em>郑爽又整了？</em>
+			    </a>
+		    </li>
+		</ul>
+	</div>
+	<script type="text/javascript" src="http://www.88ysg.com/resource/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		var $piclist = $(".piclist");
+		var index = $(".piclist.show").index(".piclist");
+		var count = $piclist.length;
+		var piclistTimer;
+		function setPiclistTimer(){
+			piclistTimer = setTimeout(function(){
+				if(index==count-1){
+					index = 0;
+				}else{
+					index++;
+				}
+				showPiclist();
+				setPiclistTimer();
+			},10000);
+		}
+		function showPiclist(){
+			$piclist.filter(".show").removeClass("show").removeAttr("style");
+			$piclist.eq(index).addClass("show").animate({
+				"opacity":"1"
+			},"fast");
+		}
+		showPiclist();
+		setPiclistTimer();
+
+		$("#prev").bind("click",function(){
+			if(index==0){
+				index = count-1;
+			}else{
+				index--;
+			}
+			showPiclist();
+		});
+
+		$("#next").bind("click",function(){
+			if(index==count-1){
+				index = 0;
+			}else{
+				index++;
+			}
+			showPiclist();
+		});
+
+		$(".piclist-panel").bind("mouseenter ",function(){
+			clearTimeout(piclistTimer);
+		});
+
+		$(".piclist-panel").bind("mouseleave ",function(){
+			setPiclistTimer();
+		});
+	</script>
+</body>
+</html>

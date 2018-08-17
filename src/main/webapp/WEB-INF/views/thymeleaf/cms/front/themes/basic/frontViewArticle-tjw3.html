@@ -1,0 +1,124 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<base target="_blank">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="render" content="webkit">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes, width=device-width">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<script type="text/javascript" src="../../../../../../../js/jquery-1.7.js"></script>
+		<script src="../../../../../../../js/YuxiSlider.jQuery.min.js" type="text/javascript" charset="utf-8"></script>
+		<link href="../../../../../../../css/article1.css" rel="stylesheet" />
+		<style type="text/css">
+				.top-list .r1_h h5 a {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			
+			@media screen and (min-width: 1280px) {
+				.wrap {
+					width: 1200px;
+				}
+				.header {
+					width: 1200px;
+				}
+				.article_detail {
+					width: 840px;
+				}
+				.article_detail .title h1 {
+					font-size: 36px;
+					line-height: 46px;
+				}
+				.article_detail .content p {
+					padding: 16px 0;
+					font-size: 18px;
+					line-height: 32px;
+				}
+				.newpic1 li {
+					margin: 5px 10px;
+				}
+				.content img {
+					text-align: center;
+				}
+				.even {
+					float: right;
+				}
+				.today_diveven {
+					width: 140px;
+					float: right;
+					margin-bottom: 10px;
+				}
+				.today_divright {
+					width: 140px;
+					float: right;
+					margin-bottom: 10px;
+				}
+				.today_divright img {
+					display: block;
+				}
+				.dede_pages li a {
+    				line-height: 16px;
+    			}
+				.hot-txt-list{padding:0px 0px 10px 0px; display: block; overflow: hidden;float: left;}
+				.hot-txt-list li { background: url('../images/li.jpg') no-repeat scroll left center transparent; padding-left:10px;margin:0px 10px;height:28px;line-height:28px;overflow: hidden; }
+				.hot-txt-list li a { color: #036; font-size: 14px; line-height: 24px; }
+				.demo {width: 300px;height: 250px;font-size: 14px;position:relative;}
+				.demo a.control {position:absolute;display: block;top: 50%;margin-top: -78px;width: 76px;height: 112px;cursor: pointer;z-index: 2;background: url(../../../../../../../images/buttons.png) no-repeat}
+				.demo a.prev {left: 0;background-position: 0 0}
+				.demo a.next {right: 0;background-position: -76px 0}
+				.demo a.prev:hover {background-position: 0 -112px}
+				.demo a.next:hover {background-position: -76px -112px}
+				p.title{margin-left: 4px;}
+				/*----------------------------为保证最佳效果，建议设置如下样式------------------------*/
+				.slider {display: none}
+		</style>
+	</head>
+
+	<body>
+		
+		<div class="aside right">
+
+			<div class="section-head ">
+					<span class="title "><span>热门搜索</span>&nbsp;Hot</span>
+				</div>
+				<div class="blank20 "></div>
+				<div class="clearfix hotSearch ">
+					<div class="today_div " th:each="t,tStat:${list} " th:if="${tStat.index &lt; 2}" th:class="${tStat.odd}? 'today_div odd' : 'today_divright'">
+						<a class="_block_today_china " th:href="${t.staticUrl} " title=" " target="_blank ">
+							<div class="img_zc ">
+								<img th:src="${t.image} " alt=" " height="105 " width="140 ">
+							</div>
+							<div class="zc_title "><span  th:utext="${t.shorttile}"  ></span></div>
+						</a>
+					</div>
+					<div styel="clearfix margin-top:5px">
+						<ul class="hot-txt-list">
+							<li th:each="t,tStat:${list} " th:if="${tStat.index &gt; 2}">
+								<a target="_blank" th:href="${t.staticUrl}"><span  th:utext="${t.shorttile}"  ></span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+		</div>
+
+
+	
+
+	<script>
+		$(".slider").YuxiSlider({
+			width:300, //容器宽度
+			height:250, //容器高度
+			control:$('.control'), //绑定控制按钮
+			during:4000, //间隔4秒自动滑动
+			speed:800, //移动速度0.8秒
+			mousewheel:false, //是否开启鼠标滚轮控制
+			direkey:true //是否开启左右箭头方向控制
+		});
+	</script>
+	</body>
+</html>

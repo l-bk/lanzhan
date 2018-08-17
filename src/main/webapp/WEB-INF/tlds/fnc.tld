@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>JSTL 1.1 functions library</description>
+	<display-name>JSTL functions cms</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>fnc</short-name>
+	<uri>http://java.sun.com/jsp/jstl/functionsc</uri>
+
+	<function>
+		<description>获取当前管理站点编号</description>
+		<name>getCurrentSiteId</name>
+		<function-class>com.modules.cms.entity.Site</function-class>
+		<function-signature>java.lang.String getCurrentSiteId()</function-signature>
+		<example>${fnc:getCurrentSiteId()}</example>
+	</function>
+
+	<function>
+		<description>获取站点</description>
+		<name>getSite</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>com.modules.cms.entity.Site getSite(java.lang.String)</function-signature>
+		<example>${fnc:getSite(siteId)}</example>
+	</function>
+
+	<function>
+		<description>获取站点列表</description>
+		<name>getSiteList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getSiteList()</function-signature>
+		<example>${fnc:getSiteList()}</example>
+	</function>
+
+	<function>
+		<description>获取主导航列表</description>
+		<name>getMainNavList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getMainNavList(java.lang.String)</function-signature>
+		<example>${fnc:getMainNavList(siteId)}</example>
+	</function>
+
+	<function>
+		<description>获取栏目</description>
+		<name>getCategory</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>com.modules.cms.entity.Category getCategory(java.lang.String)</function-signature>
+		<example>${fnc:getCategory(categoryId)}</example>
+	</function>
+
+	<function>
+		<description>获得栏目列表</description>
+		<name>getCategoryList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getCategoryList(java.lang.String,java.lang.String, int, java.lang.String)</function-signature>
+		<example>${fnc:getCategoryList(siteId, parentId, number, param)}</example>
+	</function>
+
+	<function>
+		<description>获得栏目列表</description>
+		<name>getCategoryListByIds</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List
+			getCategoryListByIds(java.lang.String)</function-signature>
+		<example>${fnc:getCategoryListByIds(categoryIds)}</example>
+	</function>
+
+	<function>
+		<description>获取文章</description>
+		<name>getArticle</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>com.modules.cms.entity.Article
+			getArticle(java.lang.String)</function-signature>
+		<example>${fnc:getArticle(articleId)}</example>
+	</function>
+
+	<function>
+		<description>获取文章列表</description>
+		<name>getArticleList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getArticleList(java.lang.String,
+			java.lang.String, int, java.lang.String)</function-signature>
+		<example>${fnc:getArticleList(siteId, categoryId, number, param)}</example>
+	</function>
+
+	<function>
+		<description>获取链接</description>
+		<name>getLink</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>com.modules.cms.entity.Link
+			getLink(java.lang.String)</function-signature>
+		<example>${fnc:getLink(linkId)}</example>
+	</function>
+
+	<function>
+		<description>获取链接列表</description>
+		<name>getLinkList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getLinkList(java.lang.String,
+			java.lang.String, int, java.lang.String)</function-signature>
+		<example>${fnc:getLinkList(siteId, categoryId, number, param)}</example>
+	</function>
+	<function>
+		<description>获取推荐位的文件</description>
+		<name>getPositionList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getPositionList(java.lang.String,
+			java.lang.String, java.lang.Integer, java.lang.String)</function-signature>
+		<example>${fnc:getPositionList(category_id, type, size, param)}</example>
+	</function>
+
+	<function>
+		<description></description>
+		<name>getDefinedTime</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.lang.String getDefinedTime(java.lang.Integer,
+			java.lang.Integer, java.lang.Integer, java.lang.Integer)</function-signature>
+		<example>${fnc:getDefinedTime(d, h, m, s)}</example>
+	</function>
+
+	<function>
+		<description>获取手机图片</description>
+		<name>toMobileImg</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.lang.String toMobileImg(javax.servlet.http.HttpServletRequest, java.lang.String)
+		</function-signature>
+
+	</function>
+	
+	<function>
+		<description>获取手机文章</description>
+		<name>WordtoMobileImg</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.lang.String WordtoMobileImg(javax.servlet.http.HttpServletRequest, java.lang.String)
+		</function-signature>
+	</function>
+	
+	
+	<function>
+		<description>获取文章第一张图片</description>
+		<name>getFirstContentImg</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.lang.String getFirstContentImg(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>获取子栏目</description>
+		<name>getChildCatagory</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getChildCatagory(java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+	<function>
+		<description>获取子栏目(不包含顶级栏目)</description>
+		<name>getChildCatagory2</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getChildCatagory2(java.lang.String, java.lang.String)
+		</function-signature>
+	</function>	
+	
+	<function>
+		<description>获取推荐位对象</description>
+		<name>getPosition</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>com.modules.position.entity.Position getPosition(java.lang.String)
+		</function-signature>
+	</function>
+	
+	<function>
+		<description>获取随机的文章</description>
+		<name>getRondomList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getRondomList(java.lang.String, java.lang.Integer, java.lang.String)</function-signature>
+		<example>${fnc:getRondomList(category_id, size, param)}</example>
+	</function>
+	
+	<function>
+		<description>获取点击的文章</description>
+		<name>getTodayHitList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getTodayHitList(java.lang.Integer)</function-signature>
+		<example>${fnc:getTodayHitList(size)}</example>
+	</function>
+	
+	<function>
+		<description>获取文件的多图片</description>
+		<name>getMoreImgPositionList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getMoreImgPositionList(java.lang.String,
+			java.lang.String, java.lang.Integer, java.lang.String)</function-signature>
+		<example>${fnc:getMoreImgPositionList(category_id, type, size, param)}</example>
+	</function>
+	
+	<function>
+		<description>获取类别</description>
+		<name>getReservationTree</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getReservationTree()</function-signature>
+		<example>${fnc:getReservationTree()}</example>
+	</function>
+	
+	<function>
+		<description>获取广告代码</description>
+		<name>getAdsList</name>
+		<function-class>com.modules.cms.utils.CmsUtils</function-class>
+		<function-signature>java.util.List getAdsList(java.lang.String,java.lang.String)</function-signature>
+		<example>${fnc:getAdsList(advPosid,typeid)}</example>
+	</function>	
+</taglib>

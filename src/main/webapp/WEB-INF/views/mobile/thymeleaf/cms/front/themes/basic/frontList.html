@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="'腾云军事 - ' + ${category.name}"></title>
+		<base target="_blank">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="../../../../../../../../css/normalize.css">
+		<link rel="stylesheet" href="../../../../../../../../css/index_list.css">
+		<script type="text/javascript" src="../../../../../../../../static/jquery/jquery-1.9.1.min.js"></script>
+		<style type="text/css">
+			@media screen and (max-width:319px){html{font-size:29px!important}}
+			@media screen and (min-width:320px){html{font-size:31px!important}}
+			@media screen and (min-width:360px){html{font-size:35px!important}}
+			@media screen and (min-width:375px){html{font-size:36px!important}}
+			@media screen and (min-width:384px){html{font-size:37px!important}}
+			@media screen and (min-width:414px){html{font-size:40px!important}}
+			@media screen and (min-width:480px){html{font-size:46px!important}}
+			@media screen and (min-width:550px){html{font-size:53px!important}}
+			@media screen and (min-width:600px){html{font-size:58px!important}}
+			@media screen and (min-width:640px){html{font-size:62px!important}}
+			@media screen and (min-width:700px){html{font-size:68px!important}}
+			@media screen and (min-width:750px){html{font-size:73px!important}}
+			@media screen and (min-width:800px){html{font-size:78px!important}}
+			@media screen and (min-width:850px){html{font-size:83px!important}}
+			@media screen and (min-width:900px){html{font-size:88px!important}}
+			@media screen and (min-width:950px){html{font-size:93px!important}}
+			@media screen and (min-width:1000px){html{font-size:98px!important}}
+			.nav a {
+				font-size: 0.5rem;
+			}
+			.content-title{
+				font-size: 0.45rem;
+			}
+			.content-source span{
+				font-size: 0.32rem;
+			}
+			.pagebox{
+			    text-align: center;
+			}
+			.pagebox li{
+			    display: inline-block;
+			    *display: inline;
+			    *zoom: 1;
+			    margin: 5px 3px;
+			    vertical-align: middle;
+			}
+			.pagebox li a{
+			    display: block;
+			    padding: 6px 10px;
+			    color: #333;
+			    text-decoration: none;
+			    border: 1px solid #ccc;
+			}
+			.pagebox .thisclass a,.pagebox li a:hover{
+			    border-color: #2a57a9;
+			    color: #fff;
+			    background: #2a57a9;
+			}
+			.content-source a {
+			    display: inline;
+			}
+		</style>
+	</head> 
+	<body>
+		<!--头部-->
+		<header>
+			<h1 class="top">
+				<a href="/" class="back"></a>
+				<a href="" th:class="'logo logo'+${category.id}">
+					<cite th:text="'腾云军事·'+${category.name}">腾云军事</cite>
+				</a>
+				<a class="menu"></a>
+			</h1>
+			<!--logo-->
+			<div class="nav-container" style="display: none">
+				<ul class="nav">
+				<li >
+					<a href="/">头条</a>
+					<a href="/a/rd/list1.shtml">社会</a>
+					<a href="/a/gn/list1.shtml">国内</a>
+					<a href="/a/gj/list1.shtml">国际</a>
+					<a href="/a/pl/list1.shtml">评价</a>
+					<a href="/a/ls/list1.shtml">历史</a>
+					<a href="/a/tp/list1.shtml">图片</a>
+				</li>
+			</ul>
+			</div>
+		</header>
+		
+		<!--内容-->
+		<div class="comment">
+			<div class="posi-content" th:each="t:${page.list}">
+				<a th:href="${t.staticUrl}" th:title="${t.title}">
+					<div class="img-panel" th:if="${t.image} ne null and ${t.image} ne ''">
+						<img class="lazy" th:src="${t.image}" src="../../../../../../../../js/grey2.png" width="120" height="80" alt="">
+					</div>
+					<div class="text-panel">
+						<div class="content-title" th:utext="${t.title}">范德萨发斯蒂芬了飞洒地方落实到发了啥地方了可适当</div>
+						<div class="content-source" >
+							<span class="time" th:text="${#dates.format(t.createDate, 'yyyy-MM-dd HH:mm:ss')}">2016-12-12 12:25:25</span>&nbsp;
+							<!-- <span th:text="'来源：'+${t.}"></span> -->
+							<a th:href="${t.msgsource.url}?${t.msgsource.url}:${t.acquisitionSource}"><span class="source" th:utext="${t.msgsource.name}?${t.msgsource.name}:'互联网'"></span></ a>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<!--页码-->
+		<div class="pagebox" style="text-align:center; margin-top:10px; margin-bottom:10px;">
+            <span style="display: none;" class="columnName" th:text="${category.nameEn}"></span><!--栏目名称-->
+            <span style="display: none;" class="pageLast" th:text="${page.last}"></span><!--总数-->
+            <span th:utext="${page}"></span>
+            
+            <script type="text/javascript">
+                var loca = location.href;
+                var pageLast = $('.pageLast').text();
+                if(pageLast < 9){
+                    $('.pagelist li a:contains("...")').parent().hide();
+                }
+                $(".pagelist li a").each(function(){
+                    if($(this).html().indexOf(pageLast)!=-1){
+                        $('.pagelist li a:contains("...")').eq(1).parent().hide();
+                    }
+                })
+                function page(n, s) {
+                    var columnName = $('.columnName').text();
+                    var loca1 = loca.split('/'+columnName+'/')[0]+'/'+columnName;
+                    location = loca1 + '/list' + n + '.shtml';
+                }
+            </script>
+            <div class="nav-line"></div>
+        </div>
+		<!--底部-->
+		<footer style="border-top: 2px solid #1A5A9A;">
+			<div class="footer">
+				<p style="font-size: 15px;">腾云军事 www.60mil.com</p>
+				<p style="font-size: 14px;">
+					<a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=rpDyXRXVH0Bv883FlqX2Q214zhrRD80pfzclPFPLLjKxLF51S5GT!1219073593">粤ICP备15002994号-1</a>
+				</p>
+				<p style="font-size: 14px;">本站文章来源于网络 仅作为展示之用 版权归原作者所有</p>
+			</div>
+		</footer>
+		<script type="text/javascript">
+			var $J_Nav = $(".nav");
+			$(window).on('scroll', function() {
+				if ($(this).scrollTop() >= 88) {
+					$('.nav-container').show();
+					$J_Nav.addClass("fixed");
+				} else {
+					$J_Nav.removeClass("fixed");
+					$('.nav-container').hide();
+				}
+			});
+			
+			var curUrl = window.location.pathname;
+			$('.nav a').each(function(){
+				var href = $(this).attr('href');
+				if(curUrl.indexOf(href) > -1 && href != "/"){
+					$(this).css("color","#1a5a9a");
+				}
+			});
+			
+			$('.menu').click(function(){
+				var ele = $('.nav-container');
+				var flag = ele.css('display');
+				if(flag == "none"){
+					ele.show();
+				}
+				else{
+					ele.hide();
+				}
+			});
+		</script>
+	</body>
+</html>

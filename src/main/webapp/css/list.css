@@ -1,0 +1,349 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0}
+fieldset,img{border:0 none}
+:focus{outline:0}
+address,caption,cite,code,dfn,em,b,i,th,var,optgroup{font-style:normal;font-weight:400}
+abbr,acronym{border:0;font-variant:normal}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}
+textarea{overflow:auto}
+ol,ul{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+caption,th{text-align:left}
+sup,sub{font-size:100%;vertical-align:baseline}
+:link,:visited,ins{text-decoration:none}
+blockquote,q{quotes:none}
+blockquote:before,blockquote:after,q:before,q:after{content:none}
+iframe{display: block}
+.clearfix:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden}
+.clearfix{zoom:1}
+body{font-size:12px;font-family:\5FAE\8F6F\96C5\9ED1;color:#333;}
+a{color:#333;}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+.blank20{
+    clear: both;
+    height: 20px;
+    overflow: hidden;
+}
+.clear{
+	 clear: both;
+    overflow: hidden;
+}
+/*澶撮儴*/
+.header-bg{
+    position: relative;
+    box-shadow: 0 3px 10px #d9d9d8;
+}
+.header-bg-left{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #165ea3;
+}
+.header-bg-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: #eeeeed;
+}
+.header{
+    position: relative;
+    z-index: 10;
+    width: 1000px;
+    height: 70px;
+    margin: 0 auto;
+}
+.header .logo{
+    float: left;
+    width: 197px;
+}
+.header .nav{
+    float: left;
+    padding: 30px 14px 14px;
+    background: #eeeeed;
+}
+.header .nav li{
+    float: left;
+    padding: 0 20px;
+    line-height: 26px;
+    font-size: 22px;
+}
+.header .nav a{
+    color: #165ea3;
+}
+/*鍐呭*/
+.w1000{width:1000px; margin:0 auto;}
+.w610{width:610px;}
+.w336{width:336px;}
+.w220{width:220px;}
+.ml20{margin-left:20px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mt20 { margin-top:20px;}
+.mt30 { margin-top:30px;}
+.bgGrey{background:#f5f5f5;}
+.bgWhite{background:#fff;}
+
+.blue,a.blue,.blue a{color:#0e558d; text-decoration:underline;}
+.grey,a.grey,.grey a{color:#999;}
+.red,a.red,.red a{color:#a93535;}
+.green,a.green,.green a{color:#6ba928;}
+.black{color:#000; font-weight:bold;}
+.f12{font-size:12px;}
+.f14{font-size:14px;}
+.f18{ font-size:18px;}
+i{font-style:normal;}
+.b{font-weight:bold;}
+.u,a.u,.u a{text-decoration:underline;}
+.borderGrey{border:1px solid #dbdbdb;}
+.center{text-align:center;}
+div, dl {line-height: 22px;}
+/* HTML5 display-role reset for older browsers */
+article,sidebar, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+/*button style*/
+.btnStyle1,.btnStyle2,.btnStyle3,.btnStyle5{border:none;cursor:pointer; vertical-align:middle;}
+.bottomDot{border-bottom:1px dotted #c6c7c8;}
+
+header, section { margin:0 auto;}
+footer{line-height:50px;}
+footer a{text-decoration:underline; margin:0 5px;}
+
+/***footer***/
+#footer {text-align: center;font: 12px  "Microsoft YaHei";color: #333;line-height: 21px;clear: both;border-top: 1px solid #a8a8a8;
+padding: 8px 0px;margin-top:10px;padding-top:10px;}
+#footer .footer_x {color: #333;font: 12px "Microsoft YaHei";line-height: 21px;}
+#footer .footer_x a {padding: 0 4px 0 6px;color:#333;text-decoration:none;}
+#footer p { line-height:21px;}
+.links {text-align: center; padding-top:20px; }
+.links img { margin:0 3px 0 3px;display: inline-block;}
+
+/****links 2015.3.6****/
+.likeTit{background: url(http://content.xilu.com/images/201211/topbg.jpg) repeat-x;height: 30px;line-height: 28px; padding-left:10px;font-size: 14px; font-weight:bold;}
+.linkList { padding:10px;}
+.linkList a{margin:0px 3px;display: inline-block;padding: 1px 5px 1px 5px;font-size: 14px;font-family: Microsoft YaHei;}
+.linkListbox { margin-left: 10px; margin-right:10px;padding: 3px;}
+.linkListbox a{margin-top:3px;display: inline-block;padding: 2px;font-size: 14px;font-family: Microsoft YaHei;}        
+.linksbox{height:30px; line-height:28px; font-family:Microsoft YaHei; background: url(http://content.xilu.com/images/201211/topbg.jpg) repeat-x;font-size: 14px;
+font-weight: bold;}
+.linksbox li{float: left; width:70px; padding:0 4px;height:30px; line-height:28px;text-align: center;color: #696969;cursor: pointer; white-space:nowrap; overflow:hidden; font-size:14px; }
+.linksbox li a { color:#696969;}
+.linksbox li.hover{height:30px; border-bottom:#606060; font-size:14px;}
+.linksbox li.hover a{ color:#606060; display:block; border-bottom:1px solid #606060;  font-family:Microsoft YaHei;}
+.linksbox li a:hover{ text-decoration:none; }
+.tabCon{display:none; height:auto;overflow:hidden;}
+.block{display:block;}
+
+/*璇︾粏鏍峰紡*/
+@charset "gb2312";
+/* CSS Document */
+
+
+.b{font-weight:bold;}
+.currenttext a:link, .currenttext a:visited {color: #0B3B8D;line-height: 20px;font-size: 14px;}
+.mt10{margin-top:10px;}
+
+.bottomDot{border-bottom:1px dotted #c6c7c8;}
+.thecurrentBorder span {font: 16px microsoft yahei;font-weight: bold;font-style: italic;color: #888;}
+
+.banner_bg { background:#e8e8e8; height:100px;}
+.news_banner_01 { margin-left:20px; padding:5px 0 5px 0;}
+.news_content { height:auto; overflow:hidden;}
+.wei { font-size:13px; line-height:50px;font-family:Microsoft YaHei; overflow:hidden;}
+.page1 { text-align:center; padding-bottom:4px; width:600px; OVERFLOW: hidden; text-indent:0em; line-height:30px; margin-top:22px; font-size:14px;font-family:Microsoft YaHei;}
+.page1 a {text-align:center; display:inline-block; color:#165ea3;margin-right: 5px;margin-bottom: 4px;}
+.page1 a.up { width:51px; height:30px;background:#e7e7e7; }
+.page1 a.up:hover{ width:51px; height:30px;  background:#165ea3; color:#fff; text-decoration:none;}
+.page1 a.up1 { width:40px; height:30px; color:#fff; background:#165ea3;}
+.page1 a.up2 { width:40px; background:#e7e7e7; height:30px; color:#165ea3;;}
+.page1 a.up2:hover { width:40px; background:#165ea3; height:30px; color:#fff; text-decoration:none;}
+
+.news_title {font: 22px 'microsoft yahei';color: #000;text-align: center;margin-top:32px;}
+.news_text { line-height:29px;font-size: 16px;color: #2b2b2b; font-family:Microsoft YaHei;}
+.news_text p{ margin-bottom: 20px;text-indent:2em;}
+.news_text img { margin-bottom:20px;}
+.news_text_gg { width: 360px;height: 300px;float: right;display: inline-block;margin-left:46px;}
+.news_sp { font-size:13px; margin-top:50px;font-family:Microsoft YaHei;}
+.news_sp li { width:300px;height:22px; line-height:22px; float:left; margin-left:3px;}
+.prevNext li { float: left;width: 285px;margin: 10px 5px;font-size: 14px;height: 22px; line-height:22px;overflow: hidden;_display: inline;font-family:Microsoft YaHei;}
+
+.er {border-bottom:1px dashed #ccc; height:auto; position:relative; top:5px;}
+.sure { margin-bottom:5px;}
+.erweima { position:relative;left:0px;top:28px;z-index:999999; zoom:1; position:absolute;}
+
+.web_hotwords {padding-bottom: 1px;}
+.page_tit {height:35px; line-height:35px; border-bottom:1px solid #ccc;}
+.page_tit h2 { font-size:17px; color:#165ea3;  display:block; padding:0 5px 0 5px; border-bottom:1px solid #165ea3; float:left; }
+.web_hotwords a{margin:3px 8px 3px 3px;display: inline-block;line-height: 25px; font-size:14px; font-family:Microsoft YaHei;}
+
+/*TAB*/
+.menubox{height:35px; border-bottom:1px solid #d9d9d9; }
+.menubox li{float: left; width:70px; padding:0 4px;height:35px; line-height:35px;font-size:16px;text-align: center;color: #313131;cursor: pointer; white-space:nowrap; overflow:hidden;  }
+.menubox li.hover{background:#fff;height:36px; border-bottom:#165ea3;font-weight:bold; }
+.menubox li.hover a{ color:#165ea3; display:block; border-bottom:1px solid #165ea3; font-size:17px; font-family:SimSun;}
+.menubox li a:hover{ text-decoration:none; }
+.tabCon{display:none; height:auto;overflow:hidden;}
+.block{display:block;}
+.tabConImg{float:left; width:220px;display:inline;}
+.tabConImg img { width:220px; height:150px;}
+.tabConImg li { margin-top:10px;width:220px; position:relative; }
+.tabConImg span{display:block; position:absolute;width:220px;left:0; bottom:0; color:#fff; line-height:25px; background:#000; opacity:0.7;filter:alpha(opcity=70); text-align:center; font-family:Microsoft YaHei;}
+.tabConImg span a{color:#fff; }
+.tabConList{ margin:10px;margin-left:0; line-height:25px; width:350px; float:right;display:inline; font-size:14px; font-family:Microsoft YaHei;}
+.tabConList_ul1 { margin-top:5px;}
+.tabConList_ul2 { margin-top:28px;}
+.tabConList li { line-height:30px;}
+.tabConImgList li{float:left; margin-top:15px;margin-left:9px;text-align:center;width:136px; height:125px; overflow:hidden; font-family:Microsoft YaHei;}
+.tabConImgList li img{display:block; margin-bottom:4px; width:136px; height:100px;}
+
+.tab_two_list { font-size:14px;}
+.tab_two_list li span { margin-right:8px; font-weight:bold;}
+.tab_two_list li{ width:310px; height:28px; line-height:28px; display:block; padding-left:12px; border-bottom:1px dashed #ccc;}
+.tab_two_list li a{ color:#333; text-decoration:none;}
+.tab_two_list li a:hover{ color:#165ea3; text-decoration:none;}
+
+.sideImgList{margin-top:10px;}
+.sideImgList li{float:left; display:inline; width:150px; margin:3px 0px 8px 12px;}
+.sideImgList li img{width:150px; height:100px;}
+.sideImgList li span{ display:block;text-align:center; margin-top:5px;font-family:Microsoft YaHei;}
+
+.newslist { font-size:14px; font-family:Microsoft YaHei;}
+.newslist li{background:url(http://res.xilu.com/images/pic/2.0/dot_green.gif) no-repeat left center;padding-left: 10px;line-height: 27px;}
+
+.news_side{width:300px;position:relative;margin:0px auto 0 auto; font-size:14px; font-family:Microsoft YaHei;}
+.news_side ul{line-height:30px; font-size:14px;}
+.news_side ul.last{background:none;}
+.news_side ul li{color:#5e5e5e;text-decoration:none; border-bottom:1px dashed #ccc; }
+.news_side ul li.cur a { text-decoration:none;}
+.news_side ul li a:hover{text-decoration:underline;}
+.news_side li span {margin-right:8px; margin-left:3px; font-weight:bold; color:#a0a0a0;}
+.news_side .side-slider{position:absolute;width:3px;background:#165ea3;height:25px;left:-12px;top:30px; margin-top:4px;}
+
+
+.catTopNew {padding: 8px;line-height: 22px;font-family:Microsoft YaHei;}
+.catTopNew dl dt {float: left;display: inline;margin-right: 6px;border: 1px solid #BDBDBD;}
+.catTopNew dl dd {float: left;display: inline;width: 184px;}
+.hot_keywords a {margin:3px 8px 3px 3px;display: inline-block;line-height: 22px;background: #ececec; padding:1px 5px 1px 5px; font-size:14px; font-family:Microsoft YaHei;}
+
+.ImgListbox li{float: left;display: inline;width: 120px; margin: 0px 0px 8px 2px;font-family:Microsoft YaHei;}
+.ImgListbox li span {display: block;text-align: center;margin-top: 5px;}
+.ImgListbox li img { width:120px; height:90px;}
+
+.share{ float:left; margin-left:10px; line-height:45px; height:45px;}
+.share_tit { display:inline-block;height:25px; padding-top:15px;}
+.share_ico { float:left; line-height:45px; height:45px;}
+.sina a{ background:url(http://res.xilu.com/images/pic/2.0/sina_ico.gif) no-repeat center; width:30px; height:30px; display:inline-block; text-decoration:none;}
+.sina a:hover{ background:url(http://res.xilu.com/images/pic/2.0/sina_ico_h.gif) no-repeat center; width:30px; height:30px; text-decoration:none;}
+.tengxun a{ background:url(http://res.xilu.com/images/pic/2.0/tx_ico.gif) no-repeat center; width:30px; height:30px; display:inline-block; text-decoration:none;}
+.tengxun a:hover{ background:url(http://res.xilu.com/images/pic/2.0/tx_ico_h.gif) no-repeat center; width:30px; height:30px; text-decoration:none;}
+
+.tit_bar { height:45px; line-height:45px; font-size:13px;font-family:Microsoft YaHei;}
+.tit_bar_l { color:#000; float:left; line-height:45px;}
+.tit_bar_l span { margin-right:8px;}
+.pinglun { margin-top:8px;}
+.pinglun a {display: inline-block;height: 23px;padding-left:24px;padding-right: 5px;background-image:url(http://res.xilu.com/images/pic/2.0/pinglun.gif);background-repeat: no-repeat;background-position: left 6;font-size: 13px;}
+.pl_title { line-height:45px; font-size:20px; font-weight:bold; font-family:Microsoft YaHei;}
+.subnav { height:40px; border-bottom:1px dashed #ccc; line-height:40px;}
+.keywordsBox {font-family:Microsoft YaHei;}
+.shopLinks li{ width:150px; float:left; line-height:20px;font-family:Microsoft YaHei;}
+
+/**************rightClick*******************/
+#goTop2 {top: 300px;position: fixed;right:-52px;width: 50px;z-index: 10;}
+#goTop #go_top, #goTop #go_top:hover {background-image: url(http://res.xilu.com/images/pic/2.0/top_ico_h.jpg);cursor: pointer;float: left;overflow: hidden;margin-bottom: 6px;}
+#goTop #go_top {height: 52px;width: 52px;background-image: url(http://res.xilu.com/images/pic/2.0/top_ico.jpg);margin-bottom: 6px;}
+#goTop #go_top:hover {background-image: url(http://res.xilu.com/images/pic/2.0/top_ico_h.jpg);}
+#goTop1 #go_top1, #goTop1 #go_top1:hover {background-image:url(http://res.xilu.com/images/pic/2.0/pl_ico_h.jpg)  cursor: pointer;float: left;overflow: hidden;margin-bottom: 6px;}
+#goTop1 #go_top1 {height: 52px;width: 52px;background-image: url(http://res.xilu.com/images/pic/2.0/pl_ico.jpg);margin-bottom: 6px;}
+#goTop1 #go_top1:hover {background-image: url(http://res.xilu.com/images/pic/2.0/pl_ico_h.jpg);}
+#goTop3 #go_top3, #goTop3 #go_top3:hover {background-image: url(http://res.xilu.com/images/pic/2.0/fx_ico_h.jpg);cursor: pointer;float: left;overflow: hidden;margin-bottom: 6px;width:52px;}
+#goTop3 #go_top3 {height: 52px;width: 52px;background-image: url(http://res.xilu.com/images/pic/2.0/fx_ico.jpg);margin-bottom: 6px;}
+#goTop3 #go_top3:hover {background-image: url(http://res.xilu.com/images/pic/2.0/fx_ico_h.jpg);}
+#goTop4 #go_top4, #goTop4 #go_top4:hover {background-image: url(http://res.xilu.com/images/pic/2.0/fh_ico_h.jpg);cursor: pointer;float: left;overflow: hidden;margin-bottom: 6px;}
+#goTop4 #go_top4 {height: 52px;width: 52px;background-image: url(http://res.xilu.com/images/pic/2.0/fh_ico.jpg);margin-bottom: 6px;}
+#goTop4 #go_top4:hover {background-image: url(http://res.xilu.com/images/pic/2.0/fh_ico_h.jpg);}
+#artweixinDiv {width:72px;height:52px;line-height:52px;position:absolute; z-index: 2001; right:50px; top:58px;}
+#artweixinDiv a{display:inline-block;width: 30px;height:30px;margin:11px 2px 0;overflow:hidden;}
+#artweixinDiv .sina_ico{background:url(http://res.xilu.com/images/pic/2.0/sina_ico.gif) no-repeat left; text-decoration:none;}
+#artweixinDiv .sina_ico:hover {background:url(http://res.xilu.com/images/pic/2.0/sina_ico_h.gif) no-repeat left; text-decoration:none;}
+#artweixinDiv .tx_ico { background:url(http://res.xilu.com/images/pic/2.0/tx_ico.gif) no-repeat left;  text-decoration:none;}
+#artweixinDiv .tx_ico:hover{ background:url(http://res.xilu.com/images/pic/2.0/tx_ico_h.gif) no-repeat left; text-decoration:none;}
+
+
+/*姝ｆ枃鍒楄〃椤�*/
+.newslist_box {width: 610px;height: auto;overflow: hidden;font-family:Microsoft YaHei;}
+.newslist_box li {overflow: hidden;clear: both;padding-bottom: 30px; padding-top:30px;border-bottom: 1px solid #d9d9d9;}
+.newslist_tit { font-size:18px; font-weight:bold; color:#333333;}
+
+/* .newslist_del{width: 425px;height:48px ;font-family:Microsoft YaHei;float: left;margin: 5px 0;} */
+
+.newslist_tm { line-height:16px;padding-top:10px; padding-bottom:6px;font-family:Microsoft YaHei;}
+.newslist_tm .times { color:#868686;}
+.newslist_source { height:16px; width:57px; background:url(http://res.xilu.com/images/pic/2.0/tj_bg.png) no-repeat; font-size:12px; font-family:Microsoft YaHei;display:block; float:left; color:#fff; line-height:16px;}
+.newslist_source p { margin-left:3px;}
+.newslist_source span { color:#868686;}
+.newslist_intro {color: #333333;font-family:Microsoft YaHei;}
+.newslist_intro a { color:#F00;}
+.newslist_Aimg {float: left;overflow: hidden; width:150px;margin-right:18px;}
+.newslist_Aimg img { width:150px; height:100px;}
+.newslist_box li:hover,.newslist_box li:focus { background:#f2f2f2;}
+
+/**************/
+.img_nav { background:#3a3a3a; height:45px; line-height:45px; font-family:Microsoft YaHei;color:#fff;}
+.img_nav_ul { width:720px; height:45px; line-height:45px;}
+.img_nav_ul li { float:left; width:135px;text-align: center; font-size:16px; margin-right:1px;}
+.img_nav_ul li a { color:#fff;font-family: Microsoft YaHei;text-decoration: none;display: block;}
+.img_nav_ul li a:hover { font-size:18px; color:#fff;background: #565656;}
+.img_nav_ul li.on {cursor: pointer;background: #565656; font-size:18px;}
+
+.sub_nav { font-size:14px; line-height:34px;font-family:Microsoft YaHei; overflow:hidden;}
+.piclist_box { width:1000px; height:auto; overflow:hidden; font-family:Microsoft YaHei;}
+.piclist_box ul { width:1035px; height:auto; overflow:hidden;}
+.piclist_box li { width:310px; margin-right:35px; float:left; margin-bottom:15px;}
+.piclist_box li img { width:310px; height:225px;}
+.piclist_box li img:hover,.piclist_box li img:focus{background:#FFF;opacity: 0.7;filter: alpha(opcity=70);}
+.piclist_box .piclist_tit {line-height:40px;}
+.piclist_box .piclist_keyw {color:#959593;}
+.piclist_box .piclist_keyw span{display: inline;margin-right: 10px;}
+
+
+/*鍒嗛〉*/
+/*.pagebox { text-align:center; padding-bottom:4px; width:100%; OVERFLOW: hidden; text-indent:0em; line-height:30px; font-size:14px;font-family:Microsoft YaHei;}
+.pagebox li{display:inline;}
+.pagebox li a {text-align:center; display:inline-block; color:#165ea3;margin-right: 5px;margin-bottom: 4px;}
+.pagebox li a.up { width:51px; height:30px;background:#e7e7e7; }
+.pagebox li a.up:hover{ width:51px; height:30px;  background:#165ea3; color:#fff; text-decoration:none;}
+.pagebox li a.up1 { width:40px; height:30px; color:#fff; background:#165ea3;}
+.pagebox li a.up2 { width:40px; background:#e7e7e7; height:30px; color:#165ea3;;}
+.pagebox li a.up2:hover { width:40px; background:#165ea3; height:30px; color:#fff; text-decoration:none;}
+.pagebox li a:hover{text-decoration: underline; }*/
+
+.pagebox{
+    text-align: center;
+}
+.pagebox li{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin: 5px 3px;
+    vertical-align: middle;
+}
+.pagebox li a{
+    display: block;
+    padding: 6px 10px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ccc;
+}
+.pagebox .thisclass a,.pagebox li a:hover{
+    border-color: #2a57a9;
+    color: #fff;
+    background: #2a57a9;
+}

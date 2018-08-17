@@ -1,0 +1,408 @@
+body, p, input, h1, h2, h3, h4, h5, h6, ul, li, dl, dt, dd, form {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	vertical-align: middle;
+
+}
+
+em {
+	font-style: normal
+}
+
+body {
+	color: #333;
+	font-size: 16px;
+	font-family: \5FAE\8F6F\96C5\9ED1, helvetica, arial;
+	-webkit-user-select: none;
+	-webkit-text-size-adjust: none
+}
+
+img {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: 0
+}
+
+a {
+	text-decoration: none;
+	color: #333
+}
+
+a:active {
+	color: #333
+}
+
+input, button {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-appearance: none;
+	outline: 0
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0
+}
+body {
+	margin: 0 auto;
+	max-width: 720px
+}
+
+header {
+	text-align: center
+}
+
+header a, header a:visited {
+	text-decoration: none;
+	color: #777;
+	font-size: 12px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	display: inline-block;
+	vertical-align: middle;
+	font-weight: 600;
+	line-height: 50px;
+	font-family: proxima-nova, sans-serif
+}
+
+.top {
+	height: 48px;
+	background: #1A5A9A;
+	border-bottom: 2px solid #1a5a9a;
+	text-align: left;
+	width: 100%;
+	text-align: center;
+}
+
+.top cite {
+	position: relative;
+	display: none;
+	z-index: -1;
+}
+
+.top .back {
+	float: left;
+	margin-top: 12px;
+	margin-left: 10px;
+	display: inline-block;
+	width: 19px;
+	height: 25px;
+	background: url(../images/tengyun-back.png) no-repeat;
+	background-size: 19px 25px;
+}
+
+.top .menu {
+	float: right;
+	margin-top: 13px;
+	margin-right: 10px;
+	display: inline-block;
+	width: 28px;
+	height: 25px;
+	background: url(../images/tengyun-menu.png) no-repeat;
+	background-size: 28px 25px;
+}
+
+.top .logo {
+	/*margin-left: 10px;*/
+	display: inline-block;
+	margin-top: 5px;
+}
+
+.top .logo1{
+	width: 100%; 
+	height: 50px;
+	background: url(../images/tengyunlogo3.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.top .logo2, .top .logo19{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo2.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo3, .top .logo20{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo3.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo4, .top .logo21{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo4.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo5, .top .logo25{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo5.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo6, .top .logo23{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo6.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo26{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo7.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.nav-container {
+	height: 44px;
+	border-bottom: 2px solid #1A5A9A;
+}
+
+.nav.fixed {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	border-bottom: 2px solid #1A5A9A;
+}
+
+.nav {
+	height: 42px;
+    line-height: 42px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.nav a {
+	float: left;
+	display: block;
+	width: 14%;
+	color: #777;
+	text-align: center;
+	font-size: 17px
+}
+
+.nav a.active {
+	color: #00a2e8
+}
+
+.footer {
+	padding: 20px 0;
+	text-align: center;
+	font-size: 13px
+}
+
+.footer p {
+	text-align: center;
+	color: #000000;
+}
+
+.footer a {
+	display: block;
+	text-align: center;
+	padding: 5px 0 10px;
+	color: #000000;
+}
+
+.topic-gallery-container {
+	margin: 0
+}
+
+.topic-gallery {
+	width: 100%;
+	overflow: hidden
+}
+
+.topic-gallery .g-list {
+	display: -webkit-box;
+	-webkit-box-lines: multiple;
+	-webkit-backface-visibility: hidden;
+	width: 100%
+}
+
+.topic-gallery .g-item {
+	width: 100%
+}
+
+.topic-gallery .g-item-innerbox {
+	position: relative
+}
+
+.topic-gallery .g-imagebox {
+	overflow: hidden
+}
+
+.topic-gallery .g-imagebox img {
+	width: 100%;
+	height: inherit;
+	vertical-align: middle
+}
+
+.topic-gallery .g-title {
+	width: 100%;
+	height: 28px;
+	line-height: 28px;
+	font-weight: 800;
+	font-size: 17px;
+	padding-left: 2.5%;
+	overflow: hidden;
+	margin-top: 3px;
+	position: absolute;
+	bottom: 0;
+	color: #fff;
+	background-color: rgba(0, 0, 0, .8)
+}
+
+.topic-gallery .g-icons {
+	font-size: 0;
+	text-align: center
+}
+
+.topic-gallery .g-icons i {
+	display: inline-block;
+	height: 6px;
+	width: 6px;
+	margin-right: 10px;
+	border-radius: 6px;
+	background-color: #d0d1d3
+}
+
+.topic-gallery .g-icons .cur {
+	background-color: #3e98f0
+}
+
+.topic-gallery .g-mask {
+	position: absolute;
+	bottom: 0;
+	height: 36px;
+	line-height: 36px;
+	width: 100%;
+	background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0),
+		rgba(0, 0, 0, .5))
+}
+
+.topic-gallery .g-mask-video {
+	position: absolute;
+	bottom: 6px;
+	right: 2px;
+	width: 24px;
+	height: 20px;
+	color: #fff
+}
+
+.ui-line-icons .g-icons {
+	height: 3px;
+	background-color: #b8bbc0;
+	z-index: 1;
+	display: -webkit-box
+}
+
+.ui-line-icons .g-icons i {
+	height: 3px;
+	-webkit-box-flex: 1;
+	display: block;
+	margin: 0
+}
+
+.posi-content {
+	border-bottom: 1px solid #ececec;
+	min-height: 80px
+}
+
+.posi-content a {
+	display: block;
+	padding: 10px 0 10px 10px
+}
+
+.posi-content a:active {
+	background: #eee
+}
+
+.img-panel {
+	float: right;
+	margin-left: 15px;
+	margin-right: 10px
+}
+
+.text-panel {
+	min-height: 80px
+}
+
+.content-title {
+	line-height: 20px;
+	overflow: hidden;
+	text-align: justify;
+	height: 60px
+}
+
+.content-source {
+	color: #888;
+	font-size: 10px;
+	height: 20px;
+	line-height: 20px
+}
+
+.content-source a {
+	color: #888
+}
+
+.content-source .time {
+	/*margin-left: 15px*/
+}
+
+.pic3-panel {
+	border-bottom: 1px solid #ececec
+}
+
+.pic3-panel a {
+	display: block;
+	padding: 10px 0 10px 10px
+}
+
+.pic3-panel a:active {
+	background: #eee
+}
+
+.pic3-title {
+	padding: 10px 0
+}
+
+.pic3-panel .img3-panel {
+	display: table;
+	width: 100%
+}
+
+.pic3-panel .img-box {
+	float: left;
+	width: 33.3333%
+}
+
+.pic3-panel .picbox {
+	padding-right: 10px
+}
+
+.pic3-panel .img {
+	width: 100%
+}
+
+.list-tips {
+	padding: 15px 0;
+	line-height: 20px;
+	font-size: 14px;
+	color: #c3c3c3;
+	text-align: center
+}
+
+img[src=''], img[src='/imgdown/icon_logo.gif'] {
+	display: none
+}

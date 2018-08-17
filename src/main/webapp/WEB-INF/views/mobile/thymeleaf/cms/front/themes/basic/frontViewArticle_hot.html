@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title th:utext="${article.title} + ' - 腾云军事'">腾云军事 - 文章页</title>
+		<base target="_blank">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="render" content="webkit">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes, width=device-width">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
+		<script type="text/javascript" src="../../../../../../../../js/jquery-1.7.js"></script>
+		<link href="../../../../../../../../css/article.css" rel="stylesheet" />
+		<style type="text/css">
+			@media screen and (max-width:319px){html{font-size:29px!important}}
+			@media screen and (min-width:320px){html{font-size:31px!important}}
+			@media screen and (min-width:360px){html{font-size:35px!important}}
+			@media screen and (min-width:375px){html{font-size:36px!important}}
+			@media screen and (min-width:384px){html{font-size:37px!important}}
+			@media screen and (min-width:414px){html{font-size:40px!important}}
+			@media screen and (min-width:480px){html{font-size:46px!important}}
+			@media screen and (min-width:550px){html{font-size:53px!important}}
+			@media screen and (min-width:600px){html{font-size:58px!important}}
+			@media screen and (min-width:640px){html{font-size:62px!important}}
+			@media screen and (min-width:700px){html{font-size:68px!important}}
+			@media screen and (min-width:750px){html{font-size:73px!important}}
+			@media screen and (min-width:800px){html{font-size:78px!important}}
+			@media screen and (min-width:850px){html{font-size:83px!important}}
+			@media screen and (min-width:900px){html{font-size:88px!important}}
+			@media screen and (min-width:950px){html{font-size:93px!important}}
+			@media screen and (min-width:1000px){html{font-size:98px!important}}
+			.nav a {
+					font-size: 0.5rem;
+			}
+			.art-title {
+			    margin: 15px 0 0;
+			}
+			.art-info {
+			    margin-bottom: 10px;
+			    line-height: 20px;
+			}
+			.img3-panel .picbox {
+			    padding-right: 10px;
+			    margin-bottom: 10px;
+			    overflow: hidden;
+			    height: 70px;
+			    box-sizing: border-box;
+			}
+			.relate-news {
+				margin: 0 10px 0 10px;
+			}
+		</style>
+		<style type="text/css">
+		    .acTit{ background:#d43b33; width:94%; padding:0 3%; overflow:hidden;}
+		    .acTit span{ padding-right:15px; display: inline-block; border-right:1px solid #b12323}
+		    .acTit a{ color:#fff; font-family:Microsoft YaHei; letter-spacing: 1px; line-height: 2.2em; font-size:20px;}
+		</style>
+<script type="text/javascript"> 
+     /*WAP智能*/ 
+     var cpro_id = "u2814297";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></script>
+
+	</head>
+	<body>
+		<!--<header>-->
+<!--			<h1 class="top">
+				<a class="aback" onclick="history.go(-1);"></a>
+				<a href="" th:class="'logo logo'+${article.category.id}">
+					<cite th:text="'腾云军事·'+${article.category.name}">腾云军事</cite>
+				</a>
+				<a class="menu"></a>
+			</h1>
+			<div class="nav-container" style="display: none">
+				<ul class="nav">
+				<li >
+					<a href="/">头条</a>
+					<a href="/a/rd/list1.shtml">社会</a>
+					<a href="/a/gn/list1.shtml">国内</a>
+					<a href="/a/gj/list1.shtml">国际</a>
+					<a href="/a/pl/list1.shtml">评价</a>
+					<a href="/a/ls/list1.shtml">历史</a>
+					<a href="/a/tp/list1.shtml">图片</a>
+				</li>
+			</ul>
+			</div>
+			<script type="text/javascript">
+				if (isWeiXin()) {
+					$('#shareB').show();
+				} else {
+	
+				}
+				function isWeiXin() {
+					var ua = window.navigator.userAgent.toLowerCase();
+					if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			</script>-->
+			<div class="acTit" style="">
+				<span><a href="#" title="">今日必读</a></span>
+			</div>
+		<!--</header>-->
+		
+		<!--内容文章-->
+		<article class="article">
+			<h1 class="art-title" th:utext="${article.title}">我是超人顶顶顶顶</h1>
+			<div class="art-info">
+				<span th:text="${#dates.format(article.createDate, 'yyyy-MM-dd HH:mm:ss')}">时间：</span>&nbsp;
+				<span>来源：</span><a th:href="${article.msgsource}?${article.msgsource.url}:${article.acquisitionSource}"><span class="source" th:utext="${article.msgsource}?${article.msgsource.name}:'互联网'"></span></a>
+				<span style="display:none;">点击：5 次</span>
+			</div>
+<script type="text/javascript">
+    /*WAP标题下*/
+    var cpro_id = "u2887564";
+</script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/cm.js"></script>
+
+			<!-- 正文 -->
+			<div id="contentID" class="article-content content" th:utext="${article.articleData.content}"></div>
+		</article>
+		
+		<!--分页-->
+		<!--<div th:if="${page.last2}>=2">-->
+		<div class="page-box">
+			<div class="dede_pages">
+				<span style="display: none;" th:text="${page.last}" class="lastPage"></span>
+				<span style="display: none;" th:text="${article.id}" class="articleId"></span>
+				<span style="display: none;" th:text="${page.index}" class="pageIndex"></span>
+				<ul class="pagelist">
+					<li>
+						<a>共<span th:text="${page.count}"></span>页
+						</a>
+					</li>
+					<li><a th:href="@{${article.id}+'.shtml'}" target="_top">首页</a></li>
+					<li th:if="${page.index} > 1">
+						<a th:href="@{${article.id}+'_'+${page.index-1}+'.shtml'}" target="_top">上一页</a>
+					</li>
+					<li class="yema" style="border:0"></li>
+					<li th:if="${page.index} < ${page.last}">
+						<a th:href="@{${article.id}+'_'+${page.index+1}+'.shtml'}" target="_top">下一页</a>
+					</li>
+					<li>
+						<a th:href="@{${article.id}+'_'+${page.last}+'.shtml'}" target="_top">尾页</a>
+					</li>
+				</ul>
+				<script type="text/javascript">
+					var length = parseInt($('.lastPage').text()) + 1;
+					var articleId = $('.articleId').text();
+					var comment = "";
+					for(var i = 1; i < length; i++) {
+						comment += '<li ><a href="' + articleId + '_' + i + '.shtml" target="_top">' + i + '</a></li>';
+					}
+					$('.yema').after(comment);
+					$('li.thisclass').removeClass('thisclass');
+					var pageIndex = parseInt($('.pageIndex').text()) + 3;
+					$('.pagelist li').eq(pageIndex).addClass('thisclass');
+					if(pageIndex == 4) {
+						$('.pagelist li').eq(pageIndex).removeClass('thisclass');
+						$('.yema').next().addClass('thisclass');
+					}
+					$('.pagelist li:gt(0)').on('click', function() {
+						$('li.thisclass').removeClass('thisclass').delay(300);
+						$(this).addClass('thisclass');
+					})
+				</script>
+			</div>
+		</div>
+		<!--</div>-->
+<script type="text/javascript">
+    /*WAP翻页下*/
+    var cpro_id = "u2814303";
+</script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/cm.js"></script>
+
+		
+		<!--推荐位-->
+			<!--相关新闻-->
+				<div class="relate-news">
+				<h2>推荐阅读</h2>
+				<aside class="recommend_moudule j_relevent_box" data-sudaclick="recommend_news">
+					<div th:each="t:${tjMap1}" >
+						<a th:href="${t.staticUrl}" title="" target="_bank">
+							<dl class="clearfix">
+								<dt class="j_art_lazy">
+									<img th:src="${t.image}" width="120" height="80" src="/js/grey2.png" />
+								</dt>
+								<dd>
+									<h3 class="title" th:utext="${t.shorttile}">您好您好</h3>
+									<div class="mark_count">
+										<span th:text="${t.acquisitionSource}">互联网</span>
+										<time th:text="${#dates.format(t.createDate, 'yyyy-MM-dd HH:mm:ss')}">2016-2-15 12:23:25</time>
+									</div>
+								</dd>
+							</dl>
+						</a>
+					</div>
+		
+					<!--推荐位中的3张缩略图-->		
+					<!-- [[${duoMap}]]			 -->
+					<!--<div th:each="t:${duoMap}">
+						<a th:href="${t.staticUrl}" title="" target="_bank">
+							<dl class="three-img clearfix">
+								<dd>
+									<h3 class="title" th:utext="${t.title}">您好fdsf您好</h3>
+								</dd>
+								<div class="img3-panel" >
+										<div class="img-box" th:each="i,tStat:${t.images}" th:if="${tStat.index &lt; 3}">
+											<div class="picbox" >
+												<img th:src="${i}" src="../../../../../../../../js/grey2.png" class="img" />
+											</div>
+										</div>
+								</div>
+								<div class="mark_count">
+										<span th:utext="${t.acquisitionSource}">互联网</span>
+										<time th:text="${#dates.format(t.createDate, 'yyyy-MM-dd HH:mm:ss')}">2016-2-15 12:23:25</time>
+								</div>
+							</dl>
+						</a>
+					</div>-->
+						
+<!--					<div th:each="t:${tjMap2}">
+						<a th:href="${t.staticUrl}" title="" target="_bank">
+							<dl class="clearfix">
+								<dt class="j_art_lazy">
+									<img th:src="${t.image}" width="120" height="80" src="/js/grey2.png" />
+								</dt>
+								<dd>
+									<h3 class="title" th:utext="${t.shorttile}">您好您好</h3>
+									<div class="mark_count">
+										<span th:utext="${t.acquisitionSource}">互联网</span>
+										<time th:text="${#dates.format(t.createDate, 'yyyy-MM-dd HH:mm:ss')}">2016-2-15 12:23:25</time>
+									</div>
+								</dd>
+							</dl>
+						</a>
+					</div>-->
+					
+				</aside>
+			</div>	
+
+<script type="text/javascript">
+    /*WAP推荐阅读1*/
+    var cpro_id = "u2887557";
+</script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/cm.js"></script>
+
+		<!--精彩图片-->		
+			<div class="relate-news" style="margin-bottom: 0;">
+				<h2>精彩图片</h2>
+				<ul class="picture_moudule clearfix" style="padding-bottom: 0;">
+					<li th:each="t:${jctMap}">
+						<a th:href="${t.url}">
+							<div class="pic-wrap">
+								<img th:src="${t.image}" src="../../../../../../../../js/grey2.png" alt="">
+								<p th:utext="${t.shorttile}">短标题</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+<div style="margin-top:-10px">
+<script type="text/javascript">
+    /*wap精彩图片*/
+    var cpro_id = "u2887551";
+</script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/cm.js"></script>
+</div>
+
+		
+		<!--底部-->
+		<footer style="border-top: 2px solid #1A5A9A;">
+			<div class="footer">
+				<p style="font-size: 15px;">腾云军事 www.60mil.com</p>
+				<p style="font-size: 14px;">
+					<a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=rpDyXRXVH0Bv883FlqX2Q214zhrRD80pfzclPFPLLjKxLF51S5GT!1219073593">粤ICP备15002994号-1</a>
+				</p>
+				<p style="font-size: 14px;">本站文章来源于网络 仅作为展示之用 版权归原作者所有</p>
+			</div>
+		</footer>
+		
+		<script type="text/javascript">		
+			var curUrl = window.location.pathname;
+			$('.nav a').each(function(){
+				var href = $(this).attr('href');
+				if(curUrl.indexOf(href) > -1 && href != "/"){
+					$(this).css("color","#1a5a9a");
+				}
+			});
+			
+			$('.menu').click(function(){
+				var ele = $('.nav-container');
+				var flag = ele.css('display');
+				if(flag == "none"){
+					ele.show();
+				}
+				else{
+					ele.hide();
+				}
+			});
+		</script>
+		<script>
+		  function setIframeHeight(iframe) {
+				if (iframe) {
+					var iframeWin = iframe.contentWindow
+							|| iframe.contentDocument.parentWindow;
+					if (iframeWin.document.body) {
+						iframe.height = iframeWin.document.documentElement.scrollHeight
+								|| iframeWin.document.body.scrollHeight;
+					}
+				}
+			};
+
+			window.onload = function() {
+				setIframeHeight(document.getElementById('external-frame1'));
+			 	setIframeHeight(document.getElementById('external-frame2'));
+			};
+		</script>	
+
+<script type="text/javascript">
+    /*WAP悬浮*/
+    var cpro_id = "u2814276";
+</script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/cm.js"></script>
+
+<script type="text/javascript">
+    /*WAP图+*/
+    var cpro_id = "u2887512";
+</script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/mi.js"></script>
+
+
+
+<script type="text/javascript"> 
+     /*WAP焦点图*/ 
+     var cpro_id = "u2816018";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?26c6da3e6f1a0e3254b0d1b35979abf7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+	</body>
+</html>

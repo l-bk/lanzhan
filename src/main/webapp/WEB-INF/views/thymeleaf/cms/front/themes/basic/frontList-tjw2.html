@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title ></title>
+    <base target="_blank">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="render" content="webkit">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes, width=device-width">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script type="text/javascript" src="../../../../../../../js/jquery-1.7.js"></script>    
+    <link href="../../../../../../../css/list.css" rel="stylesheet" />
+    <style type="text/css">
+        .w300{width: 300px;}
+        .w630{width: 630px;margin-top: 39px;}
+        .section-head {
+            height: 40px;
+            line-height: 40px;
+            border-bottom: #ccc 1px solid;
+            color: #7f7f7f;
+            font-size: 12px;
+            position: relative;
+        }
+        .section-head .title {
+            color: #7f7f7f;
+            font-size: 16px;
+            display: block;
+            position: absolute;
+            border-bottom: #0963af 2px solid;
+            bottom: -1px;
+            -webkit-font-smoothing: antialiased;
+        }
+        .section-head .title span {
+            color: #0963af;
+            -webkit-font-smoothing: auto;
+        }
+        .section-head .head_r{
+            width: 102px;
+        }
+        .section-head .head_r ul{
+            height: 40px;
+        }
+        .section-head .head_r li {
+            float: left;
+            line-height: 40px;
+            text-align: center;
+            color: #666;
+            padding: 0 12px;
+            cursor: pointer
+        }
+        .section-head .head_r li.active {
+            border-right: #ccc 1px solid;
+            border-left: #ccc 1px solid;
+            border-top: #ccc 1px solid;
+            height: 40px;
+            background: #fff
+        }
+        .top-list{display: none;}
+        .top-list.active{display: block;}
+        .top-list li{ height: 137px;margin-bottom: 10px;}
+        .top-list .r1_h h5 a { font-size: 14px; font-weight: bold; line-height: 32px; }
+        .top-list .pic { width: 140px; height: 105px; float: left; }
+        .top-list .pic_new_r0 { width: 145px; padding-top: 12px; float: right;overflow: hidden}
+        .top-list .pic_new_r0 p{ color: #717171;line-height: 20px;}
+        .top-list .pic_new_r0 .blue a{color: #004276;}
+        .tb_recom{height:447px;}
+        .tb_recom li{width:130px;height: 99px;overflow: hidden;float:left;margin:20px 10px 0 10px;overflow: hidden;}
+        .footer {
+            padding: 20px;
+            line-height: 30px;
+            text-align: center;
+            border-top:2px solid #165ea3 ;
+        }
+        .zc_title {
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            font-size: 14px;
+            margin: 5px 0 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .today_div {
+            width: 140px;
+            float: left;
+            margin-bottom: 10px;
+        }
+        .today_div img{
+            display: block;
+        }
+       	.today_diveven {
+					width: 140px;
+					float: right;
+					margin-bottom: 10px;
+				}
+				.today_divright {
+					width: 140px;
+					float: right;
+					margin-bottom: 10px;
+				}
+				.today_divright img {
+					display: block;
+				}
+				.hot-txt-list{padding:0px 0px 10px 0px; display: block; overflow: hidden;float: left;}
+.hot-txt-list li { background: url('../images/li.jpg') no-repeat scroll left center transparent; padding-left:10px;margin:0px 10px;height:28px;line-height:28px;overflow: hidden; }
+.hot-txt-list li a { color: #036; font-size: 14px; line-height: 24px; }
+        .twpic{ position: relative;width:130px;}
+        .twpic img{display: block}
+        .twpic a{color:#fff; display: block;}
+        .twpic span{position: absolute;bottom:0;z-index:4;width:130px;height: 26px; line-height: 26px; text-align:center;overflow: hidden;}
+        .twpic em{ width: 130px; height: 26px; display: block; background: #000; opacity: 0.6; position: absolute; z-index: 2; bottom:0px;}
+        .top-list .r1_h h5 a {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .newslist_del{height:48px ;font-family:Microsoft YaHei;margin: 5px 0;}
+        
+    </style>
+</head>
+
+<body>
+    
+
+        <!--right-->
+        <div class="w300 right">
+        	<div class="section-head">
+                <span class="title"><span>周榜</span>&nbsp;Top</span>
+                <div class="head_r right">
+                    <ul id="J_TopListTab">
+                        <li class="active">热点</li>
+                        <li>推荐</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="blank10"></div>
+            <ul class="top-list active weeklyHotSpots ">
+			<li   th:each="t,tStat:${zbList} "  th:if="${tStat.index &lt; 4}">
+				<div class="r1_h ">
+					<h5>
+						<a th:href="${t.staticUrl} " target="_blank " class="daodu1 "><span  th:utext="${t.shorttile}"  ></span></a>
+					</h5>
+				</div>
+				<div class="boxe6 ">
+					<div class="pic ">
+						<a th:href="${t.staticUrl} " target="_blank "><img th:src="${t.image} " border="0 " height="105 " width="140 " /></a>
+					</div>
+					<div class="pic_new_r0 ">
+						<p>
+						<span class="word " style="display: -webkit-box;    -webkit-box-orient: vertical;    overflow: hidden;    text-overflow: ellipsis;    -webkit-line-clamp: 2;">
+							<span  th:utext="${t.description}"  ></span></span><span class="blue "><a th:href="${t.staticUrl} " target="_blank ">[详细]</a></span>
+						</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+           
+		<ul class="top-list weeklyRecommendation " >
+			<li th:each="t,tStat:${zbtList} "   th:if="${tStat.index &gt; 4} ">
+				<div class="r1_h ">
+					<h5>
+						<a th:href="${t.staticUrl} " target="_blank " class="daodu1 "><span  th:utext="${t.shorttile}"  ></span></a>
+					</h5>
+				</div>
+				<div class="boxe6 ">
+					<div class="pic ">
+						<a th:href="${t.staticUrl} " target="_blank "><img th:src="${t.image} " border="0 " height="105 " width="140 " /></a>
+					</div>
+					<div class="pic_new_r0 ">
+						<p>
+							<span class="word " style="display: -webkit-box;    -webkit-box-orient: vertical;    overflow: hidden;    text-overflow: ellipsis;    -webkit-line-clamp: 2;">
+							<span  th:utext="${t.description}"  ></span></span><span class="blue "><a th:href="${t.staticUrl} " target="_blank ">[详细]</a></span>
+						</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+            
+   	 </div>
+        
+<script type="text/javascript" src="../../../../../../../js/scroll.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //字数限制
+            function word(m){
+                var length = $('.word').length;
+                for(var i=0; i<length; i++){
+                    var wordText = $('.word').eq(i).text();
+                    var wordLength = $('.word').eq(i).text().length;
+                    if (wordLength>m){
+                        var n = wordText.substr(0,m)+'...';
+                        $('.word').eq(i).text(n);
+                    }
+                }
+            }   
+            
+        });
+</script>
+    <script type="text/javascript">
+        $('#J_TopListTab li').on('click',function(){
+            var $this = $(this);
+            $this.addClass('active').siblings().removeClass('active');
+            $('.top-list').eq($this.index()).addClass('active').siblings('.top-list').removeClass('active');
+        })
+
+        
+        function wordlimit(cname,wordlength){//1.首先，定义函数，其中两个参数，参数一是目标元素，也就是需要显示省略号的那个元素；参数二是需要限制的字数。   
+            var cname=document.getElementsByClassName(cname);//2.定义变量cname，即目标元素
+            for(var i=0;i<cname.length;i++){//3.这里写了个循环，因为目标元素不止一个，之前找到一个通过获取id来截取字段实现效果的，但是如果目标元素有多个，id每个又不能相同，就显得麻烦了
+　　　　            var nowLength=cname[i].innerText.length;//4.定义变量nowLength，里面存储的是每一个目标元素所包含的字数。
+　　　　            var imgLength = cname[i].getElementsByTagName('img').length;
+                if(imgLength > 0){
+                    cname[i].innerText = '......';
+                }
+                if(nowLength>wordlength){//这里做一些判断，如果现在的每个目标元素里面的字数多于我们需要限制的字数
+　　　　　　          cname[i].innerText=cname[i].innerText.substr(0,wordlength)+' . . . ';//每个目标元素的内容就会被改变为当前内容的字符长度从0开始然后一直截取到需要限制的字数位置。
+　　　　            }
+　　          }　
+        }
+
+        wordlimit("newslist_del",65)
+    </script> 
+
+
+	
+</body>
+</html>

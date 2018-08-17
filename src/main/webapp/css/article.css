@@ -1,0 +1,543 @@
+body, p, input, h1, h2, h3, h4, h5, h6, ul, li, dl, dt, dd, form {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	vertical-align: middle
+}
+
+em {
+	font-style: normal
+}
+
+body {
+	color: #333;
+	font-family: \5FAE\8F6F\96C5\9ED1, helvetica, arial;
+	-webkit-user-select: none;
+	-webkit-text-size-adjust: none
+}
+
+img {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: 0
+}
+
+a {
+	text-decoration: none;
+	color: #333
+}
+
+a:active {
+	color: #333
+}
+
+input, button {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-appearance: none;
+	outline: 0
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0
+}
+
+body {
+	margin: 0 auto;
+	max-width: 720px
+}
+
+header {
+	text-align: center
+}
+
+header a, header a:visited {
+	text-decoration: none;
+	color: #777;
+	font-size: 12px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	display: inline-block;
+	vertical-align: middle;
+	font-weight: 600;
+	font-family: proxima-nova, sans-serif
+}
+
+.top {
+	height: 48px;
+	background: #1A5A9A;
+	border-bottom: 2px solid #1A5A9A;
+	text-align: left;
+	text-align: center;
+	width: 100%;
+}
+
+.top cite {
+	position: relative;
+	display: none;
+	z-index: -1;
+}
+
+.top .aback {
+	margin-left: 10px;
+	display: inline-block;
+	width: 19px;
+	height: 25px;
+	background: url(../images/tengyun-back.png) no-repeat;
+	background-size: 19px 25px;
+	float: left;
+	margin-top: 12px;
+}
+
+.top .menu {
+	float: right;
+	margin-top: 13px;
+	margin-right: 10px;
+	display: inline-block;
+	width: 28px;
+	height: 25px;
+	background: url(../images/tengyun-menu.png) no-repeat;
+	background-size: 28px 25px;
+}
+
+.top .logo {
+	display: inline-block;
+	margin-top:-1.65rem;
+}
+
+.top .logo1{
+	width: 100%; 
+	height: 50px;
+	background: url(../images/tengyunlogo3.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.top .logo2, .top .logo19{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo2.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo3, .top .logo20{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo3.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo4, .top .logo21{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo4.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo5, .top .logo25{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo5.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo6, .top .logo23{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo6.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.top .logo26{
+	width: 119px;
+	height: 33px;
+	background: url(../images/tengyun-logo7.png) no-repeat;
+	background-size: 119px 33px;
+}
+
+.nav.fixed {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 9999
+}
+
+.nav-container {
+	height: 44px;
+	border-bottom: 2px solid #1A5A9A;
+}
+
+.nav.fixed {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 9999
+}
+
+.nav {
+	height: 42px;
+    line-height: 42px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.nav a {
+	float: left;
+	display: block;
+	width: 14%;
+	color: #777;
+	text-align: center;
+	font-size: 17px
+}
+
+.nav a.active {
+	color: #00a2e8
+}
+
+.share-b {
+	display: block;
+	position: absolute;
+	right: 10px;
+	top: 2px;
+	color: #fff;
+	background: url(http://m.apdnews.com/images/hand1.png) right 4px
+		no-repeat;
+	width: 170px;
+	height: 18px;
+	padding-top: 12px;
+	font-size: 14px
+}
+
+.hide {
+	display: none
+}
+
+.article {
+	padding: 0 10px;
+	margin: 0 auto;
+	max-width: 720px;
+	overflow: hidden
+}
+
+.article-content {
+	font-family: Helvetica, STHeiti, Droid Sans Fallback
+}
+
+.article-content img {
+	width: 100% !important;
+	height: auto !important
+}
+
+.article-content p {
+	font: normal 18px/26px "\5FAE\8F6F\96C5\9ED1", "\5B8B\4F53";
+	color: #333;
+	margin-top: 20px;
+	
+	line-height: 28px;
+	text-align: justify
+}
+
+.art-title {
+	font-size: 21px;
+	margin: 15px 0;
+	line-height: 30px;
+	color: #444
+}
+
+.art-info {
+	margin-bottom: 15px
+}
+
+.art-info span {
+	margin: 0 ;
+	display: inline-block;
+	font-size: 13px
+}
+
+.share {
+	width: 200px;
+	margin: 20px 0;
+}
+
+.share-btn {
+	display: block;
+	margin-bottom: 5px;
+	width: 110px;
+	height: 40px;
+	background-position: 0 -88px
+}
+
+.share span {
+	display: none
+}
+
+.share span.act {
+	display: block
+}
+
+.down, .up, .back a, .share-btn, .more-chanel-btn, .chanel-up, .art-all,
+	.site span, .close {
+	background-image: url(../images/icon.png);
+	background-repeat: no-repeat
+}
+
+.relate-news {
+	margin: 0 10px 0 10px;
+}
+
+.relate-news h2 {
+	color: #14a8e5;
+	font-size: 20px;
+	border-bottom: solid #333 1px;
+	padding-bottom: 5px
+}
+
+.footer {
+	padding: 20px 0;
+	text-align: center;
+	font-size: 14px;
+}
+
+.footer p {
+	text-align: center;
+	color: #000000;
+}
+
+.footer a {
+	display: block;
+	text-align: center;
+	padding: 5px 0 10px;
+	color: #000000;
+}
+
+.back {
+	position: fixed;
+	right: 5px;
+	bottom: 35px;
+	width: 30px;
+	height: 30px;
+	color: #0092b3;
+	z-index: 10000
+}
+
+.back a {
+	display: block;
+	width: 30px;
+	height: 30px;
+	background-position: border:solid #f00 1px;
+	text-align: right;
+	background-size: 200px auto;
+	background-position: 2px -15px
+}
+
+.extend-module .th_td {
+	font-size: 16px;
+	height: 35px;
+	color: #444;
+	line-height: 35px;
+	background-color: #f9f9f9;
+	padding: 0 20px;
+	border-top: 1px solid #dcdcdc
+}
+
+.picture_moudule {
+	padding: 10px 0;
+	display: block;
+	clear: both;
+	background: #fff
+}
+
+.picture_moudule li {
+	float: left;
+	width: 50%;
+	box-sizing: border-box
+}
+
+.picture_moudule li:nth-child(2n+1) {
+	padding: 0 5px 10px 0
+}
+
+.picture_moudule li:nth-child(2n) {
+	padding: 0 0 10px 5px
+}
+
+.picture_moudule li a {
+	display: block
+}
+
+.picture_moudule li img {
+	width: 100%
+}
+
+.picture_moudule li p {
+	text-align: center;
+	width: 100%;
+	color: #444;
+	font-size: 15px;
+	line-height: 18px;
+	overflow: hidden;
+	padding-top: 4px;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+.recommend_moudule {
+	background: #fff
+}
+
+.recommend_moudule a {
+	display: block
+}
+
+.recommend_moudule a:active {
+	background: #eee
+}
+
+.recommend_moudule dl {
+	clear: both;
+	padding: 12px 0;
+	border-bottom: 1px solid #ececec
+}
+
+.recommend_moudule dt {
+	height: 80px;
+	width: 120px;
+	float: right;
+	margin-left: 16px
+}
+
+.recommend_moudule .three-img dt {
+	height: auto;
+	width: auto;
+	float: none;
+	margin-left: 0;
+	text-align: center
+}
+
+.recommend_moudule .three-img dt img {
+	display: inline
+}
+
+.recommend_moudule .three-img dt img:nth-child(2) {
+	margin: 0 6px
+}
+
+.recommend_moudule .three-img dd h3 {
+	height: auto;
+	margin-bottom: 10px
+}
+
+.recommend_moudule dt.transverse {
+	background-size: 100% auto
+}
+
+.recommend_moudule dd h3 {
+	margin-bottom: 15px;
+	color: #2f2f2f;
+	font-size: 17px;
+	line-height: 20px;
+	overflow: hidden;
+	text-align: justify;
+	overflow: hidden;
+	height: 40px
+}
+
+.recommend_moudule dd.not_img h3 {
+	height: auto;
+	max-height: 40px
+}
+
+.recommend_moudule .mark_count {
+	color: #888;
+	font-size: 10px;
+	height: 20px;
+	line-height: 20px
+}
+
+.recommend_moudule .mark_count span {
+	float: left;
+	margin-right: 10px
+}
+
+.recommend_moudule .mark_count time {
+	float: left
+}
+
+.recommend_moudule .mark_count mark {
+	float: right;
+	background: 0;
+	border-radius: 2px;
+	line-height: 10px;
+	margin: 3px 0 0 10px;
+	padding: 2px
+}
+
+.page-box {
+	margin-top: 20px;
+	text-align: center;
+	font-size: 14px
+}
+
+.dede_pages ul {
+	text-align: center
+}
+
+.dede_pages ul li {
+	display: inline-block; *
+	display: inline; *
+	zoom: 1;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	border: 1px solid #006782;
+	line-height: 24px;
+	vertical-align: top;
+	outline: medium none
+}
+
+.dede_pages ul li a {
+	display: block;
+	padding: 0 9px;
+	color: #1692b1
+}
+
+.dede_pages ul li a:hover {
+	border-color: #006782;
+	color: #fff;
+	text-decoration: none;
+	background-color: #1692b1
+}
+
+.dede_pages ul li.thisclass a, .pagebox ul li.thisclass a:hover {
+	border-color: #006782;
+	color: #fff;
+	background-color: #1692b1
+}
+
+.img3-panel {
+	display: table;
+	width: 100%
+}
+
+.img3-panel .img-box {
+	float: left;
+	width: 33.3333%
+}
+
+.img3-panel .picbox {
+	padding-right: 10px
+}
+
+.img3-panel .img {
+	width: 100%
+}
+
+img[src=''], img[src='/imgdown/icon_logo.gif'] {
+	display: none
+}
+

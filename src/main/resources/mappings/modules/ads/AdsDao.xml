@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.ads.dao.AdsDao">
+    
+	<!-- 根据广告位置获取广告代码 -->
+	<select id="findAdsbyposid" resultType="com.modules.ads.entity.Ads" parameterType="com.modules.ads.entity.Ads">
+	 	SELECT 
+			aid As aid,
+			clsid As clsid,
+			typeid As typeid,
+			tagname As tagname,
+			adname As adname,
+			timeset As timeset,
+			starttime As starttime,
+			endtime As endtime,
+			normbody As normbody,
+			expbody As expbody,
+			adv_posid	As advPosid
+		FROM news_myad
+		WHERE adv_posid = #{advPosid}
+		<if test="typeid != null and typeid != '' ">
+			and	typeid = #{typeid}
+		</if>
+		order by adv_posid,starttime
+	</select> 
+	  
+	<select id="findList" resultType="com.modules.ads.entity.Ads">
+		SELECT * FROM news_myad
+	</select>
+	
+	<select id="get" resultType="Ads">
+		SELECT 
+			aid As aid,
+			clsid As clsid,
+			typeid As typeid,
+			tagname As tagname,
+			adname As adname,
+			timeset As timeset,
+			starttime As starttime,
+			endtime As endtime,
+			normbody As normbody,
+			expbody As expbody,
+			adv_posid	As advPosid
+		FROM news_myad
+		WHERE aid = #{aid}
+	</select>
+	
+	<update id="update">
+		UPDATE news_myad SET 	
+			typeid = #{typeid},
+			tagname = #{tagname},
+			adname = #{adname},
+			normbody = #{normbody},
+			adv_posid = #{advPosid},
+			starttime = #{starttime},
+			endtime = #{endtime}
+		WHERE aid = #{aid}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM news_myad WHERE aid = #{aid}
+	</delete>
+	
+	<insert id="insert">
+		INSERT INTO news_myad (
+			typeid,
+			tagname,
+			adname,
+			normbody,
+			adv_posid,
+			starttime,
+			endtime
+		)
+		VALUE
+			(
+			#{typeid},
+			#{tagname},
+			#{adname},
+			#{normbody},
+			#{advPosid},
+			#{starttime},
+			#{endtime}
+		)
+	</insert>
+	
+	<update id="editAds" parameterType="com.modules.ads.entity.Ads">
+		UPDATE news_myad
+		<set>
+			<if test="clsid != null and clsid != '' ">
+				clsid = #{clsid},
+			</if>
+			<if test="typeid != null and typeid != '' ">
+				typeid = #{typeid},
+			</if>
+			<if test="tagname != null and tagname != '' ">
+				tagname = #{tagname},
+			</if>
+			<if test="adname != null and adname != '' ">
+				adname = #{adname},
+			</if>
+			<if test="timeset != null and timeset != '' ">
+				timeset = #{timeset},
+			</if>
+			<if test="starttime != null and starttime != '' ">
+				starttime = #{starttime},
+			</if>
+			<if test="endtime != null and endtime != '' ">
+				endtime = #{endtime},
+			</if>
+			<if test="normbody != null and normbody != '' ">
+				normbody = #{normbody},
+			</if>
+			<if test="expbody != null and expbody != '' ">
+				expbody = #{expbody},
+			</if>
+			<if test="advPosid != null and advPosid != '' ">
+				adv_posid = #{advPosid}
+			</if>			
+		</set>
+		WHERE aid = #{aid}
+	</update>
+	
+	<update id="deleteAds" parameterType="int">
+		DELETE FROM news_myad WHERE aid = #{aid}
+	</update>
+	
+</mapper>

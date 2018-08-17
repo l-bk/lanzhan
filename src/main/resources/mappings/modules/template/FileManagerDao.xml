@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.Template.dao.FileManagerDao">
+    <select id="findAll" resultType="com.modules.Template.entity.FileManager">
+        SELECT * FROM cms_file_manager
+        <where>
+            <if test="cid != null and cid != '' ">
+                and cid = #{cid}
+            </if>
+            <if test="templatefilename != null and templatefilename != '' ">
+                and templatefilename = #{templatefilename}
+            </if>
+            <if test="type != null and type != '' ">
+                and type = #{type}
+            </if>
+        </where>
+        ORDER BY sort_number DESC
+    </select>
+
+    <select id="get" resultType="com.modules.Template.entity.FileManager">
+        SELECT * FROM cms_file_manager where cid=#{cid} ORDER BY sort_number DESC
+    </select>
+
+    <insert id="save" parameterType="com.modules.Template.dao.FileManagerDao">
+        insert into cms_file_manager (
+        cid,
+        description,
+        templatefilename,
+        templatepath,
+        modifydate,
+        notes,
+        type,
+        sort_number
+        )
+        values (
+        #{cid},
+        #{description},
+        #{templatefilename},
+        #{templatepath},
+        #{modifydate},
+        #{notes},
+        #{type},
+        #{sortNumber}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.modules.copy.dao.ContextdefineDao">
+        UPDATE cms_file_manager
+        <set>
+            <if test="cid!=null and cid!=''">
+                cid=#{cid},
+            </if>
+            <if test="description!=null and description!=''">
+                description=#{description},
+            </if>
+            <if test="templatefilename!=null and templatefilename!=''">
+                templatefilename=#{templatefilename},
+            </if>
+            <if test="templatepath!=null and templatepath!=''">
+                templatepath=#{templatepath},
+            </if>
+            <if test="modifydate!=null and modifydate!=''">
+                modifydate=#{modifydate},
+            </if>
+            <if test="notes!=null and notes!=''">
+                notes=#{notes},
+            </if>
+            <if test="type!=null and type!=''">
+                type=#{type},
+            </if>
+            <if test="sortNumber!=null and sortNumber!=''">
+                sort_number=#{sortNumber}
+            </if>
+
+        </set>
+        WHERE cid = #{cid}
+    </update>
+
+    <update id="delete" parameterType="int">
+        DELETE FROM cms_file_manager WHERE cid = #{cid}
+    </update>
+</mapper>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.sensitive.dao.SensitiveDao">
+
+	<sql id="cmsSensitiveColumns">
+		a.sid AS "sid",
+		a.value AS "value",
+		a.create_by AS "createBy.id",
+		a.create_date AS
+		"createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS
+		"updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u.name AS "user.name"
+		
+	</sql>
+
+	
+	<select id="get" resultType="Sensitive">
+		SELECT
+		a.sid AS "sid",
+		a.value AS "value",
+		a.create_by AS "createBy.id",
+		a.create_date AS
+		"createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS
+		"updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+	
+		u.name AS "user.name"
+		FROM cms_sensitive a
+		
+		JOIN sys_user u ON u.id = a.create_by
+		WHERE a.sid = #{sid}
+	</select>
+
+	<select id="findList" resultType="Sensitive">
+		SELECT
+		<include refid="cmsSensitiveColumns" />
+		
+		FROM cms_sensitive a
+		
+		JOIN sys_user u ON u.id = a.create_by
+		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findAllList" resultType="Sensitive">
+		SELECT
+		<include refid="cmsSensitiveColumns" />
+		FROM cms_sensitive a
+		
+		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+
+	<insert id="insert">
+		INSERT INTO cms_sensitive(
+		sid,
+		value,
+		
+		create_by,
+		create_date,
+		update_by,
+		update_date,
+		remarks,
+		del_flag
+		
+		) VALUES (
+		#{sid},
+		#{value},
+		
+		#{createBy.id},
+		#{createDate},
+		#{updateBy.id},
+		#{updateDate},
+		#{remarks},
+		#{delFlag}
+		
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE cms_sensitive SET
+		value=#{value},
+		
+		create_date = #{createDate},
+		update_by = #{updateBy.id},
+		update_date = #{updateDate},
+		remarks = #{remarks},
+		del_flag = #{delFlag}
+		
+		
+		WHERE sid = #{sid}
+	</update>
+
+	
+	
+	<delete id="delete" parameterType="Map">
+		
+		DELETE
+		FROM
+			cms_sensitive
+		WHERE
+			sid =#{sid}
+	</delete>
+	
+
+	
+
+	
+</mapper>

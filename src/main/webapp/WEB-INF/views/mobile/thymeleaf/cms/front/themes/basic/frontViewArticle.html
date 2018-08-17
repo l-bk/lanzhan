@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title th:utext="${article.title} + ' - 腾云军事'">腾云军事 - 文章页</title>
+		<base target="_blank">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="render" content="webkit">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes, width=device-width">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<script type="text/javascript" src="../../../../../../../../js/jquery-1.7.js"></script>
+		<link href="../../../../../../../../css/article.css" rel="stylesheet" />
+		<style type="text/css">
+			@media screen and (max-width:319px){html{font-size:29px!important}}
+			@media screen and (min-width:320px){html{font-size:31px!important}}
+			@media screen and (min-width:360px){html{font-size:35px!important}}
+			@media screen and (min-width:375px){html{font-size:36px!important}}
+			@media screen and (min-width:384px){html{font-size:37px!important}}
+			@media screen and (min-width:414px){html{font-size:40px!important}}
+			@media screen and (min-width:480px){html{font-size:46px!important}}
+			@media screen and (min-width:550px){html{font-size:53px!important}}
+			@media screen and (min-width:600px){html{font-size:58px!important}}
+			@media screen and (min-width:640px){html{font-size:62px!important}}
+			@media screen and (min-width:700px){html{font-size:68px!important}}
+			@media screen and (min-width:750px){html{font-size:73px!important}}
+			@media screen and (min-width:800px){html{font-size:78px!important}}
+			@media screen and (min-width:850px){html{font-size:83px!important}}
+			@media screen and (min-width:900px){html{font-size:88px!important}}
+			@media screen and (min-width:950px){html{font-size:93px!important}}
+			@media screen and (min-width:1000px){html{font-size:98px!important}}
+			.nav a {
+					font-size: 0.5rem;
+			}
+			.art-title {
+			    margin: 15px 0 0;
+			}
+			.art-info {
+			    margin-bottom: 10px;
+			    line-height: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1 class="top">
+				<a class="aback" onclick="history.go(-1);"></a>
+				<a href="" th:class="'logo logo'+${article.category.id}">
+					<cite th:text="'腾云军事·'+${article.category.name}">腾云军事</cite>
+				</a>
+				<a class="menu"></a>
+			</h1>
+			<!--logo-->
+			<div class="nav-container" style="display: none">
+				<ul class="nav">
+				<li >
+					<a href="/">头条</a>
+					<a href="/a/rd/list1.shtml">社会</a>
+					<a href="/a/gn/list1.shtml">国内</a>
+					<a href="/a/gj/list1.shtml">国际</a>
+					<a href="/a/pl/list1.shtml">评价</a>
+					<a href="/a/ls/list1.shtml">历史</a>
+					<a href="/a/tp/list1.shtml">图片</a>
+				</li>
+			</ul>
+			</div>
+			<script type="text/javascript">
+				if (isWeiXin()) {
+					$('#shareB').show();
+				} else {
+	
+				}
+				// 判断是否通过微信打开网页
+				function isWeiXin() {
+					var ua = window.navigator.userAgent.toLowerCase();
+					if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			</script>
+		</header>
+		
+		<!--内容文章-->
+		<article class="article">
+			<h1 class="art-title" th:utext="${article.title}">我是超人顶顶顶顶</h1>
+			<div class="art-info">
+				<span th:text="${#dates.format(article.createDate, 'yyyy-MM-dd HH:mm:ss')}">时间：</span>&nbsp;
+				<span>来源：</span><a th:href="${article.msgsource}?${article.msgsource.url}:${article.acquisitionSource}"><span class="source" th:utext="${article.msgsource}?${article.msgsource.name}:'互联网'"></span></a>
+				<span style="display:none;">点击：5 次</span>
+			</div>
+			<!-- 正文 -->
+			<div id="contentID" class="article-content content" th:utext="${article.articleData.content}"></div>
+		</article>
+		
+		<!--分页-->
+		<!--<div th:if="${page.last2}>=2">-->
+		<div class="page-box">
+			<div class="dede_pages">
+				<span style="display: none;" th:text="${page.last}" class="lastPage"></span>
+				<span style="display: none;" th:text="${article.id}" class="articleId"></span>
+				<span style="display: none;" th:text="${page.index}" class="pageIndex"></span>
+				<ul class="pagelist">
+					<li>
+						<a>共<span th:text="${page.count}"></span>页
+						</a>
+					</li>
+					<li><a th:href="@{${article.id}+'.shtml'}" target="_top">首页</a></li>
+					<li th:if="${page.index} > 1">
+						<a th:href="@{${article.id}+'_'+${page.index-1}+'.shtml'}" target="_top">上一页</a>
+					</li>
+					<li class="yema" style="border:0"></li>
+					<li th:if="${page.index} < ${page.last}">
+						<a th:href="@{${article.id}+'_'+${page.index+1}+'.shtml'}" target="_top">下一页</a>
+					</li>
+					<li>
+						<a th:href="@{${article.id}+'_'+${page.last}+'.shtml'}" target="_top">尾页</a>
+					</li>
+				</ul>
+				<script type="text/javascript">
+					var length = parseInt($('.lastPage').text()) + 1;
+					var articleId = $('.articleId').text();
+					var comment = "";
+					for(var i = 1; i < length; i++) {
+						comment += '<li ><a href="' + articleId + '_' + i + '.shtml" target="_top">' + i + '</a></li>';
+					}
+					$('.yema').after(comment);
+					$('li.thisclass').removeClass('thisclass');
+					var pageIndex = parseInt($('.pageIndex').text()) + 3;
+					$('.pagelist li').eq(pageIndex).addClass('thisclass');
+					if(pageIndex == 4) {
+						$('.pagelist li').eq(pageIndex).removeClass('thisclass');
+						$('.yema').next().addClass('thisclass');
+					}
+					$('.pagelist li:gt(0)').on('click', function() {
+						$('li.thisclass').removeClass('thisclass').delay(300);
+						$(this).addClass('thisclass');
+					})
+				</script>
+			</div>
+		</div>
+		<!--</div>-->
+		
+		<!--推荐位-->
+			<!--相关新闻-->
+			<iframe src="/frontViewArticle-mtjw1.shtml" frameborder="0" scrolling="no" width="100%" 
+				id="external-frame1" onload="setIframeHeight(this)"></iframe> 
+
+		<!--精彩图片-->		
+			<iframe src="/frontViewArticle-mtjw2.shtml" frameborder="0" scrolling="no" width="100%"   style="margin-top: -20px"
+				id="external-frame2" onload="setIframeHeight(this)"></iframe> 
+		
+		<!--底部-->
+		<footer style="border-top: 2px solid #1A5A9A;">
+			<div class="footer">
+				<p style="font-size: 15px;">腾云军事 www.60mil.com</p>
+				<p style="font-size: 14px;">
+					<a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=rpDyXRXVH0Bv883FlqX2Q214zhrRD80pfzclPFPLLjKxLF51S5GT!1219073593">粤ICP备15002994号-1</a>
+				</p>
+				<p style="font-size: 14px;">本站文章来源于网络 仅作为展示之用 版权归原作者所有</p>
+			</div>
+		</footer>
+		
+		<script type="text/javascript">		
+			var curUrl = window.location.pathname;
+			$('.nav a').each(function(){
+				var href = $(this).attr('href');
+				if(curUrl.indexOf(href) > -1 && href != "/"){
+					$(this).css("color","#1a5a9a");
+				}
+			});
+			
+			$('.menu').click(function(){
+				var ele = $('.nav-container');
+				var flag = ele.css('display');
+				if(flag == "none"){
+					ele.show();
+				}
+				else{
+					ele.hide();
+				}
+			});
+		</script>
+		<script>
+		  function setIframeHeight(iframe) {
+				if (iframe) {
+					var iframeWin = iframe.contentWindow
+							|| iframe.contentDocument.parentWindow;
+					if (iframeWin.document.body) {
+						iframe.height = iframeWin.document.documentElement.scrollHeight
+								|| iframeWin.document.body.scrollHeight;
+					}
+				}
+			};
+
+			window.onload = function() {
+				setIframeHeight(document.getElementById('external-frame1'));
+			 	setIframeHeight(document.getElementById('external-frame2'));
+			};
+		</script>	
+	</body>
+</html>

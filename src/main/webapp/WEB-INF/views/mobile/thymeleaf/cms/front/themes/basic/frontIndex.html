@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>腾云军事</title>
+		<link rel="stylesheet" type="text/css" href="../../../../../../../../css/swiper-3.3.1.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../../../../../../../css/index_list.css">
+		<script type="text/javascript" src="../../../../../../../../static/jquery/jquery-1.9.1.min.js"></script>
+		<script src="../../../../../../../../js/swiper-3.3.1.jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		@media screen and (max-width:319px){html{font-size:29px!important}}
+		@media screen and (min-width:320px){html{font-size:31px!important}}
+		@media screen and (min-width:360px){html{font-size:35px!important}}
+		@media screen and (min-width:375px){html{font-size:36px!important}}
+		@media screen and (min-width:384px){html{font-size:37px!important}}
+		@media screen and (min-width:414px){html{font-size:40px!important}}
+		@media screen and (min-width:480px){html{font-size:46px!important}}
+		@media screen and (min-width:550px){html{font-size:53px!important}}
+		@media screen and (min-width:600px){html{font-size:58px!important}}
+		@media screen and (min-width:640px){html{font-size:62px!important}}
+		@media screen and (min-width:700px){html{font-size:68px!important}}
+		@media screen and (min-width:750px){html{font-size:73px!important}}
+		@media screen and (min-width:800px){html{font-size:78px!important}}
+		@media screen and (min-width:850px){html{font-size:83px!important}}
+		@media screen and (min-width:900px){html{font-size:88px!important}}
+		@media screen and (min-width:950px){html{font-size:93px!important}}
+		@media screen and (min-width:1000px){html{font-size:98px!important}}
+		.nav a {
+				font-size: 0.5rem;
+		}
+		.swiper-slide p{
+			width: 100%;
+			position: absolute;
+			bottom:0px;
+			background-color:black;
+			padding:5px;
+			font-size:17px!important;
+			color:white;
+			
+		}
+		.banner p,.content-title{
+			font-size: 0.45rem;
+		}
+		.content-source span{
+			font-size: 0.32rem;
+		}
+	</style>
+	</head>
+	<body>
+	<header>
+	<!--头部-->
+		<h1 class="top">	<!--logo-->
+			<a href="/" class="logo logo1"> <cite>腾云军事</cite>
+			</a>
+		</h1>
+		<div class="nav-container">
+			<ul class="nav">
+				<li >
+					<a href="/">头条</a>
+					<a href="/a/rd/list1.shtml">社会</a>
+					<a href="/a/gn/list1.shtml">国内</a>
+					<a href="/a/gj/list1.shtml">国际</a>
+					<a href="/a/pl/list1.shtml">评价</a>
+					<a href="/a/ls/list1.shtml">历史</a>
+					<a href="/a/tp/list1.shtml">图片</a>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<!--轮播图-->
+	<div class="swiper-container banner "  style="height: 190px;">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide" th:each = "t:${jdtMap}">
+				<a th:href="${t.staticUrl}"><img th:src="${t.image}" src="../../../../../../../../images/05-01.png"></a>
+				<p th:text="${t.shorttile}">烦得很健康的说法和坚实的返回点击上课速度点击</p>
+			</div>
+		</div>
+		<!--<div class="swiper-pagination"></div>-->
+	</div>
+	
+	<!--内容-->
+	<div class="comment">
+		<div class="posi-content" th:each="t,tStat:${dtMap}" style="display: none;">
+			<a th:href="${t.staticUrl}" title="" target="_bank">
+				<div class="img-panel">
+						<img class="lazy" th:src="${t.image} " src="../../../../../../../../js/grey2.png" width="120" height="80"/>
+				</div>
+				<div class="text-panel">
+					<div class="content-title" th:utext="${t.shorttile}">2.508宿舍和发挥开始的夫就卡萨回复会计师</div>
+					<div class="content-source">
+						<!-- <span class="source">来源</span><a th:href="${article.msgsource}?${article.msgsource.url}:${article.acquisitionSource}"><span class="source" th:utext="${article.msgsource}?${article.msgsource.name}:'互联网'"></span></a> -->
+						<span class="time" th:text="${#dates.format(t.createDate, 'yyyy-MM-dd HH:mm:ss')}">2016-12-12 12:25:25</span>
+					</div>
+				</div>
+			</a>
+		</div>
+		
+	<div id="J_NewsListTips" class="list-tips">正在加载...</div>
+	
+	<!--底部-->
+	<footer style="border-top: 2px solid #1A5A9A;">
+		<div class="footer">
+			<p style="font-size: 15px;">腾云军事 www.60mil.com</p>
+			<p style="font-size: 14px;">
+				<a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=rpDyXRXVH0Bv883FlqX2Q214zhrRD80pfzclPFPLLjKxLF51S5GT!1219073593">粤ICP备15002994号-1</a>
+			</p>
+			<p style="font-size: 14px;">本站文章来源于网络 仅作为展示之用 版权归原作者所有</p>
+		</div>
+	</footer>
+	
+	<!--script-->
+	<script type="text/javascript">
+		$(function() {
+			//轮播图
+			var mySwiper = new Swiper('.banner', {
+				initialSlide: 0,
+			    pagination: '.swiper-pagination',   // 如果需要分页器
+			    autoplay : 3000,  //自动播放
+				autoplayDisableOnInteraction: false,
+				loop: true  //循环
+			});
+			//滚动条
+			$(window).on("scroll", function() {
+				if ($(this).scrollTop() >= 88) {
+					$(".nav").addClass("fixed");
+				} else {
+					$(".nav").removeClass("fixed");
+				}
+			});
+			
+			var curUrl = window.location.pathname;
+			$('.nav a').each(function() {
+				var href = $(this).attr('href');
+				if (curUrl.indexOf(href) > -1) {
+					$(this).css({"color": "#1A5A9A","font-weight":"bold"});
+				}
+			});
+			
+			$('.comment div.posi-content:lt(12)').show();
+		});	
+		
+		//延迟显示
+		var $body = $("body");
+		var newsListLoading = false;
+		$(document).bind("scroll",function() {
+			if (!newsListLoading && $body.scrollTop() > parseInt(($body.height() - $(window).height()) * 2 / 3)) {
+				fetchNewsList();
+			}else{
+				$("#J_NewsListTips").text("已经是最后一页")
+			}
+		});
+		var index = 1;
+		function fetchNewsList() {
+			var preIndex;
+			var reqIndex;
+			newsListLoading = true;
+			preIndex = index*12;
+			index++;
+			reqIndex = index*12;
+			console.log(index);
+			autoOnload(preIndex,reqIndex);
+		}
+		function autoOnload(preIndex,allIndex) {
+			console.log(allIndex);
+			for(var i=preIndex; i<allIndex; i++){
+				$('.comment>div').eq(i).show();
+			}
+			if(allIndex<120){
+				newsListLoading = false;
+			}else{
+				newsListLoading = true;
+			}
+		}
+	</script>
+	</body>
+</html>
+
+
+

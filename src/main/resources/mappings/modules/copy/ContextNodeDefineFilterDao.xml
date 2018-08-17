@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.copy.dao.ContextNodeDefineFilterDao">
+    
+	<sql id="contextNodeDefineFilterColumns">
+		a.cid AS "cid",
+		a.title AS "title",
+		a.node_define_id AS "nodeDefineId",
+		a.begin AS "begin",
+		a.end AS "end",
+		a.type AS "type",
+		a.create_date AS "createDate"
+	</sql>
+	
+	<sql id="contextNodeDefineFilterJoins">
+	</sql>
+    
+	<select id="get" resultType="ContextNodeDefineFilter">
+		SELECT 
+			<include refid="contextNodeDefineFilterColumns"/>
+		FROM context_node_define_filter a
+		<include refid="contextNodeDefineFilterJoins"/>
+		WHERE a.cid = #{cid}
+	</select>
+	
+	<select id="findAll" resultType="ContextNodeDefineFilter" parameterType="ContextNodeDefineFilter">
+	    SELECT 
+			<include refid="contextNodeDefineFilterColumns"/>
+		FROM context_node_define_filter a
+		<include refid="contextNodeDefineFilterJoins"/>
+		<where>
+			a.node_define_id = #{nodeDefineId}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findList" resultType="ContextNodeDefineFilter">
+		SELECT 
+			<include refid="contextNodeDefineFilterColumns"/>
+		FROM context_node_define_filter a
+		<include refid="contextNodeDefineFilterJoins"/>
+		<where>
+			
+			<if test="title != null and title != ''">
+				AND a.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ContextNodeDefineFilter">
+		SELECT 
+			<include refid="contextNodeDefineFilterColumns"/>
+		FROM context_node_define_filter a
+		<include refid="contextNodeDefineFilterJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO context_node_define_filter(
+			title,
+			begin,
+			end,
+			type,
+			node_define_id,
+			create_date
+		) VALUES (
+			#{title},
+			#{begin},
+			#{end},
+			#{type},
+			#{nodeDefineId},
+			#{createDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE context_node_define_filter SET 	
+			title = #{title},
+			begin = #{begin},
+			end = #{end},
+			type = #{type},
+			node_define_id = #{nodeDefineId}
+		WHERE cid = #{cid}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM context_node_define_filter
+		WHERE cid = #{cid}
+	</update>
+	
+	<select id="findListByNodeId" resultType="ContextNodeDefineFilter" parameterType="Contextnodedefine">
+	    SELECT 
+			<include refid="contextNodeDefineFilterColumns"/>
+		FROM context_node_define_filter a
+		<include refid="contextNodeDefineFilterJoins"/>
+		<where>
+			a.node_define_id = #{cid}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+</mapper>

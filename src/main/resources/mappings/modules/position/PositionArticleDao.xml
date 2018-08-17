@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.position.dao.PositionArticleDao">
+	
+	<select id="get" resultType="PositionArticle">
+		SELECT
+		a.posid as "posid",
+	a.article_id as "articleId",
+	a.sid AS "sid",
+	a.number AS "number",
+	b.id AS "article.id",
+	b.category_id AS "article.category.id",
+	b.title AS "article.title",
+	b.link AS "article.link",
+	b.color AS "article.color",
+	b.image AS "article.image",
+	b.keywords AS "article.keywords",
+	b.description AS "article.description",
+	b.weight AS "article.weight",
+	b.weight_date AS "article.weightDate",
+	b.hits AS "article.hits",
+	b.posid AS "article.posid",
+	b.custom_content_view AS "article.customContentView",
+	b.view_config AS "article.viewConfig",
+	b.create_by AS "article.createBy.id",
+	b.create_date AS "article.createDate",
+	b.update_by AS "article.updateBy.id",
+	b.update_date AS "article.updateDate",
+	b.remarks AS "articleremarks",
+	b.del_flag AS "article.delFlag",
+	c.name AS "article.category.name",
+	u.name AS "article.user.name",
+	b.managerid AS "article.managerid",
+	b.acquisition_source AS acquisitionSource,
+	b.timing AS "article.timing",
+	b.istime AS "article.istime",
+	b.msgid AS "article.msgid",
+	m.name AS "article.msgsource.name",
+	tp.description AS "article.posName",
+	d.content AS "article.articleData.content"
+	
+	FROM t_position_article a
+	LEFT join cms_article b on  b.id = a.article_id
+	JOIN cms_category c ON c.id = b.category_id
+	JOIN sys_office o ON o.id = c.office_id
+	JOIN sys_user u ON u.id = b.create_by
+	LEFT JOIN cms_article_data d ON d.id=b.id
+	LEFT JOIN cms_msgsource m ON m.sid = b.msgid
+	join t_position tp ON tp.posid = a.posid
+		
+		WHERE a.sid = #{sid}
+	</select>
+	<select id="findAll" resultType="com.modules.position.entity.PositionArticle">
+		SELECT * FROM t_position_article
+		<where>
+			<if test="sid != null and sid != '' ">
+				and sid = #{sid}
+			</if>
+			<if test="posid != null and posid != '' ">
+				and posid = #{posid}
+			</if>
+			<if test="articleId!= null and articleId != '' ">
+				and article_id = #{articleId}
+			</if>
+		</where>
+
+	</select>
+	<select id="findAll2" resultType="com.modules.position.entity.PositionArticle">
+	SELECT 
+	a.posid as "posid",
+	a.article_id as "articleId",
+	a.sid AS "sid",
+	a.number AS "number",
+	b.id AS "article.id",
+	b.category_id AS "article.category.id",
+	b.title AS "article.title",
+	b.link AS "article.link",
+	b.color AS "article.color",
+	b.image AS "article.image",
+	b.keywords AS "article.keywords",
+	b.description AS "article.description",
+	b.weight AS "article.weight",
+	b.weight_date AS "article.weightDate",
+	b.hits AS "article.hits",
+	b.posid AS "article.posid",
+	b.custom_content_view AS "article.customContentView",
+	b.view_config AS "article.viewConfig",
+	b.create_by AS "article.createBy.id",
+	b.create_date AS "article.createDate",
+	b.update_by AS "article.updateBy.id",
+	b.update_date AS "article.updateDate",
+	b.remarks AS "article.remarks",
+	b.del_flag AS "article.delFlag",
+	c.name AS "article.category.name",
+	u.name AS "article.user.name",
+	b.managerid AS "article.managerid",
+	b.acquisition_source AS acquisitionSource,
+	b.timing AS "article.timing",
+	b.istime AS "article.istime",
+	b.msgid AS "article.msgid",
+	c.name_en AS "article.category.nameEn",
+	m.sid AS "article.msgsource.sid",
+	m.name AS "article.msgsource.name",
+	
+	tp.description AS "position.description",
+	d.content AS "article.articleData.content"
+	
+	FROM t_position_article a
+	left join cms_article b on  b.id = a.article_id
+	JOIN cms_category c ON c.id = b.category_id
+	JOIN sys_office o ON o.id = c.office_id
+	JOIN sys_user u ON u.id = b.create_by
+	LEFT JOIN cms_article_data d ON d.id=b.id
+	
+	LEFT JOIN cms_msgsource m ON m.sid = b.msgid
+	
+	join t_position tp ON tp.posid = a.posid
+	<where>
+			
+			<if test="article.delFlag != null and  article.delFlag != ''">
+						b.del_flag = #{article.delFlag}
+			</if>
+				
+			<if test="articleId!= null and articleId != '' ">
+				and a.article_id = #{articleId}
+			</if>
+			<if test="posid != null and posid != '' ">
+				and a.posid = #{posid}
+			</if>
+			<if test="article.acquisitionSource != null and  article.acquisitionSource != ''">
+				AND b.acquisition_source = #{article.acquisitionSource}
+			</if>
+			<if test="article.title != null and article.title != ''">
+				AND b.title LIKE
+				<if test="dbName == 'oracle'">'%'||#{article.title}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{article.title}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{article.title}, '%')</if>
+			</if>
+			
+			<if test="article.category.id != null and article.category.id != ''">
+				AND (b.category_id = #{article.category.id}
+				<if test="article.category.parentIds != null and article.category.parentIds != ''">
+					or c.parent_ids like
+					<if test="dbName == 'oracle'">'%'||#{article.category.id}||'%'</if>
+					<if test="dbName == 'mssql'">'%,'+#{article.category.id}+',%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%,', #{article.category.id}, ',%')</if>
+				</if>
+				)
+			</if>
+			<if test="article.image != null and article.image != ''">
+				AND b.image = #{article.image}
+			</if>
+
+			<if test="article.createBy != null and article.createBy.id != null and article.createBy.id != ''">
+				AND b.create_by in (#{article.createBy.id})
+			</if>
+
+			<if
+				test="article.beginDate != null and article.beginDate != '' and article.endDate != null and article.endDate != ''">
+				AND b.create_date &gt;= #{article.beginDate} AND b.create_date &lt;=
+				#{article.endDate}
+			</if>
+			<if test="article.id !=null and article.id!=''">
+				AND b.id=#{article.id}
+			</if>
+			
+			<!-- ${sqlMap.dsf} -->
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY  b.weight_date DESC , a.number  DESC
+			</otherwise>
+		</choose>
+	</select>
+
+
+	<insert id="save" parameterType="com.modules.position.entity.PositionArticle">
+		insert into t_position_article (
+		sid,
+		posid,
+		stat,
+		createdate,
+		medifydate,
+		article_id,
+		number
+		)
+		values (
+		#{sid},
+		#{posid},
+		#{stat},
+		#{createdate},
+		#{medifydate},
+		#{articleId},
+		#{number}
+
+		)
+	</insert>
+	
+	<insert id="saveAhead" parameterType="com.modules.position.entity.PositionArticle">
+		insert into t_position_article_ahead (
+		sid,
+		posid,
+		stat,
+		createdate,
+		medifydate,
+		article_id,
+		number
+		)
+		values (
+		#{sid},
+		#{posid},
+		#{stat},
+		#{createdate},
+		#{medifydate},
+		#{articleId},
+		#{number}
+
+		)
+	</insert>
+
+	<update id="update" parameterType="com.modules.position.entity.PositionArticle">
+		UPDATE t_position_article
+		<set>
+			<if test="sid!=null and sid!=''">
+				sid=#{sid},
+			</if>
+			<if test="posid!=null and posid!=''">
+				posid=#{posid},
+			</if>
+			<if test="stat!=null and stat!=''">
+				stat=#{stat},
+			</if>
+			<if test="createdate!=null and createdate!=''">
+				createdate=#{createdate},
+			</if>
+			<if test="medifydate!=null and medifydate!=''">
+				medifydate=#{medifydate},
+			</if>
+			<if test="articleId!=null and articleId!=''">
+				article_id=#{articleId},
+			</if>
+			<if test="number!=null and number!=''">
+				number=#{number}
+			</if>
+
+
+		</set>
+		WHERE sid = #{sid}
+	</update>
+	
+	<update id="updateAhead" parameterType="com.modules.position.entity.PositionArticle">
+		UPDATE t_position_article_ahead
+		<set>
+			<if test="sid!=null and sid!=''">
+				sid=#{sid},
+			</if>
+			<if test="posid!=null and posid!=''">
+				posid=#{posid},
+			</if>
+			<if test="stat!=null and stat!=''">
+				stat=#{stat},
+			</if>
+			<if test="createdate!=null and createdate!=''">
+				createdate=#{createdate},
+			</if>
+			<if test="medifydate!=null and medifydate!=''">
+				medifydate=#{medifydate},
+			</if>
+			<if test="articleId!=null and articleId!=''">
+				article_id=#{articleId},
+			</if>
+			<if test="number!=null and number!=''">
+				number=#{number}
+			</if>
+
+
+		</set>
+		WHERE sid = #{sid}
+	</update>
+
+	<update id="delete" parameterType="int">
+		DELETE FROM t_position_article
+		WHERE sid = #{sid}
+	</update>
+	
+	
+	
+	<update id="deleteAhead" parameterType="com.modules.position.entity.PositionArticle">
+		DELETE FROM t_position_article_ahead
+		WHERE posid=#{posid} and article_id=#{articleId}
+	</update>
+	<update id="delByPosid" parameterType="int">
+		DELETE FROM
+		t_position_article WHERE posid = #{posid}
+	</update>
+	<update id="delByArticleId" parameterType="String">
+		DELETE FROM
+		t_position_article WHERE article_id = #{articleId}
+	</update>
+	<update id="delByArticleIdAhead" parameterType="String">
+		DELETE FROM
+		t_position_article_ahead WHERE article_id = #{articleId}
+	</update>
+	
+	<select id="maxnumber" resultType="PositionArticle">
+		select max(number+0) as "number" from
+		t_position_article;
+	</select>
+
+</mapper>

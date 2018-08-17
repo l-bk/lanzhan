@@ -1,0 +1,363 @@
+<!DOCTYPE html >
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>腾云军事</title>
+		<base target="_blank">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="render" content="webkit">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes, width=device-width">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="../../../../../../../css/index.css" rel="stylesheet" />
+	</head>
+
+	<body>
+
+		<div class="header-bg">
+			<div class="header-bg-left"></div>
+			<div class="header-bg-right"></div>
+			<div class="header">
+				<a class="logo" href="/" target="_self"><img width="197" height="70" src="../../../../../../../images/tengyun_logo1.png" /></a>
+				<ul class="nav">
+					<li th:each="t:${categoryList}">
+						<a th:href="${t.staticUrl}">[[${t.name}]]</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="wrap clearfix">
+			<div class="blank20"></div>
+			<div class="focus" id="fcbx">
+				<ul id="fcimg">
+					<li th:each="t,tStat:${jdList} ">
+						<a th:href="${t.staticUrl} " target="_blank">
+							<img th:src="${t.image} " height="340" width="590"></a>
+						<p class="fcTitle"><span  th:utext="${t.shorttile}"  ></span></p>
+					</li>
+
+					<!--焦点图片内容-->
+				</ul>
+
+			</div>
+			<dl class="main_imglist_right" th:each="t,tStat:${tdList} ">
+				<dt><a th:href="${t.staticUrl} " target="_blank" title=""><span th:utext ="${t.shorttile}"></span></a></dt>
+				<dd class="main_imglist_l left">
+					<a th:href="${t.staticUrl} " target="_blank" title=""><img width="150" height="100" th:src="${t.image} "></a>
+				</dd>
+				<dd class="main_imglist_r_txt left f12"><span class="word" style="display: -webkit-box;    -webkit-box-orient: vertical;    overflow: hidden;    text-overflow: ellipsis;    -webkit-line-clamp: 3;">
+                       <span th:utext ="${t.description}"></span></span><span>
+                       <a th:href="${t.staticUrl} " target="_blank" title="详细">[详细]</a></span></dd>
+			</dl>
+			<div class="blank20"></div>
+			<div class="blank20"></div>
+
+			<div class="main_sidebar left globalHotSpots" style="margin-right: 20px;">
+				<!--环球热点内容-->
+				<div>
+					<div class="main_tit">
+						<span class="f12 more right "><a href="/a/rd/list1.shtml" target="_blank" title="更多">更多</a></span>
+						<a href="/a/rd/list1.shtml" target="_blank" title="环球热点">环球热点</a>
+					</div>
+
+					<dl class="main_imglist_left" th:each="t,tStat:${hqtList} "><dt><a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}"  ></span></a></dt>
+
+						<dd class="main_imglist_l left">
+							<a th:href="${t.staticUrl} " target="_blank" title=""><img width="150" height="100" th:src="${t.image} "></a>
+						</dd>
+						<dd class="main_imglist_r_txt left f12"><span class="word" style="display: -webkit-box;    -webkit-box-orient: vertical;    overflow: hidden;    text-overflow: ellipsis;    -webkit-line-clamp: 3;">
+                      <span  th:utext="${t.description}"  ></span>  </span><span><a th:href="${t.staticUrl} "  target="_blank" title="详细">[详细]</a></span></dd>
+					</dl>
+				</div>
+
+				<ul class="main_article_list" >
+
+
+					<li th:each="t,tStat:${hqList} ">
+						<a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}"  ></span></a>
+					</li>
+				</ul>
+
+			</div>
+
+			<div class="main_sidebar left chineseMilitary" style="margin-right: 20px;">
+				<!--中国军情内容-->
+				<div >
+					<div class="main_tit">
+						<span class="f12 more right "><a href="/a/gn/list1.shtml" target="_blank" title="更多">更多</a></span>
+						<a href="/a/gn/list1.shtml" target="_blank" title="中国军情">中国军情</a>
+					</div>
+
+					<dl class="main_imglist_left" th:each="t,tStat:${jqtList} "><dt><a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}"  ></span></a></dt>
+
+						<dd class="main_imglist_l left">
+							<a th:href="${t.staticUrl} " target="_blank" title=""><img width="150" height="100" th:src="${t.image} "></a>
+						</dd>
+						<dd class="main_imglist_r_txt left f12"><span class="word" style="display: -webkit-box;    -webkit-box-orient: vertical;    overflow: hidden;    text-overflow: ellipsis;    -webkit-line-clamp: 3;">
+                       <span  th:utext="${t.description}"  ></span></span><span><a th:href="${t.staticUrl} "  target="_blank" title="详细">[详细]</a></span></dd>
+					</dl>
+				</div>
+
+
+				<ul class="main_article_list" >
+
+
+					<li th:each="t,tStat:${jqList} " >
+						<a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}"  ></span></a>
+					</li>
+				</ul>
+
+			</div>
+
+			<div class="main_sidebar left overseasObservation">
+				<!--海外观察内容-->
+				<div>
+					<div class="main_tit">
+						<span class="f12 more right "><a href="/a/gj/list1.shtml" target="_blank" title="更多">更多</a></span>
+						<a href="/a/gj/list1.shtml" target="_blank" title="海外观察">海外观察</a>
+					</div>
+
+					<dl class="main_imglist_left" th:each="t,tStat:${hwtList} "><dt><a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}"  ></span></a></dt>
+
+						<dd class="main_imglist_l left">
+							<a th:href="${t.staticUrl} " target="_blank" title=""><img width="150" height="100" th:src="${t.image} "></a>
+						</dd>
+						<dd class="main_imglist_r_txt left f12"><span class="word" style="display: -webkit-box;    -webkit-box-orient: vertical;    overflow: hidden;    text-overflow: ellipsis;    -webkit-line-clamp: 3;">
+                     <span  th:utext="${t.description}"  ></span> </span><span><a th:href="${t.staticUrl} "  target="_blank" title="详细">[详细]</a></span></dd>
+					</dl>
+				</div>
+
+
+				<ul class="main_article_list" >
+
+
+					<li th:each="t,tStat:${hwList} " >
+						<a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}"  ></span></a>
+					</li>
+				</ul>
+			</div>
+			<div class="blank20"></div>
+			<div class="blank20"></div>
+
+			<div class="main_sidebar left militarySecrets" style="margin-right: 20px;">
+				<!--军情秘闻内容-->
+				<div>
+					<div class="main_tit">
+						<span class="f12 more right "><a href="/a/ls/list1.shtml" target="_blank" title="更多">更多</a></span>
+						<a href="/a/ls/list1.shtml" target="_blank" title="军情秘闻">军情秘闻</a>
+					</div>
+
+					<dl class="main_imglist_left" th:each="t,tStat:${mwtList} "><dt><a th:href="${t.staticUrl} " target="_blank" title=""> <span  th:utext="${t.shorttile}"  ></span></a></dt>
+
+						<dd class="main_imglist_l left">
+							<a th:href="${t.staticUrl} " target="_blank" title=""><img width="150" height="100" th:src="${t.image} "></a>
+						</dd>
+						<dd class="main_imglist_r_txt left f12"><span class="word" style="display: -webkit-box;    -webkit-box-orient: vertical;    overflow: hidden;    text-overflow: ellipsis;    -webkit-line-clamp: 3;">
+                      <span  th:utext="${t.description}"  ></span></span><span><a th:href="${t.staticUrl} "  target="_blank" title="详细">[详细]</a></span></dd>
+					</dl>
+				</div>
+
+
+				<ul class="main_article_list" >
+
+
+					<li th:each="t,tStat:${mwList} ">
+						<a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}"  ></span></a>
+					</li>
+				</ul>
+			</div>
+
+			<!--  slideBOX  -->
+			<div id="slide_x" class="left slide_x" style="margin-right: 20px;">
+				<div class="focus-box">
+					<ul class="list" style="text-align: center;">
+						<!--最新热点内容-->
+						<li th:each="t,tStat:${rtList} ">
+							<a th:href="${t.staticUrl} " target="_blank"><img th:src="${t.image} " height="440" width="320"></a>
+							<p class="fcTitle"><span  th:utext="${t.shorttile}"  ></span></p>
+						</li>
+					</ul>
+
+				</div>
+				<ul class="focus-btn">
+					<li class="b_1 selected">1</li>
+					<li class="b_2">2</li>
+					<li class="b_3">3</li>
+					<li class="b_4">4</li>
+				</ul>
+				<div class="plus"></div>
+				<div class="minus"></div>
+
+			</div>
+
+			<!--    slideBox end-->
+			<div class="main_sidebar left  currentAffairsComment">
+				<!--时事评论内容-->
+				<div class="main_tit"><span class="f12 more right"><a href="a/pl/list1.shtml" target="_blank" title="更多">更多</a>
+				  </span>
+					<a href="a/pl/list1.shtml" target="_blank" title="时事评论">时事评论</a>
+				</div>
+
+				<dl class="main_imglist_left" style="padding-bottom: 15px;" th:each="t,tStat:${pltList} " >
+					<dt><a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}"  ></span></a></dt>
+					<dd class="main_imglist_l left">
+						<a th:href="${t.staticUrl} " target="_blank" title="">
+							<img width="150" height="100" th:src="${t.image}"></a>
+					</dd>
+					<dd class="main_imglist_r_txt left f12"><span class="word" style="display: -webkit-box;    -webkit-box-orient: vertical;    overflow: hidden;    text-overflow: ellipsis;    -webkit-line-clamp: 3;">
+                      <span  th:utext="${t.description}"  ></span></span><span><a th:href="${t.staticUrl} " target="_blank" title="详细">[详细]</a></span></dd>
+				</dl>
+
+				<ul class="main_article_list">
+
+					<li th:each="t,tStat:${plList} ">
+						<a th:href="${t.staticUrl} " target="_blank" title="'"><span  th:utext="${t.shorttile}"  ></span></a>
+					</li>
+				</ul>
+
+			</div>
+			<div class="blank20"></div>
+			<div class="blank20"></div>
+
+			<div class="morePictures main_tit">
+			<span class="f12 more right"><a href="/a/tp/list4.shtml" target="_blank" title="更多">更多</a></span><a href="/a/tp/list4.shtml" target="_blank" title="图说军事">图说军事</a></div>
+			
+				<div th:each="t,tStat:${tsList} " th:if="${tStat.index &lt; 1}">
+					<div class="pic2015_box_l left">
+						<a th:href="${t.staticUrl} " target="_blank" title=""><img width="400" height="277" th:src="${t.image} "></a>
+						<p class="pic2015_box_l_tit f18">
+							<a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}"  style="font-size: 14px"></span></a>
+						</p>
+					</div>
+				</div>
+
+				<ul class="right pic2015_box_r f14" style="text-align: center;">
+
+					<li th:each="t,tStat:${tsList} " th:if="${tStat.index &gt; 0}">
+						<a th:href="${t.staticUrl} " target="_blank" title=""><img width="180" height="120" th:src="${t.image} "></a>
+						<p>
+							<a th:href="${t.staticUrl} " target="_blank" title=""><span  th:utext="${t.shorttile}" style="font-size: 14px" ></span></a>
+						</p>
+					</li>
+
+					<!--图说军事内容-->
+			</div>
+			<div class="blank20"></div>
+			<div class="blank20"></div>
+		</div>
+		<div class="footer">
+			<p>本站文章来源于网络 仅作为展示之用 版权归原作者所有 如果侵犯您的权益 请来信告知我们 我们会尽快删除</p>
+			<p>
+				<a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=rpDyXRXVH0Bv883FlqX2Q214zhrRD80pfzclPFPLLjKxLF51S5GT!1219073593">粤ICP备15002994号-1</a>
+			</p>
+		</div>
+		<script type="text/javascript" src="../../../../../../../js/jquery-1.7.js"></script>
+		<script src="../../../../../../../js/jquery.cxslide.min.js"></script>
+
+		<!--ajax来填充页面-->
+		<script type="text/javascript">
+			var indx = 0;
+			var looper = 3500;
+			var myTimer;
+			
+			$(document).ready(function() {
+				focusMap();
+				showFImg("#fcimg li", "#fcnum li", "crn");
+				$("#slide_x").cxSlide({
+					plus: true,
+					minus: true
+				});
+
+				//焦点图函数
+				function focusMap() {
+					if($('#thscrll') && $('#thscrll img').length > 0) {
+						$('#thscrll').css({
+							"padding-bottom": "15px"
+						});
+					}
+
+					if($("#fcimg li").length > 1) {
+						$("#fcimg").after($('<div></div><ul id="fcnum"></ul>'));
+						for(i = 1; i <= $("#fcimg li").length; i++) {
+							if(i == 1) $("#fcnum").append($("<li class=\"crn\"> </li>"));
+							else $("#fcnum").append($("<li> </li>"));
+						}
+						clearInterval(myTimer);
+						myTimer = setInterval('showFImg("#fcimg li","#fcnum li","crn")', looper);
+						$("#fcnum li").click(function() {
+							indx = $("#fcnum li").index(this);
+							showFImg("#fcimg li", "#fcnum li", "crn");
+							try {
+								clearInterval(myTimer);
+								myTimer = setInterval('showFImg("#fcimg li","#fcnum li","crn")', looper);
+							} catch(e) {}
+							return false;
+						});
+						$("#fcimg").hover(function() {
+							if(myTimer) {
+								clearInterval(myTimer);
+							}
+						}, function() {
+							clearInterval(myTimer);
+							myTimer = setInterval('showFImg("#fcimg li","#fcnum li","crn")', looper);
+						});
+					}
+
+				}
+				//栏目列表页中所采集的文章没有图片，栏目列表页则不显示左侧图片框
+				var newslist_AimgLength = $('.ddImag').length;
+				for(var j = 0; j < newslist_AimgLength; j++) {
+					var newslist_Aimg = $('.ddImag').eq(j).find('img');
+					if(newslist_Aimg == "") {
+						$('.ddImag').eq(j).css('display', 'none');
+					}
+				}
+				//字数限制
+				function word(m) {
+					var length = $('.word').length;
+					for(var i = 0; i < length; i++) {
+						var wordText = $('.word').eq(i).text();
+						var wordLength = $('.word').eq(i).text().length;
+						if(wordLength > m) {
+							var n = wordText.substr(0, m) + '...';
+							$('.word').eq(i).text(n);
+						}
+					}
+				}
+			});
+
+			function showFImg(il, nl, cs) {
+				if($(il).length > 1) {
+					crobj = $(il).eq(indx);
+					$(il).not(crobj).hide();
+					$(nl).removeClass(cs)
+					$(nl).eq(indx).addClass(cs);
+					crobj.stop(true, true).fadeIn('slow');
+					indx = (++indx) % ($(il).length);
+				}
+			}
+		</script>
+
+
+		<script type="text/javascript">
+			/*PC视窗*/
+			var cpro_id = "u2758680";
+		</script>
+		<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/f.js"></script>
+
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "//hm.baidu.com/hm.js?952977d2b203cdf5badf715d7539ee16";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})(); 
+		</script>
+
+
+	</body>
+
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.copy.dao.ContextdefineDao">
+    
+	<select id="findAll" resultType="com.modules.copy.entity.Contextdefine">
+		SELECT * FROM context_define
+		<where>
+			<if test="cid != null and cid != '' ">
+				and cid = #{cid}
+			</if>
+		</where>
+		
+	</select>
+	
+	<insert id="save" parameterType="com.modules.copy.dao.ContextdefineDao">
+		insert into context_define ( 
+			cid,
+			medifydate,
+			lang,
+			content_lang,
+			medifymanage,
+			stat,
+			<if test="beginTime != null and beginTime != '' ">
+				begin_time,
+			</if>
+			ischeckflag,
+			description,
+			url,
+			copyflag,
+			posid
+		) 
+		values (
+			#{cid},
+			#{medifydate},
+			#{lang},
+			#{contentLang},
+			#{medifymanage},
+			#{stat},
+			<if test="beginTime != null and beginTime != '' ">
+				#{beginTime},
+			</if>
+			#{ischeckflag},
+			#{description},
+			#{url},
+			#{copyflag},
+			#{posid}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.modules.copy.dao.ContextdefineDao">
+		UPDATE context_define
+		<set>
+			<if test="cid!=null and cid!=''">
+				cid=#{cid},
+			</if>
+			<if test="medifydate!=null and medifydate!=''">
+				medifydate=#{medifydate},
+			</if>
+			<if test="lang!=null and lang!=''">
+				lang=#{lang},
+			</if>
+			<if test="contentLang!=null and contentLang!=''">
+				content_lang=#{contentLang},
+			</if>
+			<if test="medifymanage!=null and medifymanage!=''">
+				medifymanage=#{medifymanage},
+			</if>
+			<if test="stat!=null and stat!=''">
+				stat=#{stat},
+			</if>
+			<if test="beginTime!=null and beginTime!=''">
+				begin_time=#{beginTime},
+			</if>
+			<if test="ischeckflag!=null and ischeckflag!=''">
+				ischeckflag=#{ischeckflag},
+			</if>
+			<if test="description!=null and description!=''">
+				description=#{description},
+			</if>
+			<if test="url!=null and url!=''">
+				url=#{url},
+			</if>
+			<if test="copyflag!=null and copyflag!=''">
+				copyflag=#{copyflag},
+			</if>
+			<if test="posid!=null and posid!=''">
+				posid=#{posid}
+			</if>
+		</set>
+		WHERE cid = #{cid}
+	</update>
+	
+	<update id="delete" parameterType="int">
+		DELETE FROM context_define WHERE cid = #{cid}
+	</update>
+	
+</mapper>

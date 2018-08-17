@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.modules.cms.dao.ArticleDao">
+	<sql id="cmsArticleColumns">
+		a.id AS "id" ,
+		a.category_id AS "category.id" ,
+		a.title AS "title" ,
+		a.link AS "link" ,
+		a.color AS "color" ,
+		a.image AS "image" ,
+		a.shorttile AS "shorttile" ,
+		a.keywords AS "keywords" ,
+		a.description AS "description" ,
+		a.weight AS "weight" ,
+		a.weight_date AS "weightDate"
+		,
+		a.hits AS "hits" ,
+		a.today_hits AS "todayhits" ,
+		a.posid AS "posid" ,
+		a.custom_content_view AS "customContentView" ,
+		a.view_config AS
+		"viewConfig" ,
+		a.create_by AS "createBy.id" ,
+		a.create_date AS "createDate" ,
+		a.update_by AS "updateBy.id" ,
+		a.update_date AS "updateDate" ,
+		a.remarks AS "remarks" ,
+		a.del_flag AS "delFlag" ,
+		c. name AS "category.name" ,
+		c.name_en AS "category.nameEn" ,
+		u. name AS "user.name" ,
+		a.managerid AS "managerid" ,
+		a.acquisition_source AS acquisitionSource ,
+		a.timing AS timing ,
+		a.istime AS istime ,
+		a.msgid AS "msgid" ,
+		a.number AS "number" ,
+		d.content AS "articleData.content" ,
+		c.custom_content_view AS "category.customContentView" ,
+		m. name AS
+		"msgsource.name" ,
+		m.sid AS "msgsource.sid" ,
+		m.url AS "msgsource.url",
+		a.is_statis as isStatis,
+		a.is_mobile_statis as "isMobileStatis",
+		a.static_url as staticUrl
+	</sql>
+
+	<sql id="cmsArticleJoins">
+		JOIN cms_category c ON c.id = a.category_id
+		<!-- JOIN sys_office o ON o.id = c.office_id -->
+		JOIN sys_user u ON u.id = a.create_by
+		LEFT JOIN
+		cms_article_data d ON d.id=a.id
+		LEFT JOIN cms_msgsource m ON m.sid=a.msgid
+	</sql>
+
+	<select id="get" resultType="Article">
+		SELECT
+		<include refid="cmsArticleColumns" />
+
+		FROM cms_article a
+		<include refid="cmsArticleJoins" />
+
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="getById" resultType="Article">
+		SELECT * from cms_article a
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="findList" resultType="Article">
+		SELECT
+		<include refid="cmsArticleColumns" />
+
+
+		FROM cms_article a
+		<include refid="cmsArticleJoins" />
+
+
+		<where>
+			<choose>
+				<when test="isshowview !=null and isshowview!=''">
+					a.del_flag in ('0','3')
+				</when>
+				<otherwise>
+					<if test="delFlag != null and  delFlag != ''">
+						a.del_flag = #{delFlag}
+					</if>
+				</otherwise>
+			</choose>
+			<if test="acquisitionSource != null and  acquisitionSource != ''">
+				AND a.acquisition_source = #{acquisitionSource}
+			</if>
+			<if test="title != null and title != ''">
+				AND a.title LIKE
+				<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{title}, '%')</if>
+			</if>
+			<choose>
+				<when test="remarks=='1'">
+					AND a.posid=''
+				</when>
+				<otherwise>
+					<if test="posid != null and posid != ''">
+						AND a.posid LIKE
+						<if test="dbName == 'oracle'">'%'||#{posid}||'%'</if>
+						<if test="dbName == 'mssql'">'%'+#{posid}+'%'</if>
+						<if test="dbName == 'mysql'">CONCAT('%', #{posid}, '%')</if>
+					</if>
+				</otherwise>
+			</choose>
+			<if test="category.id != null and category.id != ''">
+				AND (a.category_id = #{category.id}
+				<if test="category.parentIds != null and category.parentIds != ''">
+					or c.parent_ids like
+					<if test="dbName == 'oracle'">'%'||#{category.id}||'%'</if>
+					<if test="dbName == 'mssql'">'%,'+#{category.id}+',%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%,', #{category.id}, ',%')</if>
+				</if>
+				)
+			</if>
+			<if test="image != null and image != ''">
+				AND a.image = #{image}
+			</if>
+
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				AND a.create_by in (#{createBy.id})
+			</if>
+
+			<if test="beginDate != null and beginDate != '' and endDate != null and endDate != ''">
+				AND a.create_date &gt;= #{beginDate} AND a.create_date &lt;=
+				#{endDate}
+			</if>
+			<if test="id !=null and id!=''">
+				AND a.id=#{id}
+			</if>
+			<if test="isStatis !=null and isStatis!=''">
+				AND a.is_statis=#{isStatis}
+			</if>
+			<if test="isMobileStatis !=null and isMobileStatis!=''">
+				AND a.is_mobile_statis=#{isMobileStatis}
+			</if>
+			<!-- ${sqlMap.dsf} -->
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findAllList" resultType="Article">
+		SELECT
+		<include refid="cmsArticleColumns" />
+		FROM cms_article a
+		<include refid="cmsArticleJoins" />
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="isStatis !=null and isStatis!=''">
+				AND a.is_statis=#{isStatis} or a.is_statis= null
+			</if>
+			<if test="isMobileStatis !=null and isMobileStatis!=''">
+				AND a.is_mobile_statis=#{isMobileStatis} or a.is_mobile_statis= null
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.weight_date desc, a.number desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<insert id="insert">
+		INSERT INTO cms_article(
+		id,
+		category_id,
+		title,
+		link,
+		color,
+		image,
+		shorttile,
+		keywords,
+		description,
+		weight,
+		weight_date,
+		hits,
+		posid,
+		custom_content_view,
+		view_config,
+		create_by,
+		create_date,
+		update_by,
+		update_date,
+		remarks,
+		del_flag,
+		managerid,
+		acquisition_source,
+		<if test="timing != null and timing != '' ">
+			timing,
+		</if>
+		istime,
+		msgid,
+		static_url
+		) VALUES (
+		#{id},
+		#{category.id},
+		#{title},
+		#{link},
+		#{color},
+		#{image},
+		#{shorttile},
+		#{keywords},
+		#{description},
+		#{weight},
+		#{weightDate},
+		#{hits},
+		#{posid},
+		#{customContentView},
+		#{viewConfig},
+		#{createBy.id},
+		#{createDate},
+		#{updateBy.id},
+		#{updateDate},
+		#{remarks},
+		#{delFlag},
+		#{managerid},
+		#{acquisitionSource},
+		<if test="timing != null and timing != '' ">
+			#{timing},
+		</if>
+		#{istime},
+		#{msgsource.sid},
+		#{staticUrl}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE cms_article SET
+		category_id = #{category.id},
+		title = #{title},
+		link = #{link},
+		color = #{color},
+		image = #{image},
+		shorttile=#{shorttile},
+		keywords =
+		#{keywords},
+		description =
+		#{description},
+		weight = #{weight},
+		weight_date = #{weightDate},
+		hits =
+		#{hits},
+		posid = #{posid},
+		custom_content_view = #{customContentView},
+		view_config =
+		#{viewConfig},
+		create_date = #{createDate},
+		update_by =
+		#{updateBy.id},
+		update_date = #{updateDate},
+		remarks = #{remarks},
+		del_flag =
+		#{delFlag},
+		managerid=#{managerid},
+		acquisition_source=#{acquisitionSource},
+		<if test="timing != null and timing != '' ">
+			timing=#{timing},
+		</if>
+		istime=#{istime},
+		msgid=#{msgsource.sid},
+		static_url=#{staticUrl},
+		is_statis=#{isStatis},
+		is_mobile_statis = #{isMobileStatis}
+
+		WHERE id = #{id}
+	</update>
+
+
+	<update id="delete">
+		UPDATE cms_article SET
+		del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+	<select id="findByIdIn" resultType="Article">
+		SELECT
+		<include refid="cmsArticleColumns" />
+		from cms_article a where
+		<where>
+			id in (${id});
+		</where>
+	</select>
+
+	<update id="updateArticle">
+		UPDATE cms_article SET
+		weight_date=#{weightDate}
+		WHERE id =
+		#{id}
+	</update>
+
+	<update id="updateExpiredWeight">
+		update cms_article SET
+		weight = 0
+		WHERE weight &gt; 0 AND weight_date
+		&lt;
+		<if test="dbName == 'oracle'">sysdate</if>
+		<if test="dbName == 'mssql'">FLOOR(CONVERT(FLOAT,GETDATE()))</if>
+		<if test="dbName == 'mysql'">CURDATE()</if>
+	</update>
+
+	<update id="updateHitsAddOne">
+		update cms_article set
+		hits = hits+1,
+		today_hits=today_hits+1
+		WHERE id = #{id}
+	</update>
+
+	<select id="findStats" resultType="Category">
+		select max(c.id) AS "id",
+		max(c.name) AS "name",
+		max(cp.id) AS
+		"parent.id",
+		max(cp.name) AS "parent.name",
+		count(*) AS "cnt",
+		sum(a.hits) AS
+		"hits",
+		max(a.update_date) as "updateDate",
+		max(o.id) AS
+		"office.id",
+		max(o.name) AS "office.name",
+		a.is_statis as isStatis,
+		a.is_mobile_statis as "isMobileStatis",
+		a.static_url as
+		staticUrl
+		FROM cms_article a
+		RIGHT JOIN
+		cms_category c
+		ON c.id = a.category_id
+		JOIN cms_category cp ON
+		c.parent_id
+		= cp.id
+		JOIN sys_office o ON
+		o.id = c.office_id
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND c.site_id = #{site.id}
+			<if test="office.id != null and office.id != ''">
+				AND (c.office_id = #{office.id} OR o.parent_ids like
+				<if test="dbName == 'oracle'">'%'||#{office.id}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{office.id}+'%'</if>
+
+				<if test="dbName == 'mysql'">CONCAT('%', #{office.id}, '%')</if>
+				)
+			</if>
+			<if test="beginDate != null and beginDate != ''">
+				AND a.update_date <![CDATA[ >= #{beginDate} ]]>
+			</if>
+			<if test="endDate != null and endDate != ''">
+				AND a.update_date <![CDATA[ <= #{endDate} ]]>
+			</if>
+			<if test="id != null and id != ''">
+				AND (c.id = #{id} OR c.parent_ids LIKE
+				<if test="dbName == 'oracle'">'%'||#{id}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{id}+'%'</if>
+
+				<if test="dbName == 'mysql'">CONCAT('%', #{id}, '%')</if>
+				)
+			</if>
+			group by cp.sort, cp.id, c.sort, c.id
+			order by cp.sort, cp.id, c.sort,
+			c.id
+		</where>
+	</select>
+	<select id="getPosList" resultType="Article" parameterType="Map">
+		SELECT
+		t3.id AS "id" ,
+		t3.category_id AS "category.id" ,
+		t3.title AS
+		"title"
+		,
+		t3.link AS "link" ,
+		t3.color AS "color" ,
+		t3.image AS "image" ,
+		t3.keywords AS "keywords" ,
+		t3.description AS "description" ,
+		t3.weight
+		AS
+		"weight" ,
+		t3.weight_date AS "weightDate" ,
+		t3.hits AS "hits" ,
+		t3.posid AS "posid" ,
+		t3.custom_content_view AS "customContentView" ,
+		t3.view_config AS "viewConfig" ,
+		t3.create_by AS "createBy.id" ,
+		t3.create_date AS "createDate" ,
+		t3.update_by AS "updateBy.id" ,
+		t3.update_date AS "updateDate" ,
+		t3.shorttile AS shorttile ,
+		t3.remarks AS "remarks" ,
+		t3.del_flag AS "delFlag" ,
+		t3.acquisition_source AS
+		acquisitionSource,
+		c.name_en AS "category.nameEn",
+		d.content AS "articleData.content",
+		m.name AS"msgsource.name",
+		m.url AS "msgsource.url",
+		m.sid AS "msgsource.sid",
+		t3.is_statis as isStatis,
+		t3.static_url as staticUrl,
+		t3.is_mobile_statis as "isMobileStatis"
+		FROM
+		t_position t1
+		INNER JOIN t_position_article t2 ON t1.posid
+		=
+		t2.posid
+		INNER
+		JOIN cms_article t3 on
+		t3.id =
+		t2.article_id
+		JOIN
+		cms_category c ON
+		c.id = t3.category_id
+		LEFT JOIN cms_article_data d ON
+		d.id =
+		t3.id
+		LEFT JOIN cms_msgsource m ON
+		m.sid
+		=t3.msgid
+		where
+		<if test="type != null and type != ''">
+			t1.type = #{type} and 
+		</if>
+		t3.del_flag in('0' , '3')
+		<choose>
+			<when test="type != null and type != ''">
+				ORDER BY
+				t3.weight_date desc,
+				t2.number
+			</when>
+			<otherwise>
+				ORDER BY
+				t3.weight_date desc,
+				t2.number
+			</otherwise>
+		</choose>
+		desc
+		limit #{index},#{size}
+	</select>
+	<update id="UpdateByTiming">
+		<!-- update cms_article set del_flag = 0 WHERE id in( SELECT id FROM cms_article a <where> a.del_flag = 1 and a.istime = 1 <if test="timing 
+			!= null and timing != ''"> AND sysdate() <![CDATA[ >= #{timing} ]]> </if> </where> ) -->
+
+
+		UPDATE cms_article a
+		INNER JOIN cms_article b ON b.del_flag = 2
+
+		AND
+		b.istime = 1
+		AND <![CDATA[ b.timing <= ]]>
+		sysdate()
+		AND a.id = b.id
+
+		set a.del_flag=3
+
+
+	</update>
+
+	<select id="findTimeList" resultType="Article">
+		SELECT
+		<include refid="cmsArticleColumns" />
+		FROM cms_article a
+		<include refid="cmsArticleJoins" />
+		<where>
+			a.del_flag = 3
+			and istime = 1
+			<if test="timing != null and timing != ''">
+				AND sysdate() <![CDATA[ >= #{timing} ]]>
+			</if>
+		</where>
+
+	</select>
+
+	<select id="findposiarticleList" resultType="Article">
+		SELECT
+		a.id AS "id",
+		a.category_id AS "category.id",
+		a.title AS "title",
+		a.link AS "link",
+		a.color AS "color",
+		a.image AS "image",
+		a.keywords AS
+		"keywords",
+		a.description AS "description",
+		a.weight AS "weight",
+		a.weight_date AS "weightDate",
+		a.hits AS "hits",
+		a.posid AS "posid",
+		a.custom_content_view AS "customContentView",
+		a.view_config AS
+		"viewConfig",
+		a.create_by AS "createBy.id",
+		a.create_date AS
+		"createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS
+		"updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		c.name AS
+		"category.name",
+		u.name
+		AS "user.name",
+		a.managerid AS "managerid",
+		a.acquisition_source AS acquisitionSource,
+		a.timing AS timing,
+		a.istime
+		AS istime,
+		a.msgid AS
+		"msgid",
+		m.sid AS "msgsource.sid",
+		m.name AS "msgsource.name",
+		m.url AS "msgsource.url",
+		tp.description AS "posName",
+		d.content AS
+		"articleData.content",
+		a.is_statis as isStatis,
+		a.static_url as staticUrl,
+		a.is_mobile_statis as "isMobileStatis"
+		FROM
+		cms_article a
+		<include refid="cmsArticleJoins" />
+		LEFT join t_position tp ON tp.posid = a.posid
+
+
+		<where>
+			<if test="delFlag != null and  delFlag != ''">
+				a.del_flag = #{delFlag}
+			</if>
+			and a.posid IS NOT null
+			and a.posid !=''
+			<if test="acquisitionSource != null and  acquisitionSource != ''">
+				AND a.acquisition_source = #{acquisitionSource}
+			</if>
+			<if test="title != null and title != ''">
+				AND a.title LIKE
+				<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{title}, '%')</if>
+			</if>
+			<if test="category.id != null and category.id != ''">
+				AND (a.category_id = #{category.id}
+				<if test="category.parentIds != null and category.parentIds != ''">
+					or c.parent_ids like
+					<if test="dbName == 'oracle'">'%'||#{category.id}||'%'</if>
+					<if test="dbName == 'mssql'">'%,'+#{category.id}+',%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%,', #{category.id}, ',%')</if>
+				</if>
+				)
+			</if>
+			<if test="posid != null and posid != ''">
+				AND a.posid = #{posid} or a.posid
+				LIKE
+				CONCAT('%,',#{posid}) or a.posid LIKE CONCAT(#{posid},',%') or
+				a.posid LIKE
+				CONCAT('%,',
+				#{posid}, ',%')
+
+			</if>
+
+			<if test="image != null and image != ''">
+				AND a.image = #{image}
+			</if>
+
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				AND a.create_by in (#{createBy.id})
+			</if>
+			<if test="beginDate != null and beginDate != '' and endDate != null and endDate != ''">
+				AND a.update_date &gt;= #{beginDate} AND a.update_date &lt;=
+				#{endDate}
+			</if>
+			<!-- ${sqlMap.dsf} -->
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY
+				a.weight_date desc,
+				a.number desc
+			</otherwise>
+		</choose>
+	</select>
+
+
+	<select id="findposiarticleList2" resultType="Article">
+		SELECT
+		a.id AS "id",
+		a.category_id AS "category.id",
+		a.title AS "title",
+		a.link AS "link",
+		a.color AS "color",
+		a.image AS "image",
+		a.keywords AS
+		"keywords",
+		a.description AS "description",
+		a.weight AS "weight",
+		a.weight_date AS "weightDate",
+		a.hits AS "hits",
+		a.posid AS "posid",
+		a.custom_content_view AS "customContentView",
+		a.view_config AS
+		"viewConfig",
+		a.create_by AS "createBy.id",
+		a.create_date AS
+		"createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS
+		"updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		c.name AS
+		"category.name",
+		u.name
+		AS "user.name",
+		a.managerid AS "managerid",
+		a.acquisition_source AS acquisitionSource,
+		a.timing AS timing,
+		a.istime
+		AS istime,
+		a.msgid AS
+		"msgid",
+		m.name AS "msgsource.name",
+		m.sid AS "msgsource.sid",
+		m.url AS "msgsource.url",
+		tp.description AS "posName",
+		d.content AS
+		"articleData.content",
+		a.is_statis as isStatis,
+		a.static_url as staticUrl,
+		a.is_mobile_statis as "isMobileStatis"
+		FROM
+		cms_article a
+		<include refid="cmsArticleJoins" />
+		join t_position tp ON tp.posid = a.posid
+
+		<where>
+			<if test="delFlag != null and  delFlag != ''">
+				a.del_flag = #{delFlag}
+			</if>
+			and a.posid IS NOT null
+			and a.posid !=''
+			<if test="acquisitionSource != null and  acquisitionSource != ''">
+				AND a.acquisition_source = #{acquisitionSource}
+			</if>
+			<if test="title != null and title != ''">
+				AND a.title LIKE
+				<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{title}, '%')</if>
+			</if>
+			<if test="category.id != null and category.id != ''">
+				AND (a.category_id = #{category.id}
+				<if test="category.parentIds != null and category.parentIds != ''">
+					or c.parent_ids like
+					<if test="dbName == 'oracle'">'%'||#{category.id}||'%'</if>
+					<if test="dbName == 'mssql'">'%,'+#{category.id}+',%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%,', #{category.id}, ',%')</if>
+				</if>
+				)
+			</if>
+			<if test="posid != null and posid != ''">
+				AND a.posid = #{posid} or a.posid
+				LIKE
+				CONCAT('%,',#{posid}) or a.posid LIKE CONCAT(#{posid},',%') or
+				a.posid LIKE
+				CONCAT('%,',
+				#{posid}, ',%')
+
+			</if>
+
+			<if test="image != null and image != ''">
+				AND a.image = #{image}
+			</if>
+
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				AND a.create_by in (#{createBy.id})
+			</if>
+			<if test="beginDate != null and beginDate != '' and endDate != null and endDate != ''">
+				AND a.update_date &gt;= #{beginDate} AND a.update_date &lt;=
+				#{endDate}
+			</if>
+			<!-- ${sqlMap.dsf} -->
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY
+				a.weight_date desc,
+				a.number desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<update id="updatenumber">
+		UPDATE cms_article SET
+		number=#{number}
+		WHERE id =
+		#{id}
+	</update>
+
+	<select id="maxid" resultType="Article">
+		select max(id+0) as "id" from
+		cms_article;
+	</select>
+
+	<select id="getRondomList" resultType="Article" parameterType="Map" flushCache="true">
+		SELECT
+		<include refid="cmsArticleColumns" />
+		FROM cms_article a
+		<include refid="cmsArticleJoins" />
+		order by rand() LIMIT #{size};
+	</select>
+
+
+	<select id="getTodayHitList" resultType="Article" parameterType="Map">
+		SELECT
+		<include refid="cmsArticleColumns" />
+		FROM cms_article a
+		<include refid="cmsArticleJoins" />
+		ORDER BY a.hits desc, a.id DESC LIMIT #{size};
+	</select>
+
+	<update id="clearTodayHit">
+		update cms_article set
+		today_hits=0
+	</update>
+	<update id="PositionArticleForNumber">
+		update t_position_article_ahead a set number
+		=#{number}
+		where
+		a.article_id=#{articleId} and a.posid=#{posid}
+	</update>
+	<select id="checkAcquisitionSource" resultType="int" parameterType="Map">
+		SELECT
+		count(*)
+		from
+		cms_article t
+		where
+		t.acquisition_source =
+		#{acquisitionSource};
+	</select>
+	<select id="findArticle" resultType="Article" parameterType="String">
+		SELECT
+		*
+		from cms_article a
+		where a.id = #{id}
+	</select>
+
+	<update id="updateWeight_date">
+		UPDATE cms_article SET
+		weight_date = #{weightDate}
+		WHERE id =
+		#{id}
+	</update>
+
+	<update id="updateStaticPage">
+		UPDATE cms_article SET
+		static_url=#{staticUrl},
+		is_statis=#{isStatis},
+		is_mobile_statis=#{isMobileStatis}
+		WHERE id = #{id}
+	</update>
+
+	<update id="updateNoneStatic">
+		UPDATE cms_article SET
+		is_statis= 0,is_mobile_statis = 0
+	</update>
+
+</mapper>
