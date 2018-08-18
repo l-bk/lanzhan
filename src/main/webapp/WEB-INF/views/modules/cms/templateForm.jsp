@@ -40,12 +40,12 @@
 	</ul>
 	<br />
 	<form:form id="inputForm" modelAttribute="template"
-		action="${ctx}/cms/templatefile/save" method="post"
+		action="${ctx}/cms/templatefile/save?cid =1 " method="post"
 		class="form-horizontal">
 
 		<form:hidden path="templatepath" />
 		<form:hidden path="show" />
-
+		<form:hidden path="cid" />	
 		<div class="control-group">
 			<label class="control-label">文件名:</label>
 			<div class="controls">

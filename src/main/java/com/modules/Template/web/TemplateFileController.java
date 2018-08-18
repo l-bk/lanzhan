@@ -159,7 +159,6 @@ public class TemplateFileController extends BaseController {
 			log.info("show:" + show);
 			template = templateService.get(t);
 			template.setShow(show);
-			// System.out.println("template=" + template);
 			template.setContext(ReadFile(template));
 			model.addAttribute("template", template);
 			return "modules/cms/templateForm";
@@ -264,15 +263,17 @@ public class TemplateFileController extends BaseController {
 		if (list != null && list.size() > 0) {
 			// log.info("已经存在目录");
 			for(Template newTemplate:list) {
-				File file =new File(newTemplate.getTemplatepath());
-				String[] str =newTemplate.getTemplatefilename().split(".");
-				File oldFile = new File(str[0]+"_1"+str[1]);
+				File file =new File(webpath+newTemplate.getTemplatepath());
+				String[] str =newTemplate.getTemplatefilename().split("\\.");
+				String  newFileName = webpath + newTemplate.getTemplatepath()+"_bak";
+				File oldFile = new File(newFileName);
 				if(oldFile.exists()) {
 					oldFile.delete();
 				}
-				file.renameTo(new File(str[0]+"_1"+str[1]));
-				BufferedWriter bw =new BufferedWriter(new FileWriter(new File(template.getTemplatefilename())));
-				bw.write(newTemplate.getContext());
+				
+				file.renameTo(new File(newFileName));
+				BufferedWriter bw =new BufferedWriter(new FileWriter(new File(webpath+newTemplate.getTemplatepath())));
+				bw.write(Encodes.unescapeHtml(template.getContext()));
 				bw.flush();
 				bw.close();
 				if (templateService.update(template) != 1) {
