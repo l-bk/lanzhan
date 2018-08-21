@@ -76,4 +76,6 @@ public interface ArticleDao extends CrudDao<Article> {
 	public int updateNoneStatic();
 	
 	public Article getById(String id);
+	
+	public List<Article> getAllNoStats();
 }

@@ -189,13 +189,11 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 			dao.insert(article);
 			articleDataDao.insert(articleData);
 		} else {
-
+			
 			article.preUpdate();
 			articleData = article.getArticleData();
 			articleData.setId(article.getId());
-			//修改的时候文章也要静态化， 所以要将字段 is_statis和 is_mobile_statis 改成0（未静态化状态）
-			article.setIsMobileStatis("0");
-			article.setIsStatis("0");
+		
 			
 			if (article.getPosid() != null && article.getPosid().length() > 0) {
 				String posids[] = article.getPosid().split(",");
@@ -263,6 +261,10 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 			}
 			dao.update(article);
 			articleDataDao.update(article.getArticleData());
+		/*	Article  newArticle = dao.get(article.getId());
+			article.setIsMobileStatis("1");
+			article.setIsStatis("1");
+			dao.update(article);*/
 			//修改信息先删除服务器原来的文件，静态化就加新的
 		/*	int i=0;
 			for(;;) {

@@ -127,6 +127,8 @@ public class ArticleController extends BaseController
   @RequestMapping({"list", ""})
   public String list(Article article, HttpServletRequest request, HttpServletResponse response, Model model, String flag)
   {
+	  
+	 
     String pageNo = request.getParameter("pageNo");
 
     this.log.info("flag=" + flag);
@@ -262,12 +264,18 @@ public class ArticleController extends BaseController
     this.log.info("设置默认模板版");
     Category category = (Category)this.categoryService.get(article.getCategory().getId());
     article.setCustomContentView(category.getCustomContentView());
-
+    
+	if (StringUtils.isNotBlank(article.getId())) {
+		//修改的时候文章也要静态化， 所以要将字段 is_statis和 is_mobile_statis 改成0（未静态化状态）
+		article.setIsMobileStatis("0");
+		article.setIsStatis("0");
+	}
+    
     this.articleService.save(article);
 
-    Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article, this.updatePageService);
+ /*   Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article, this.updatePageService);
     System.out.println("--------------------------------------------------------------------------------articleId :"+article.getId());
-    thread.start();
+    thread.start();*/
     
 
     addMessage(redirectAttributes, new String[] { "保存文章'" + StringUtils.abbr(article.getTitle(), 50) + "'成功" });
@@ -290,8 +298,8 @@ public class ArticleController extends BaseController
     }
     this.articleService.save(article2);
 
-    Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article2, this.updatePageService);
-    thread.start();
+   /* Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article2, this.updatePageService);
+    thread.start();*/
 
     addMessage(redirectAttributes, new String[] { ((isRe != null) && (isRe.booleanValue()) ? "发布" : "删除") + "文章成功" });
     return "redirect:" + this.adminPath + "/cms/article/?repage&category.id=" + (categoryId != null ? categoryId : "");
@@ -584,8 +592,8 @@ public class ArticleController extends BaseController
           this.positionArticleDao.update(pa1);
           this.positionArticleDao.update(pa2);
           Article article2 = get(id);
-          Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article2, this.updatePageService);
-          thread.start();
+//          Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article2, this.updatePageService);
+//          thread.start();
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -637,8 +645,8 @@ public class ArticleController extends BaseController
           this.positionArticleDao.update(pa1);
           this.positionArticleDao.update(pa2);
           Article article2 = get(id);
-          Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article2, this.updatePageService);
-          thread.start();
+//          Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article2, this.updatePageService);
+//          thread.start();
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -687,7 +695,11 @@ public class ArticleController extends BaseController
       for (String sid : positionArticle.getIds()) {
         PositionArticle pa1 = (PositionArticle)this.positionArticleDao.get(sid);
 
-        this.articleService.PositionArticleForNumber(pa1);
+        Article article = get(pa1.getArticleId());
+        Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article, this.updatePageService);
+        thread.start();
+        
+//        this.articleService.PositionArticleForNumber(pa1);
       }
     }
 
