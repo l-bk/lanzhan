@@ -692,15 +692,18 @@ public class ArticleController extends BaseController
     }
     if ((positionArticle.getIds() != null) && (positionArticle.getIds().length > 0)) {
       System.out.println("positionArticle.ids====" + positionArticle.getIds().length);
+      
+      List<Article> list= new ArrayList<Article>();
       for (String sid : positionArticle.getIds()) {
         PositionArticle pa1 = (PositionArticle)this.positionArticleDao.get(sid);
 
         Article article = get(pa1.getArticleId());
-        Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, article, this.updatePageService);
-        thread.start();
+        list.add(article);
         
 //        this.articleService.PositionArticleForNumber(pa1);
       }
+      Thread thread = new StaticPageThread(this.runStatic, this.mobileStatic, list, this.updatePageService);
+      thread.start();
     }
 
     addMessage(redirectAttributes, new String[] { "发布文章成功!" });

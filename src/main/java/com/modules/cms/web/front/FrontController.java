@@ -228,7 +228,7 @@ public class FrontController extends BaseController {
 		
 		if(UserAgentUtils.isComputer(request)) { // PC端
 			// 焦点图
-			Map<String, List<Article>> jdMap = getPosArticleList(null, "16", 4, null, model, null, null, null);
+			Map<String, List<Article>> jdMap = getPosArticleList(null, "16", 3, null, model, null, null, null);
 			model.addAttribute("jdList", jdMap.get("articleList"));
 	
 			// 首页头条
