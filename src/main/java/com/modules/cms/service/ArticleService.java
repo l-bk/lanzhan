@@ -513,4 +513,9 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	public void updateNoneStatic() {
 		dao.updateNoneStatic();
 	}
+	
+	@Transactional(readOnly = false)
+	public  List<Article> getAllNoStats() {
+		return dao.getAllNoStats();
+	}
 }

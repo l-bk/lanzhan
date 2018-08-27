@@ -43,7 +43,7 @@ public class ArticleAutoRun {
 		// 首页进行静态化
 		updatePage.setId("2");
 		updatePage.setType("1");
-		// runStatic.indexPublic(updatePage); runStatic.listPublic(updatePage);
+		runStatic.indexPublic(updatePage); runStatic.listPublic(updatePage);
 		mobileStatic.indexPublic(updatePage);
 		for (Article article : timeList) {
 			// 栏目页静态化
@@ -53,8 +53,8 @@ public class ArticleAutoRun {
 				mobileStatic.listPublic(updatePage);
 			}
 		}
-	}*/
-
+	}
+*/
 	@Scheduled(cron = "59 23 * * * ?")
 	public void ClearTodayHits() {
 		log.info("ClearTodayHits");
@@ -62,7 +62,7 @@ public class ArticleAutoRun {
 	}
 	
 	
-	@Scheduled(cron = "0 0 0 * * ?")
+	@Scheduled(cron = "0 0 22 * * ?")
 	public void statsAllArticle() {
 		List<Article> list = articleDao.getAllNoStats();  
 		for(Article newArticle :list) {

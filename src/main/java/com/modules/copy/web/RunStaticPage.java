@@ -97,11 +97,11 @@ public class RunStaticPage {
 			if (StringUtils.isNotEmpty(contextbuffer)) {
 				try {
 
-					File file1 = new File(webpath + "a/" + tmp.getCategory().getNameEn());
+					File file1 = new File(webpath  + tmp.getCategory().getNameEn());
 					if (!file1.isDirectory()) {
 						file1.mkdir();
 					}
-					File file = new File(webpath + "a/" + tmp.getCategory().getNameEn() + "/" + tmp.getId() + ".shtml");
+					File file = new File(webpath  + tmp.getCategory().getNameEn() + "/" + tmp.getId() + ".shtml");
 					if (!file.exists()) {
 						file.createNewFile();
 					}
@@ -136,11 +136,11 @@ public class RunStaticPage {
 
 					try {
 
-						File file1 = new File(webpath + "a/" + tmp.getCategory().getNameEn());
+						File file1 = new File(webpath  + tmp.getCategory().getNameEn());
 						if (!file1.isDirectory()) {
 							file1.mkdir();
 						}
-						File file = new File(webpath + "a/" + tmp.getCategory().getNameEn() + "/" + tmp.getId() + "_"
+						File file = new File(webpath  + tmp.getCategory().getNameEn() + "/" + tmp.getId() + "_"
 								+ String.valueOf(j + 1) + ".shtml");
 						if (!file.exists()) {
 							file.createNewFile();
@@ -157,7 +157,7 @@ public class RunStaticPage {
 				///////////////////////////////
 				Article acticleData = articleDao.get(tmp.getId());
 				acticleData.setIsStatis("1");
-				acticleData.setStaticUrl(webhost + "a/" + tmp.getCategory().getNameEn() + "/" + tmp.getId() + ".shtml");
+				acticleData.setStaticUrl(webhost  + tmp.getCategory().getNameEn() + "/" + tmp.getId() + ".shtml");
 				articleDao.updateStaticPage(acticleData);
 
 			}
@@ -311,12 +311,12 @@ public class RunStaticPage {
 				if (StringUtils.isNotEmpty(contextbuffer)) {
 					try {
 
-						File file1 = new File(webpath + "a/" + tmp.getNameEn());
+						File file1 = new File(webpath  + tmp.getNameEn());
 						if (!file1.isDirectory()) {
 							file1.mkdir();
 						}
 						File file = new File(
-								webpath + "a/" + tmp.getNameEn() + "/list" + String.valueOf(j + 1) + ".shtml");
+								webpath  + tmp.getNameEn() + "/list" + String.valueOf(j + 1) + ".shtml");
 						if (!file.exists()) {
 							file.createNewFile();
 						}

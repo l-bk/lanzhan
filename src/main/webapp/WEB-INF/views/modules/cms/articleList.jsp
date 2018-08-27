@@ -92,7 +92,8 @@
 			<!-- <input id="static" class="btn btn-primary" type="button" value="栏目页静态化" style="float: right"/> -->
 			<a href="${ctx}/cms/article/articleStatic" style="float: right;color:white;padding:5px 8px;background-color: #3daae9;border-radius:5px;margin-right: 10px;">文章页静态化</a>
 			<a href="${ctx}/cms/article/listStatic" style="float: right;color:white;padding:5px 8px;background-color: #3daae9;border-radius:5px;margin-right: 10px;">栏目页静态化</a>&nbsp;&nbsp;&nbsp;&nbsp;
-		</div>
+		
+		 </div>
 	</form:form>
 	<sys:message content="${message}"/>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
